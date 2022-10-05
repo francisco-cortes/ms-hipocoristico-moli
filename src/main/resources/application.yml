@@ -1,0 +1,45 @@
+quarkus:
+  http:
+    port: 8080
+    #datasource:
+    #db-kind: postgresql
+    #username: posgres
+    #password: gabu
+    #  jdbc:
+    #  url: jdbc:postgresql://localhost:5432/REMFONETIC
+  container-image:
+    group: ""
+    name: ms-hipocoristico-moli
+    tag: 1.0-snapshot
+    registry: franciscoct
+  kubernetes:
+    namespace: app_datos
+  profile: prod
+  log:
+    level: INFO
+    file:
+      enable: true
+      path: ./log/logms-hipocoristico-moli
+      level: INFO
+      format: '{"log_data":{"fecha":"%d{yyyy-MM-dd HH:mm:ss}","Level":"%-5p","Mensaje":"%m","servicios":[%X{servicios}],"TiempoTotal":%X{tiempo}}}%n'
+      rotation:
+        max-file-size: 500M
+        max-backup-index: 5
+        rotate-on-boot: true
+        file-suffix: .yyyy-MM-dd
+  smallrye-openapi:
+    path: /ms-modulo-hipocoristico
+    info-title: Contrato de Interfaz Microservicio Hipocoristico para modulo de concidencia de nombres.
+    info-version: 1.0.0
+    info-description: Contrato de Interfaz para la consulta de un nombres en base da datos para determinar si existe como hipocoristico y remplazarlo por su nombre real.
+
+conexion:
+  conexionesdb:
+    c3remesas:
+      credenciales:
+        usuario: Administrator1
+        contrasena: vvfwNGdF2Y0a
+      ip: rds-multimarcas-remesas-dev-instance-1.ci8xo0u6a75o.us-east-1.rds.amazonaws.com
+      port: 5433
+      name: REMFONETIC
+      fsp: hola
