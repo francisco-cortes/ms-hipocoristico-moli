@@ -83,7 +83,7 @@ public class ConsultarHipocorsiticoDao {
      */
       resp = cstmt.getString(1);
     }
-    catch (SQLException exception){
+    catch (Exception exception){
       resp = hipocoristico;
       log.registrarExcepcion(exception,"Error SQL");
       log.registrarMensaje(NOMBRE_CLASE+NOMBRE_METODO,exception.getMessage());

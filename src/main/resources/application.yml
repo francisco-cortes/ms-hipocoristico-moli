@@ -1,6 +1,6 @@
 quarkus:
   http:
-    port: 8080
+    port: 8081
     #datasource:
     #db-kind: postgresql
     #username: posgres
@@ -13,13 +13,13 @@ quarkus:
     tag: 1.0-snapshot
     registry: franciscoct
   kubernetes:
-    namespace: app_datos
+    namespace: app-datos
   profile: prod
   log:
     level: INFO
     file:
       enable: true
-      path: ./log/logms-hipocoristico-moli
+      path: ./log/logms-hipocoristico-moli.log
       level: INFO
       format: '{"log_data":{"fecha":"%d{yyyy-MM-dd HH:mm:ss}","Level":"%-5p","Mensaje":"%m","servicios":[%X{servicios}],"TiempoTotal":%X{tiempo}}}%n'
       rotation:

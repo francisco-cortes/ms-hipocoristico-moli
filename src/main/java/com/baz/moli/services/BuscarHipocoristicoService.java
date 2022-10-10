@@ -83,7 +83,7 @@ public class BuscarHipocoristicoService {
       resultadoBusqueda = buscarNombres(arregloCompleto, log, nombres, apellidos);
       setDetalles(Constantes.MENSAJE_EXITO);
     }
-    catch (SQLException e) {
+    catch (Exception e) {
       /*
       solo existen exepciones sql
        */
