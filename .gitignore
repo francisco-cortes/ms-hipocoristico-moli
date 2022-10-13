@@ -45,7 +45,11 @@ log/
 .scannerwork/
 
 .jar
+CifradoRSA-1.0.0.jar
+RemesasUtils-1.0.0.jar
 
 .txt
+SonarQubeCommand.txt
 
 .zip
+ms-hipocoristico-moli.zip
