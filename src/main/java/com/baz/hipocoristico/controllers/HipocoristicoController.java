@@ -3,6 +3,7 @@ package com.baz.moli.controllers;
 import com.baz.moli.dtos.EstadoResponseDto;
 import com.baz.moli.dtos.HipocoristicoRequestDto;
 import com.baz.moli.dtos.HipocoristicoResponseDto;
+import com.baz.moli.exceptions.ErrorInternoExepcion;
 import com.baz.moli.services.BuscarHipocoristicoService;
 import com.baz.moli.services.MonitoreoService;
 import com.baz.moli.utilis.Constantes;
@@ -62,20 +63,10 @@ public class HipocoristicoController {
         content = @Content(mediaType = "application/json",
           schema =  @Schema(implementation = HipocoristicoResponseDto.class))),
       @APIResponse(
-        responseCode = Constantes.HTTP_400,
-        description = "Solicitud incorrecta",
-        content = @Content(mediaType = "application/json",
-          schema =  @Schema(implementation = HipocoristicoResponseDto.class))),
-      @APIResponse(
-        responseCode = Constantes.HTTP_404,
-        description = "Solicitud incorrecta",
-        content = @Content(mediaType = "application/json",
-          schema =  @Schema(implementation = HipocoristicoResponseDto.class))),
-      @APIResponse(
         responseCode = Constantes.HTTP_500,
         description = "Error Interno en la aplicación",
         content = @Content(mediaType = "application/json",
-          schema =  @Schema(implementation = HipocoristicoResponseDto.class))),
+          schema =  @Schema(implementation = ErrorInternoExepcion.class))),
 
     })
   public Response buscarHipocoristico(@RequestBody HipocoristicoRequestDto peticion){
