@@ -6,21 +6,20 @@ import com.baz.servicios.Uid;
 
 import javax.inject.Singleton;
 /**
-        * <b>MonitoreoService</b>
-        * @descripcion: Monitoreo service para el modulo
-        * @autor: Francisco Javier Cortes Torres, Desarrollador
-        * @ultimaModificacion: 04/10/22
-       */
+ * <b>MonitoreoService</b>
+ * @descripcion: Monitoreo service para el modulo
+ * @autor: Francisco Javier Cortes Torres, Desarrollador
+ * @ultimaModificacion: 04/10/22
+ */
 @Singleton
 public class MonitoreoService {
 
   /**
-          * <b>generarUid</b>
-          * @descripcion: genera un UID para verificar el estado del modulo
-          * @autor: Francisco Javier Cortes Torres, Desarrollador
-          *
-          * @ultimaModificacion: 04/10/22
-        */
+   * <b>generarUid</b>
+   * @descripcion: genera un UID para verificar el estado del modulo
+   * @autor: Francisco Javier Cortes Torres, Desarrollador
+   * @ultimaModificacion: 04/10/22
+   */
 
   public EstadoResponseDto generarUid(){
     EstadoResponseDto uidAlive = new EstadoResponseDto();

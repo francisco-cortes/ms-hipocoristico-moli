@@ -2,6 +2,7 @@ package com.baz.hipocoristico.dtos;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;
+import lombok.Getter;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 /**
@@ -12,6 +13,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
  */
 
 @Data
+@Getter
 @JsonPropertyOrder({"nombres","apellidos","mensaje"})
 public class HipocoristicoResponseDto {
   /*

@@ -53,7 +53,7 @@ public class ConsultarHipocorsiticoDao {
     //String de resouesta del metodo
     String resp;
     log.iniciarTiempoMetodo(NOMBRE_CLASE+NOMBRE_METODO,Constantes.NOMBRE_MS);
-    // objeto de conexxion sql
+    // objeto de conexion sql
     Connection con = null;
     //objeto callable sql
     CallableStatement cstmt = null;
@@ -65,7 +65,7 @@ public class ConsultarHipocorsiticoDao {
       con = fabricaConexionDao.getConexion();
       con.setAutoCommit(false);
       /*
-    se declara la query para la ejecucion del sp, buscar forma de guardarla en properties
+    se declara la query para la ejecucion del sp, ((buscar forma de guardarla en properties))
      */
       cstmt = con.prepareCall("{? = call SC_FONET.FNDICCIONARIO(?, ?)}");
     /*
@@ -99,7 +99,7 @@ public class ConsultarHipocorsiticoDao {
     }
     finally {
       /*
-    cerrar conexion a base postgress
+    cerrar conexion a base postgres
      */
       assert con !=null;
       assert cstmt !=null;

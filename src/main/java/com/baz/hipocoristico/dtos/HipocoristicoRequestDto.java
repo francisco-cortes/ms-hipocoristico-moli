@@ -1,7 +1,9 @@
 package com.baz.hipocoristico.dtos;
 
+import com.baz.anotaciones.Validacion;
+import com.baz.hipocoristico.utilis.Constantes;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import lombok.Data;
+import lombok.*;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 /**
@@ -12,21 +14,44 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
  */
 
 @Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @JsonPropertyOrder({"nombres","apellidos"})
 public class HipocoristicoRequestDto {
   /*
   Arreglo de strings para guardar los nombres de una persona
    */
+  @Validacion(
+    tipoDato = Validacion.tiposDato.VARCHAR,
+    requerido = true,
+    caracteresValidos = Validacion.LETRAS,
+    longitudMin = Constantes.LONGITUD_MIN_ENTRADA,
+    longitudMax = Constantes.LONGITUD_MAX_ENTRADA
+  )
   @Schema(
     example = " [\"PACO\", \"JAVIER\" ]",
+    required = true,
+    minLength = Constantes.LONGITUD_MIN_ENTRADA,
+    maxLength = Constantes.LONGITUD_MAX_ENTRADA,
     description = "Arreglos de cadenas, idealmente nombres de personas, en maysucula"
   )
   private String[] nombres;
   /*
   Arreglo de strings para guardar los apellidos de una persona
    */
+  @Validacion(
+    tipoDato = Validacion.tiposDato.VARCHAR,
+    requerido = true,
+    caracteresValidos = Validacion.LETRAS,
+    longitudMin = Constantes.LONGITUD_MIN_ENTRADA,
+    longitudMax = Constantes.LONGITUD_MAX_ENTRADA
+  )
   @Schema(
     example = " [\"GARCIA\", \"MTZ\" ]",
+    minLength = Constantes.LONGITUD_MIN_ENTRADA,
+    maxLength = Constantes.LONGITUD_MAX_ENTRADA,
     description = "Arreglos de cadenas, idealmente apellidos de persona, en maysucula"
   )
   private String[] apellidos;

@@ -1,7 +1,10 @@
 package com.baz.hipocoristico.dtos;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 /**
@@ -12,16 +15,27 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
  */
 
 @Data
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @JsonPropertyOrder({"mensaje","folio"})
 public class EstadoResponseDto {
   /*
   mensaje
    */
-  @Schema(example = "OK", required = false, description = "Mensaje que representa el estado del microservicio.")
+  @Schema(
+    example = "OK",
+    required = false,
+    description = "Mensaje que representa el estado del microservicio."
+  )
   public String mensaje;
   /*
   folio generado por remesas
    */
-  @Schema(example = "UID201910011922", required = false, description = "Identificador único de la solicitud.")
+  @Schema(
+    example = "UID201910011922",
+    required = false,
+    description = "Identificador único de la solicitud."
+  )
   public String folio;
 }

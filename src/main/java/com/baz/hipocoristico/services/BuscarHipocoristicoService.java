@@ -36,17 +36,19 @@ public class BuscarHipocoristicoService {
    */
   private String mensaje = "";
   /*
-  detalles expcion
+  detalles excepcion
    */
   private String detalles = "";
 
   /**
-          * <b>iniciaBuscar</b>
-          * @descripcion: Inicio de la estructura que busca hipocoristicos
-          * @autor: Francisco Javier Cortes Torres, Desarrollador
-          * Arreglos de string
-          * @ultimaModificacion: 04/10/22
-        */
+   * <b>iniciaBuscar</b>
+   * @descripcion: Inicio de la estructura que busca hipocoristicos
+   * @autor: Francisco Javier Cortes Torres, Desarrollador
+   * @param: nombres, arreglo de nombres de una persona
+   * @param: apellido, arreglo de apellido de una persona
+   * @param: arregloCompleto, conjunto de nombres y apellidos
+   * @ultimaModificacion: 13/10/22
+   */
 
   public HipocoristicoResponseDto iniciaBuscar(String[] nombres, String[] apellidos, String[] arregloCompleto){
     LogServicio log = new LogServicio();
@@ -229,7 +231,6 @@ public class BuscarHipocoristicoService {
    * <b>subCadenaSeparada</b>
    * @descripcion: separa una cadena en un arreglo de cadenas apartir de cada espacio
    * @autor: Francisco Javier Cortes Torres, Desarrollador
-   *
    * @ultimaModificacion: 01/06/22
    */
   private String[] subCadenaSeparada(String cadenaAnalizada){
@@ -237,49 +238,45 @@ public class BuscarHipocoristicoService {
   }
 
   /**
-          * <b>getMensaje</b>
-          * @descripcion: getter para mensaje
-          * @autor: Francisco Javier Cortes Torres, Desarrollador
-          *
-          * @ultimaModificacion: 04/10/22
-        */
+   * <b>getMensaje</b>
+   * @descripcion: getter para mensaje
+   * @autor: Francisco Javier Cortes Torres, Desarrollador
+   *
+   * @ultimaModificacion: 04/10/22
+   */
 
   private String getMensaje(){
     return mensaje;
   }
 
   /**
-          * <b>getDetalles</b>
-          * @descripcion: getter para detalles
-          * @autor: Francisco Javier Cortes Torres, Desarrollador
-          *
-          * @ultimaModificacion: 04/10/22
-        */
+   * <b>getDetalles</b>
+   * @descripcion: getter para detalles
+   * @autor: Francisco Javier Cortes Torres, Desarrollador
+   * @ultimaModificacion: 04/10/22
+   */
 
   private String getDetalles(){
     return detalles;
   }
 
   /**
-          * <b>setMensaje</b>
-          * @descripcion: settter para mensaje
-          * @autor: Francisco Javier Cortes Torres, Desarrollador
-          *
-          * @ultimaModificacion: 04/10/22
-        */
+   * <b>setMensaje</b>
+   * @descripcion: settter para mensaje
+   * @autor: Francisco Javier Cortes Torres, Desarrollador
+   * @ultimaModificacion: 04/10/22
+   */
 
   private void setMensaje(String mensajeActual){
     mensaje = mensajeActual;
   }
 
   /**
-          * <b>setDetalles</b>
-          * @descripcion: setter par detalles
-          * @autor: Francisco Javier Cortes Torres, Desarrollador
-          *
-          * @ultimaModificacion: 04/10/22
-        */
-
+   * <b>setDetalles</b>
+   * @descripcion: setter par detalles
+   * @autor: Francisco Javier Cortes Torres, Desarrollador
+   * @ultimaModificacion: 04/10/22
+   */
   private void setDetalles(String excepcionMensaje){
     detalles = excepcionMensaje;
   }

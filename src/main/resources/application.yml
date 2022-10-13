@@ -37,9 +37,9 @@ conexion:
   conexionesdb:
     c3remesas:
       credenciales:
-        usuario: Administrator1
-        contrasena: vvfwNGdF2Y0a
-      ip: rds-multimarcas-remesas-dev-instance-1.ci8xo0u6a75o.us-east-1.rds.amazonaws.com
-      port: 5433
-      name: REMFONETIC
+        usuario: rL5KVE62kP3i1FJTaSmREA
+        contrasena: MfeoIDy5dL4uEV2fH-YeMg
+      ip: uYx3RV2-TQEHDr7-0gim9x4uZYdVw-suErVPWljmhWheenvOqDOHOy8UMbu135Y-cdzSPlp-Uy13DTM5wxlHmnV47cq_iJTHY331MDuW10A
+      port: Y90BNCyOb8r61WBZigIEfA
+      name: KiIPuiEfM53_RfP77oDDwg
       fsp: hola

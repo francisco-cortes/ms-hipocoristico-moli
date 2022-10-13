@@ -5,11 +5,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
-        * <b>ErrorInternoExepcion</b>
-        * @descripcion: breve descripción del contenido
-        * @autor: Francisco Javier Cortes Torres, Desarrollador
-        * @ultimaModificacion: 04/10/22
-       */
+ * <b>ErrorInternoExepcion</b>
+ * @descripcion: clase modelo para la respuesta controlada de excepciones
+ * @autor: Francisco Javier Cortes Torres, Desarrollador
+ * @ultimaModificacion: 13/10/22
+ */
 @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 public class ErrorInternoExepcion extends RuntimeException {
   /*
