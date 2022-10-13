@@ -1,7 +1,7 @@
-package com.baz.moli.daos;
+package com.baz.hipocoristico.daos;
 
 import com.baz.log.LogServicio;
-import com.baz.moli.exceptions.ErrorInternoExepcion;
+import com.baz.hipocoristico.exceptions.ErrorInternoExepcion;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

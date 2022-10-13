@@ -1,4 +1,4 @@
-package com.baz.moli.dtos;
+package com.baz.hipocoristico.dtos;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;
@@ -29,7 +29,7 @@ public class HipocoristicoResponseDto {
     description = "Arreglos de cadenas, idealmente nombres de personas, en maysucula")
   private String[] nombres;
   /*
-  apellidso de una persona
+  apellidos de una persona
    */
   @Schema(
     example = "[ \"GARCIA\", \"MARTINEZ\" ]",

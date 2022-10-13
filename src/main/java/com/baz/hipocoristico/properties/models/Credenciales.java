@@ -1,4 +1,4 @@
-package com.baz.moli.properties.models;
+package com.baz.hipocoristico.properties.models;
 
 import io.quarkus.runtime.annotations.ConfigGroup;
 

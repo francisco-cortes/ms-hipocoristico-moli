@@ -1,4 +1,4 @@
-package com.baz.moli.exceptions;
+package com.baz.hipocoristico.exceptions;
 
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.springframework.http.HttpStatus;

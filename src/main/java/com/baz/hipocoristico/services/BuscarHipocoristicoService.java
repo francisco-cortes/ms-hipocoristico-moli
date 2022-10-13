@@ -1,10 +1,10 @@
-package com.baz.moli.services;
+package com.baz.hipocoristico.services;
 
 import com.baz.log.LogServicio;
-import com.baz.moli.daos.ConsultarHipocorsiticoDao;
-import com.baz.moli.dtos.HipocoristicoResponseDto;
-import com.baz.moli.exceptions.ErrorInternoExepcion;
-import com.baz.moli.utilis.Constantes;
+import com.baz.hipocoristico.daos.ConsultarHipocorsiticoDao;
+import com.baz.hipocoristico.dtos.HipocoristicoResponseDto;
+import com.baz.hipocoristico.exceptions.ErrorInternoExepcion;
+import com.baz.hipocoristico.utilis.Constantes;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -28,7 +28,7 @@ public class BuscarHipocoristicoService {
   private ConsultarHipocorsiticoDao consultarHipocorsiticoDao;
 
   /*
-  variable de control para vairas consultas
+  variable de control para varias consultas
    */
   private int hipocoristicosEncontrados = 0;
   /*

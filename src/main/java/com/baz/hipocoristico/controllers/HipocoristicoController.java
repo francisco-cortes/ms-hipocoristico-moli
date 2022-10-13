@@ -1,53 +1,56 @@
-package com.baz.moli.controllers;
+package com.baz.hipocoristico.controllers;
 
-import com.baz.moli.dtos.EstadoResponseDto;
-import com.baz.moli.dtos.HipocoristicoRequestDto;
-import com.baz.moli.dtos.HipocoristicoResponseDto;
-import com.baz.moli.exceptions.ErrorInternoExepcion;
-import com.baz.moli.services.BuscarHipocoristicoService;
-import com.baz.moli.services.MonitoreoService;
-import com.baz.moli.utilis.Constantes;
+import com.baz.hipocoristico.dtos.EstadoResponseDto;
+import com.baz.hipocoristico.dtos.HipocoristicoRequestDto;
+import com.baz.hipocoristico.dtos.HipocoristicoResponseDto;
+import com.baz.hipocoristico.exceptions.ErrorInternoExepcion;
+import com.baz.hipocoristico.services.BuscarHipocoristicoService;
+import com.baz.hipocoristico.services.MonitoreoService;
+import com.baz.hipocoristico.utilis.Constantes;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.stream.Stream;
+
 /**
-        * <b>HipocoristicoController</b>
-        * @descripcion: Controlador principal para el modulo
-        * @autor: Francisco Javier Cortes Torres, Desarrollador
-        * @ultimaModificacion: 03/10/22
-       */
+ * <b>HipocoristicoController</b>
+ * @descripcion: Controlador principal para el modulo
+ * @autor: Francisco Javier Cortes Torres, Desarrollador
+ * @ultimaModificacion: 13/10/22
+ */
+@RestController
 @Path("/remesas/hipocoristico")
+@Tag(name = "Hipocoristico - Consulta - monitoreo")
 public class HipocoristicoController {
-
-
   /*
-  instacia del servicio monitoreo a tra ves de inyeccion
+  Inyeccion de instacia del MonitoreoService
    */
   @Inject
   private MonitoreoService monitoreoService;
 
   /*
-  instancia del serrvicio principal de busqueda a travez de inyeccion
+  Inyeccion instancia del BuscarHipocoristico
    */
   @Inject
   private BuscarHipocoristicoService buscarHipocoristicoService;
 
   /**
-          * <b>buscarHipocoristico</b>
-          * @descripcion: Endpoint POST principal
-          * @autor: Francisco Javier Cortes Torres, Desarrollador
-          * @param; JsonObjet String arrays
-          * @ultimaModificacion: 03/10/22
-        */
+   * <b>buscarHipocoristico</b>
+   * @descripcion: Endpoint POST principal
+   * @autor: Francisco Javier Cortes Torres, Desarrollador
+   * @param; peticion contiene los nombres y apellidos de una persona en arreglos de cadenas
+   * @ultimaModificacion: 13/10/22
+   */
 
   @POST
   @Path("/buscar-hipocoristico")
@@ -84,13 +87,13 @@ public class HipocoristicoController {
     String[] arregloNombreApellidos = Stream.of(peticion.getNombres(), peticion.getApellidos())
       .flatMap(Stream::of).toArray(String[]::new);
     /*
-    invoca metodo del servicio principal y crea el objeto con el odel hipocoristicoResponseDto
+    invoca metodo del servicio principal y crea el objeto con el model hipocoristicoResponseDto
      */
     HipocoristicoResponseDto hipocoristicoResponse =
       buscarHipocoristicoService.iniciaBuscar(nombres,apeliidos,arregloNombreApellidos);
 
     /*
-    retorna el objeto como entidad para el parceo como json
+    retorna el objeto como entidad para el parseo como json
      */
     return Response.ok().entity(hipocoristicoResponse).build();
   }
@@ -99,14 +102,13 @@ public class HipocoristicoController {
    * <b>status</b>
    * @descripcion: Método para validar el estado del microservicio
    * @autor: Francisco Javier Cortes Torres, Desarrollador
-   *
-   * @ultimaModificacion: 20/06/22
+   * @ultimaModificacion: 13/10/22
    */
   @GET
   @Path("/estado")
   @Operation(
-    summary = "Metodo de consulta al estado y Uid del microservicio",
-    description = "description")
+    operationId = "2",
+    summary = "Se realiza el test de disponibilidad al microservicio.")
   @Produces(MediaType.APPLICATION_JSON)
   public Response status(){
     /*

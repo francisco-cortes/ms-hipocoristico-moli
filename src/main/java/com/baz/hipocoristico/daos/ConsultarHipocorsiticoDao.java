@@ -1,8 +1,8 @@
-package com.baz.moli.daos;
+package com.baz.hipocoristico.daos;
 
 import com.baz.log.LogServicio;
-import com.baz.moli.exceptions.ErrorInternoExepcion;
-import com.baz.moli.utilis.Constantes;
+import com.baz.hipocoristico.exceptions.ErrorInternoExepcion;
+import com.baz.hipocoristico.utilis.Constantes;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -37,12 +37,18 @@ public class ConsultarHipocorsiticoDao {
    * <b>ejecutarSp</b>
    * @descripcion: Ejecucuta un porcedimiento almacenado, obtiene y retorna una obejto String resultado del procedimiento.
    * @autor: Francisco Javier Cortes Torres, Desarrollador
-   *
-   * @ultimaModificacion: 01/06/22
+   * @param: hipocoristico, nombre analizado
+   * @param: log, instancia de logger
+   * @param: nombres, arreglos de nombres de una persona
+   * @param: apellidos, arreglos de apellidos de una persona
+   * @ultimaModificacion: 13/10/22
    */
   @Transactional
   public String ejecutarSp(String hipocoristico, LogServicio log, String[] nombres, String[] apellidos)
     throws SQLException {
+    final int RESPUESTA = 1;
+    final int PARAMETRO_PAIS = 2;
+    final int PARAMETRO_HIPOCORSITICO = 3;
     final String NOMBRE_METODO = "ejecutarSp";
     //String de resouesta del metodo
     String resp;
@@ -54,7 +60,7 @@ public class ConsultarHipocorsiticoDao {
 
     try {
       /*
-    obtiene conexios a base de datoo postgres
+    obtiene conexion a base de datos postgres
      */
       con = fabricaConexionDao.getConexion();
       con.setAutoCommit(false);
@@ -65,15 +71,15 @@ public class ConsultarHipocorsiticoDao {
     /*
     salida String nombre solicitado
      */
-      cstmt.registerOutParameter(1, Types.VARCHAR);
+      cstmt.registerOutParameter(RESPUESTA, Types.VARCHAR);
     /*
     Datos de entrada, MEXICO por default
      */
-      cstmt.setShort(2, Constantes.MEXICO);
+      cstmt.setShort(PARAMETRO_PAIS, Constantes.MEXICO);
     /*
     Datos de entrada, nombre a buscar
      */
-      cstmt.setString(3,hipocoristico);
+      cstmt.setString(PARAMETRO_HIPOCORSITICO,hipocoristico);
     /*
     ejcucion de sp
      */
@@ -81,7 +87,7 @@ public class ConsultarHipocorsiticoDao {
     /*
     obtencion de salida sp
      */
-      resp = cstmt.getString(1);
+      resp = cstmt.getString(RESPUESTA);
     }
     catch (Exception exception){
       resp = hipocoristico;

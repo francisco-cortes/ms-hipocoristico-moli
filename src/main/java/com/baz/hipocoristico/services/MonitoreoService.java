@@ -1,7 +1,7 @@
-package com.baz.moli.services;
+package com.baz.hipocoristico.services;
 
-import com.baz.moli.dtos.EstadoResponseDto;
-import com.baz.moli.utilis.Constantes;
+import com.baz.hipocoristico.dtos.EstadoResponseDto;
+import com.baz.hipocoristico.utilis.Constantes;
 import com.baz.servicios.Uid;
 
 import javax.inject.Singleton;

@@ -1,4 +1,4 @@
-package com.baz.moli.dtos;
+package com.baz.hipocoristico.dtos;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;
@@ -15,7 +15,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 @JsonPropertyOrder({"nombres","apellidos"})
 public class HipocoristicoRequestDto {
   /*
-  Arreglo de string para guardar los nombres de una persona
+  Arreglo de strings para guardar los nombres de una persona
    */
   @Schema(
     example = " [\"PACO\", \"JAVIER\" ]",
@@ -23,7 +23,7 @@ public class HipocoristicoRequestDto {
   )
   private String[] nombres;
   /*
-  Arreglo de string para guardar los apellidos de una persona
+  Arreglo de strings para guardar los apellidos de una persona
    */
   @Schema(
     example = " [\"GARCIA\", \"MTZ\" ]",

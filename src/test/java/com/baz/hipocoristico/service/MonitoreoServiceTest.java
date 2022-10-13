@@ -1,8 +1,8 @@
-package com.baz.moli.service;
+package com.baz.hipocoristico.service;
 
-import com.baz.moli.dtos.EstadoResponseDto;
-import com.baz.moli.services.MonitoreoService;
-import com.baz.moli.utilis.Constantes;
+import com.baz.hipocoristico.dtos.EstadoResponseDto;
+import com.baz.hipocoristico.services.MonitoreoService;
+import com.baz.hipocoristico.utilis.Constantes;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

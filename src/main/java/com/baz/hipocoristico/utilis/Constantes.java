@@ -1,4 +1,4 @@
-package com.baz.moli.utilis;
+package com.baz.hipocoristico.utilis;
 
 public class Constantes {
 

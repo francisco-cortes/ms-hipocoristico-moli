@@ -1,4 +1,4 @@
-package com.baz.moli.daos;
+package com.baz.hipocoristico.daos;
 
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.DisplayName;

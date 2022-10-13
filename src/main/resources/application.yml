@@ -9,7 +9,7 @@ quarkus:
     #  url: jdbc:postgresql://localhost:5432/REMFONETIC
   container-image:
     group: ""
-    name: ms-hipocoristico-moli
+    name: ms-hipocoristico-hipocoristico
     tag: 1.0-snapshot
     registry: franciscoct
   kubernetes:
@@ -19,7 +19,7 @@ quarkus:
     level: INFO
     file:
       enable: true
-      path: ./log/logms-hipocoristico-moli.log
+      path: ./log/logms-hipocoristico-hipocoristico.log
       level: INFO
       format: '{"log_data":{"fecha":"%d{yyyy-MM-dd HH:mm:ss}","Level":"%-5p","Mensaje":"%m","servicios":[%X{servicios}],"TiempoTotal":%X{tiempo}}}%n'
       rotation:

@@ -1,7 +1,7 @@
-package com.baz.moli.daos;
+package com.baz.hipocoristico.daos;
 
-import com.baz.moli.properties.Properties;
-import com.baz.moli.utilis.Constantes;
+import com.baz.hipocoristico.properties.Properties;
+import com.baz.hipocoristico.utilis.Constantes;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -25,25 +25,22 @@ public class FabricaConexionDao {
   @Inject
   private Properties properties;
 
-  private Connection conexion;
-
   /**
    * obtenerConexion
    * Descrpcion: creoa le objeto SQL.Connection
    * Autor: Francisco Javier Cortes Torres, Desarrollador
-   * params:
    * returns: String
    **/
   public Connection getConexion() throws SQLException {
      /*
-    cadena de coenxion otrogada por servicios de base datos
+    cadena de conexion otrogada por servicios de base datos
      */
     String cadenaConexion = "jdbc:postgresql://" +
       properties.conexionesdb().get(Constantes.C3REMESASC).ip() + ":" +
       properties.conexionesdb().get(Constantes.C3REMESASC).port()  + "/" +
       properties.conexionesdb().get(Constantes.C3REMESASC).name();
     /*
-    construlle y retorna el objeto connection a treves del drive manager
+    construye y retorna el objeto connection a traves del DriveManager
      */
     return DriverManager.getConnection(cadenaConexion,
       properties.conexionesdb().get(Constantes.C3REMESASC).credenciales().usuario(),
