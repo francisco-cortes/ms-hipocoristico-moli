@@ -16,6 +16,8 @@ public class BuscarHipocoristicoServiceTest {
 
   private static final String[] NOMBRES = new String[] {"LEONARDO ISRAEL","PACO"};
   private static final String[] APELLIDOS = new String[] {"MILLAN","GARCIA"};
+  private static final String PRIMER_APELLIDO = "MILLAN";
+  private static final String SEGUNDO_APELLIDO = "GARCIA";
 
   @Inject
   private BuscarHipocoristicoService buscarHipocoristicoService;
@@ -23,7 +25,7 @@ public class BuscarHipocoristicoServiceTest {
   @DisplayName("Prueba Unitaria busqueda 1 hipocoristico")
   @Test
   public void testIniciarBusquedaIdeal(){
-    final String[] ARREGLO_COMPLETO = new String[] {"LEONARDO","PACO","MILLAN","GARCIA"};
+    final String[] ARREGLO_COMPLETO = new String[] {"LEONARDO","PACO",PRIMER_APELLIDO,SEGUNDO_APELLIDO};
     HipocoristicoResponseDto resp = buscarHipocoristicoService.iniciaBuscar(NOMBRES,APELLIDOS,ARREGLO_COMPLETO);
     assertEquals(Constantes.UN_HIPOCORISTICO,resp.getMensaje());
   }
@@ -31,7 +33,7 @@ public class BuscarHipocoristicoServiceTest {
   @DisplayName("Prueba Unitaria buqueda 2 o mas hipocoristicos")
   @Test
   public void testIniciarBusquedaDosHipocoristicos(){
-    final String[] ARREGLO_COMPLETO = new String[] {"LEONARDO PETE","PACO","MILLAN","GARCIA"};
+    final String[] ARREGLO_COMPLETO = new String[] {"LEONARDO PETE","PACO",PRIMER_APELLIDO,SEGUNDO_APELLIDO};
     HipocoristicoResponseDto resp = buscarHipocoristicoService.iniciaBuscar(NOMBRES,APELLIDOS,ARREGLO_COMPLETO);
     assertEquals(Constantes.DOS_HIPOCORISTICO,resp.getMensaje());
   }
@@ -39,7 +41,7 @@ public class BuscarHipocoristicoServiceTest {
   @DisplayName("Prueba sin hipocorisiticos")
   @Test
   public void testIniciarBusquedaSinHipocoristicos(){
-    final String[] ARREGLO_COMPLETO = new String[] {"LEONARDO","ISRAEL","MILLAN","GARCIA"};
+    final String[] ARREGLO_COMPLETO = new String[] {"LEONARDO","ISRAEL",PRIMER_APELLIDO,SEGUNDO_APELLIDO};
     HipocoristicoResponseDto resp = buscarHipocoristicoService.iniciaBuscar(NOMBRES,APELLIDOS,ARREGLO_COMPLETO);
     assertEquals(Constantes.CERO_HIPOCORISTICOS,resp.getMensaje());
   }

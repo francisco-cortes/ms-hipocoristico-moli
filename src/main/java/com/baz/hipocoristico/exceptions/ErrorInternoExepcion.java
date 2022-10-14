@@ -42,7 +42,7 @@ public class ErrorInternoExepcion extends RuntimeException {
   private String[] nombres;
 
   /*
-  apellidso de una persona
+  apellidos de una persona
    */
   @Schema(
     example = "GARCIA, MARTINEZ"

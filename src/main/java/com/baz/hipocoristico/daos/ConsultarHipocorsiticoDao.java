@@ -46,6 +46,9 @@ public class ConsultarHipocorsiticoDao {
   @Transactional
   public String ejecutarSp(String hipocoristico, LogServicio log, String[] nombres, String[] apellidos)
     throws SQLException {
+    /*
+    Constantes para indices de parametros en SP
+     */
     final int RESPUESTA = 1;
     final int PARAMETRO_PAIS = 2;
     final int PARAMETRO_HIPOCORSITICO = 3;

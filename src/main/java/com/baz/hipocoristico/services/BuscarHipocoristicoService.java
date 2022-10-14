@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.regex.Pattern;
 
 /**
  * <b>BusccarCadenasDiccionario</b>
@@ -20,6 +21,7 @@ import java.util.Arrays;
 
 @Singleton
 public class BuscarHipocoristicoService {
+  private static final Pattern ESPACIOS_REGEX = Pattern.compile("\\s+");
   private static final String NOMBRE_CLASE = "BuscarHipocoristicoService";
   /*
   inyeccion del dao para consultar sp
@@ -161,19 +163,21 @@ public class BuscarHipocoristicoService {
 
   /**
    * <b>buscarEnTabla</b>
-   * @descripcion: ejecuta consulta a sp con un String como parametro actualiza mensaje dependiendo de parametros mesajeActual y HipocoristicosEncotrados
+   * @descripcion: ejecuta consulta a sp con un String como parametro actualiza
+   * mensaje dependiendo de parametros mesajeActual y HipocoristicosEncotrados
    * @autor: Francisco Javier Cortes Torres, Desarrollador
    *
    * @ultimaModificacion: 01/06/22
    */
 
-  private String buscarEnTabla(String nombreBuscado, LogServicio log, String[] nombres, String[] apellidos) throws SQLException {
+  private String buscarEnTabla(String nombreBuscado, LogServicio log, String[] nombres, String[] apellidos)
+    throws SQLException {
     final String NOMBRE_METODO = "buscarEnTabla";
     log.iniciarTiempoMetodo(NOMBRE_CLASE+NOMBRE_METODO, Constantes.NOMBRE_MS);
     String respuestaSp;
     String busquedaTabla = consultarHipocorsiticoDao.ejecutarSp(nombreBuscado.toUpperCase(),log, nombres, apellidos);
 
-    if(busquedaTabla.isBlank() | busquedaTabla.isEmpty() | Constantes.SP_RESPUESTA_VACIA.equals(busquedaTabla)){
+    if(busquedaTabla.isBlank() || busquedaTabla.isEmpty() || Constantes.SP_RESPUESTA_VACIA.equals(busquedaTabla)){
       respuestaSp = nombreBuscado;
       if(hipocoristicosEncontrados == 0){
         setMensaje(Constantes.CERO_HIPOCORISTICOS);
@@ -234,7 +238,7 @@ public class BuscarHipocoristicoService {
    * @ultimaModificacion: 01/06/22
    */
   private String[] subCadenaSeparada(String cadenaAnalizada){
-    return cadenaAnalizada.split("\\s+");
+    return ESPACIOS_REGEX.split(cadenaAnalizada);
   }
 
   /**

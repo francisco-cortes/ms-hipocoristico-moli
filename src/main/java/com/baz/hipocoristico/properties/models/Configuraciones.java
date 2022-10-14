@@ -4,7 +4,8 @@ import io.quarkus.runtime.annotations.ConfigGroup;
 
 /**
  * <b>Configuraciones</b>
- * @descripcion: Interfaz que contienes las propiedades partículares de la validacion del token a ocupar en las peticiones.
+ * @descripcion: Interfaz que contienes las propiedades partículares de la validacion
+ * del token a ocupar en las peticiones.
  * @autor: Francisco Javier Cortes Torres, Desarrollador
  * @ultimaModificacion: 12/07/22
  */
