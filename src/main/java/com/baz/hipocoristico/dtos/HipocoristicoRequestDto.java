@@ -13,12 +13,10 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
  * @ultimaModificacion: 03/10/2022
  */
 
-@Data
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonPropertyOrder({"nombres","apellidos"})
 public class HipocoristicoRequestDto {
   /*
   Arreglo de strings para guardar los nombres de una persona

@@ -2,7 +2,7 @@ package com.baz.hipocoristico.daos;
 
 import com.baz.hipocoristico.properties.Properties;
 import com.baz.hipocoristico.utilis.Constantes;
-import com.baz.servicios.Cifrador;
+import com.baz.servicios.CifradorAes;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -26,7 +26,7 @@ public class FabricaConexionDao {
   @Inject
   private Properties properties;
 
-  private Cifrador cifrador;
+  private CifradorAes cifradorAes;
 
   /**
    * obtenerConexion
@@ -35,20 +35,20 @@ public class FabricaConexionDao {
    * returns: String
    **/
   public Connection getConexion() throws Exception {
-    cifrador = new Cifrador(false);
+    cifradorAes = new CifradorAes(false);
      /*
     cadena de conexion otrogada por servicios de base datos
      */
     String cadenaConexion = "jdbc:postgresql://" +
-      cifrador.desencriptar( properties.conexionesdb().get(Constantes.C3REMESASC).ip() ) + ":" +
-      cifrador.desencriptar( properties.conexionesdb().get(Constantes.C3REMESASC).port() )  + "/" +
-      cifrador.desencriptar( properties.conexionesdb().get(Constantes.C3REMESASC).name() );
+      cifradorAes.desencriptarDato( properties.conexionesdb().get(Constantes.C3REMESASC).ip() ) + ":" +
+      cifradorAes.desencriptarDato( properties.conexionesdb().get(Constantes.C3REMESASC).port() )  + "/" +
+      cifradorAes.desencriptarDato( properties.conexionesdb().get(Constantes.C3REMESASC).name() );
     /*
     construye y retorna el objeto connection a traves del DriveManager
      */
     return DriverManager.getConnection(cadenaConexion,
-      cifrador.desencriptar( properties.conexionesdb().get(Constantes.C3REMESASC).credenciales().usuario() ),
-      cifrador.desencriptar( properties.conexionesdb().get(Constantes.C3REMESASC).credenciales().contrasena() ));
+      cifradorAes.desencriptarDato( properties.conexionesdb().get(Constantes.C3REMESASC).credenciales().usuario() ),
+      cifradorAes.desencriptarDato( properties.conexionesdb().get(Constantes.C3REMESASC).credenciales().contrasena() ));
   }
 
   /**

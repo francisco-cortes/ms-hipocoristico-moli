@@ -1,5 +1,8 @@
 package com.baz.hipocoristico.interceptors;
 
+import com.baz.excepciones.BadRequestException;
+import com.baz.excepciones.InternalServerErrorException;
+import com.baz.excepciones.NotFoundException;
 import com.baz.hipocoristico.dtos.HipocoristicoRequestDto;
 import com.baz.hipocoristico.exceptions.ErrorInternoExepcion;
 import com.baz.hipocoristico.utilis.Constantes;
@@ -23,9 +26,8 @@ import java.util.regex.Pattern;
  * @autor: Francisco Javier Cortes Torres, Desarrollador
  * @ultimaModificacion: 13/10/2022
  */
-@ConstrainedTo(RuntimeType.SERVER)
-@Provider
-public class HipocoristicoInterceptor implements ReaderInterceptor {
+
+public class HipocoristicoInterceptor{
 
   /*
   regex de validacion de cadenas para nombres en español
@@ -46,18 +48,26 @@ public class HipocoristicoInterceptor implements ReaderInterceptor {
    * @param: context, contexto de lectura de interceptor
    * @ultimaModificacion: 14/10/22
    */
-  @Override
+  /*@Override
   public Object aroundReadFrom(ReaderInterceptorContext context)
     throws IOException, WebApplicationException {
-
+    HipocoristicoRequestDto request = null;
     System.out.println("ENTRA AL INTERCEPTOR");
     LogServicio log = new LogServicio();
     String nombreClaseMetodo = "ConsultaBarriInterceptor-aroundReadFrom";
     log.iniciarTiempoMetodo(nombreClaseMetodo, Constantes.NOMBRE_MS);
+    String uid = context.getHeaders().getFirst("uid");
     System.out.println("URI:" + uri.getPath());
     int contadorNulosNombres = 0;
     int contadorNulosApellidos = 0;
-    HipocoristicoRequestDto request = (HipocoristicoRequestDto) context.proceed();
+
+    try {
+      System.out.println(context.proceed());
+      request = (HipocoristicoRequestDto) context.proceed();
+    }
+    catch(BadRequestException | NotFoundException | InternalServerErrorException excepcion){
+      throw excepcion;
+    }
 
     String[] noms = request.getNombres();
     String[] aps = request.getApellidos();
@@ -87,5 +97,5 @@ public class HipocoristicoInterceptor implements ReaderInterceptor {
     }
 
     return request;
-  }
+  }*/
 }
