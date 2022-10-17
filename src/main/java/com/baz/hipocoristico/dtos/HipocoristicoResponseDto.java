@@ -60,10 +60,15 @@ public class HipocoristicoResponseDto {
    */
   public HipocoristicoResponseDto(String codigoRespuesta, String[] nombres, String[] apellidos,
                                   String mensaje, String detalles){
+    //codigo http
     this.codigoRespuesta = codigoRespuesta;
+    //nombres
     this.nombres = nombres.clone();
+    // apellidos
     this.apellidos = apellidos.clone();
+    // mensaje de error
     this.mensaje = mensaje;
+    // detalles de error
     this.detalles = detalles;
   }
 

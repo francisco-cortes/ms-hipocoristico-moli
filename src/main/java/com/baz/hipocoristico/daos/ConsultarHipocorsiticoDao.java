@@ -35,7 +35,7 @@ public class ConsultarHipocorsiticoDao {
 
   /**
    * <b>ejecutarSp</b>
-   * @descripcion: Ejecucuta un porcedimiento almacenado, obtiene y retorna una obejto String resultado del procedimiento.
+   * @descripcion: Ejecucuta un porcedimiento almacenado, obtiene y retorna un String resultado del procedimiento.
    * @autor: Francisco Javier Cortes Torres, Desarrollador
    * @param: hipocoristico, nombre analizado
    * @param: log, instancia de logger

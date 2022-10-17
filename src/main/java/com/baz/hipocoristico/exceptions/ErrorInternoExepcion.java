@@ -54,11 +54,16 @@ public class ErrorInternoExepcion extends RuntimeException {
   constructor
    */
   public ErrorInternoExepcion(String codigo, String mensaje, String detalles, String[] nombres, String[] apellidos) {
+    //codigo http
     this.codigo = codigo;
-    this.mensaje = mensaje;
-    this.detalles = detalles;
+    //nombres
     this.nombres = nombres.clone();
+    // apellidos
     this.apellidos = apellidos.clone();
+    // mensaje de error
+    this.mensaje = mensaje;
+    // detalles de error
+    this.detalles = detalles;
   }
 
   /*

@@ -14,10 +14,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @QuarkusTest
 public class BuscarHipocoristicoServiceTest {
 
-  private static final String[] NOMBRES = new String[] {"LEONARDO ISRAEL","PACO"};
-  private static final String[] APELLIDOS = new String[] {"MILLAN","GARCIA"};
   private static final String PRIMER_APELLIDO = "MILLAN";
   private static final String SEGUNDO_APELLIDO = "GARCIA";
+  private static final String[] NOMBRES = new String[] {"LEONARDO ISRAEL","PACO"};
+  private static final String[] APELLIDOS = new String[] {PRIMER_APELLIDO,SEGUNDO_APELLIDO};
 
   @Inject
   private BuscarHipocoristicoService buscarHipocoristicoService;

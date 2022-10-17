@@ -1,9 +1,7 @@
 package com.baz.hipocoristico.dtos;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
@@ -16,8 +14,6 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 @Data
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
 @JsonPropertyOrder({"mensaje","folio"})
 public class EstadoResponseDto {
   /*

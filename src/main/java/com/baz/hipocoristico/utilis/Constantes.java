@@ -23,14 +23,18 @@ public class Constantes {
   public static final int LONGITUD_MIN_ENTRADA = 1;
   public static final int LONGITUD_MAX_ENTRADA = 10;
 
+  public final static String GENERAL_EXITO = "C00000";
   public static final String ESTADO_OK = "OK";
   public static final String ESTADO_NOT_OK = "NOT OK";
   public static final String CODIGO_EXITO = "E";
   public static final String MENSAJE_EXITO = "Operacion exitosa.";
+  public final static String GENERAL_APP_INTERNA = "C20000";
+  public final static String GENERAL_ERROR = "C20001";
+  public final static String BAD_REQUEST = "C20002";
 
-  public final static String MENSAJE_CODIGO400 = "Datos de entrada incorrectos, por favor valide su información.";
-  public final static String MENSAJE_CODIGO500 = "Ocurrió un incoveniente al procesar la solicitud.";
-  public final static String MENSAJE_CODIGO500_LOG = "Problemas al procesar su solicitud favor de contactar a su administrador.";
-
+  public final static String MENSAJE_CODIGO_400 = "Datos de entrada incorrectos, por favor valide su información.";
+  public final static String MENSAJE_CODIGO_401 = "No estas autorizado, favor de validar.";
+  public final static String MENSAJE_CODIGO_404 = "Recurso no encontrado";
+  public final static String MENSAJE_CODIGO_500 = "Ocurrió un incoveniente al procesar la solicitud.";
 
 }

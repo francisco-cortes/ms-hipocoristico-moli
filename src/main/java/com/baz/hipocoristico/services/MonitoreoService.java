@@ -27,7 +27,7 @@ public class MonitoreoService {
     /*
     genera folio a traves de RemesasUtils.jar
      */
-    uidAlive.setFolio("UDI" + Uid.generarUid(Constantes.TAMANO_UDI,Constantes.CICLOS_UDI));
+    uidAlive.setFolio("UID" + Uid.generarUid(Constantes.TAMANO_UDI,Constantes.CICLOS_UDI));
     return uidAlive;
   }
 

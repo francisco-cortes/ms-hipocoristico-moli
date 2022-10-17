@@ -27,15 +27,29 @@ import java.util.regex.Pattern;
 @Provider
 public class HipocoristicoInterceptor implements ReaderInterceptor {
 
+  /*
+  regex de validacion de cadenas para nombres en español
+   */
   private static final Pattern NOMBRE_REGEX =
     Pattern.compile("^(?=.{1,40}$)[a-zA-ZáéíóúüñÁÉÍÓÚÑ]+(?:[\\s][a-zA-ZáéíóúüñÁÉÍÓÚÑ]+)*$");
 
+  /*
+  inyeccion de UriInfo
+   */
   @Context
   private UriInfo uri;
 
+  /**
+   * <b>aroundReadFrom</b>
+   * @descripcion: breve descripción del contenido
+   * @autor: Francisco Javier Cortes Torres, Desarrollador
+   * @param: context, contexto de lectura de interceptor
+   * @ultimaModificacion: 14/10/22
+   */
   @Override
   public Object aroundReadFrom(ReaderInterceptorContext context)
     throws IOException, WebApplicationException {
+
     System.out.println("ENTRA AL INTERCEPTOR");
     LogServicio log = new LogServicio();
     String nombreClaseMetodo = "ConsultaBarriInterceptor-aroundReadFrom";
