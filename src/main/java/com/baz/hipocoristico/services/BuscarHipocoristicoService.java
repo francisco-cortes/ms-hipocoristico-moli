@@ -1,5 +1,6 @@
 package com.baz.hipocoristico.services;
 
+import com.baz.hipocoristico.dtos.HipocoristicoRequestDto;
 import com.baz.log.LogServicio;
 import com.baz.hipocoristico.daos.ConsultarHipocorsiticoDao;
 import com.baz.hipocoristico.dtos.HipocoristicoResponseDto;
@@ -11,6 +12,7 @@ import javax.inject.Singleton;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 /**
  * <b>BusccarCadenasDiccionario</b>
@@ -52,14 +54,29 @@ public class BuscarHipocoristicoService {
    * @ultimaModificacion: 13/10/22
    */
 
-  public HipocoristicoResponseDto iniciaBuscar(String[] nombres, String[] apellidos, String[] arregloCompleto){
+  public HipocoristicoResponseDto iniciaBuscar(HipocoristicoRequestDto peticion){
     LogServicio log = new LogServicio();
     StringBuilder cadenaNombres = new StringBuilder();
     StringBuilder cadenaApellidos = new StringBuilder();
     final String NOMBRE_METODO = "iniciaBuscar";
     log.iniciarTiempoMetodo(NOMBRE_CLASE+NOMBRE_METODO,Constantes.NOMBRE_MS);
+    /*
+    obtiene la cantidad de strings del arreglo nombre
+     */
+    String[] nombres = peticion.getNombres();
+    /*
+    obtiene la cantida de string del arreglo apellido
+     */
+    String[] apellidos = peticion.getApellidos();
+    /*
+    une los arreglos para iterar despues
+     */
+    String[] arregloCompleto= Stream.of(peticion.getNombres(), peticion.getApellidos())
+      .flatMap(Stream::of).toArray(String[]::new);
+
     log.registrarMensaje(NOMBRE_CLASE+NOMBRE_METODO,"Recibido: " + arregloCompleto.length +
       " de nombres");
+
     for(int i = 0; i < nombres.length; i++){
       cadenaNombres.append(nombres[i]);
       cadenaNombres.append(" ");

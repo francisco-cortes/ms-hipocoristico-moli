@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.inject.Inject;
 import org.springframework.http.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.stream.Stream;
-
 /**
  * <b>HipocoristicoController</b>
  * @descripcion: Controlador principal para el modulo
@@ -79,29 +77,18 @@ public class HipocoristicoController {
           schema =  @Schema(implementation = ErrorInternoExepcion.class))),
 
     })
-  @PostMapping(value ="/buscar-hipocoristico", produces = MediaType.APPLICATION_JSON_VALUE,consumes = MediaType.APPLICATION_JSON_VALUE)
+  @PostMapping(value ="/buscar-hipocoristico",
+    produces = MediaType.APPLICATION_JSON_VALUE,
+    consumes = MediaType.APPLICATION_JSON_VALUE)
   public Response buscarHipocoristico(@RequestHeader(name = "uid", required = true) String uidHeader,
                                       @RequestHeader(name = "token", required = true) String tokenHeader,
                                       @RequestBody HipocoristicoRequestDto peticion){
-    /*
-    obtiene la cantidad de strings del arreglo nombre
-     */
-    String[] nombres = peticion.getNombres();
-    /*
-    obtiene la cantida de string del arreglo apellido
-     */
-    String[] apeliidos = peticion.getApellidos();
-    /*
-    une los arreglos para iterar despues
-     */
-    String[] arregloNombreApellidos = Stream.of(peticion.getNombres(), peticion.getApellidos())
-      .flatMap(Stream::of).toArray(String[]::new);
+
     /*
     invoca metodo del servicio principal y crea el objeto con el model hipocoristicoResponseDto
      */
     HipocoristicoResponseDto hipocoristicoResponse =
-      buscarHipocoristicoService.iniciaBuscar(nombres,apeliidos,arregloNombreApellidos);
-
+      buscarHipocoristicoService.iniciaBuscar(peticion);
     /*
     retorna el objeto como entidad para el parseo como json
      */
