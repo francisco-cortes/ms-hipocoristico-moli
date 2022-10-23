@@ -8,9 +8,12 @@ import com.baz.hipocoristico.exceptions.ErrorInternoExepcion;
 import com.baz.hipocoristico.utilis.Constantes;
 import com.baz.log.LogServicio;
 
+import javax.ws.rs.ConstrainedTo;
+import javax.ws.rs.RuntimeType;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
+import javax.ws.rs.ext.Provider;
 import javax.ws.rs.ext.ReaderInterceptor;
 import javax.ws.rs.ext.ReaderInterceptorContext;
 import java.io.IOException;
@@ -23,7 +26,8 @@ import java.util.regex.Pattern;
  * @autor: Francisco Javier Cortes Torres, Desarrollador
  * @ultimaModificacion: 13/10/2022
  */
-
+@ConstrainedTo(RuntimeType.SERVER)
+@Provider
 public class HipocoristicoInterceptor implements ReaderInterceptor{
 
   /*
@@ -53,16 +57,16 @@ public class HipocoristicoInterceptor implements ReaderInterceptor{
     String nombreClaseMetodo = "ConsultaBarriInterceptor-aroundReadFrom";
     log.iniciarTiempoMetodo(nombreClaseMetodo, Constantes.NOMBRE_MS);
     String uid = context.getHeaders().getFirst("uid");
+    System.out.println(uid);
     System.out.println("URI:" + uri.getPath());
     int contadorNulosNombres = 0;
     int contadorNulosApellidos = 0;
-    System.out.println(context.proceed());
 
     try {
       request = (HipocoristicoRequestDto) context.proceed();
     }
     catch(BadRequestException | NotFoundException | InternalServerErrorException excepcion){
-      throw excepcion;
+      excepcion.printStackTrace();
     }
 
     String[] noms = request.getNombres();
