@@ -4,6 +4,8 @@ import com.baz.hipocoristico.dtos.EstadoResponseDto;
 import com.baz.hipocoristico.services.MonitoreoService;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.inject.Inject;
@@ -20,8 +22,8 @@ import javax.ws.rs.core.Response;
  * @ultimaModificacion: 13/10/22
  */
 @RestController
-@Path("/remesas/hipocoristico")
-@Tag(name = "Monitoreo")
+@RequestMapping("/remesas/hipocoristico")
+@Tag(name = "Monitoreo - hipocoristico")
 public class MonitoreoController {
   /*
   Inyeccion de instacia del MonitoreoService
@@ -35,12 +37,10 @@ public class MonitoreoController {
    * @autor: Francisco Javier Cortes Torres, Desarrollador
    * @ultimaModificacion: 13/10/22
    */
-  @GET
-  @Path("/status")
   @Operation(
     operationId = "2",
     summary = "Se realiza el test de disponibilidad al microservicio.")
-  @Produces(MediaType.APPLICATION_JSON)
+  @GetMapping(value ="/status", produces = MediaType.APPLICATION_JSON)
   public Response status(){
     /*
     modelo con con los datos de salida

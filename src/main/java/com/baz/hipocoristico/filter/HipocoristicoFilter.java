@@ -37,53 +37,47 @@ public class HipocoristicoFilter implements ContainerRequestFilter {
   @Override
   public void filter(ContainerRequestContext requestContext) throws IOException {
     System.out.println("ENTRA AL FILTER");
-    //logger
     LogServicio log = new LogServicio();
-    CifradorAes cifradorAes = new CifradorAes(false);
     String nombreClaseMetodo  = "HipocoristicoFilter-filter";
-    //ruta consultada
-    String valorToken = requestContext.getHeaderString("token");
-    String valorUid = requestContext.getHeaderString("uid");
-
     log.iniciarTiempoMetodo(nombreClaseMetodo, Constantes.NOMBRE_MS);
 
+    String uid = requestContext.getHeaderString("uid");
+    String token = requestContext.getHeaderString("token");
+    ValidarDto validarDto;
+
+    System.out.println("VALOR DE uid "+ uid);
+    System.out.println("VALOR de TOKEN "+ token);
     try {
+
       if (!"/remesas/hipocoristico/buscar-hipocoristico".equals(requestContext.getUriInfo().getPath())) {
         return;
       }
-      String token = cifradorAes.desencriptarDato(valorToken);
 
-      Resultado resultado = new Resultado();
-      resultado.setUid(valorUid);
-      resultado.setCodigo(Constantes.GENERAL_EXITO);
-      resultado.setMensaje(Constantes.MENSAJE_EXITO);
-      ValidarDto validarDto = new ValidarDto();
-      validarDto.validarPeticionAes(new Header(valorUid,token), resultado);
-      log.terminarTiempoMetodo(nombreClaseMetodo);
+      System.out.println("ENTRA EN EL TRY");
+      Resultado resultado = new Resultado(uid, Constantes.CODIGO_EXITO, Constantes.MENSAJE_EXITO);
+      validarDto = new ValidarDto();
+      System.out.println("entra a validar peticion ");
+      validarDto.validarPeticionAes(new Header(uid,token), resultado);
+      System.out.println(resultado.getMensaje());
+      System.out.println("sale de validar peticion");
+      System.out.println(resultado.getCodigo());
 
       if (!resultado.getCodigo().equals(Constantes.CODIGO_EXITO)) {
-        throw new BadRequestException(Constantes.HTTP_400,
-          resultado.getCodigo(),
-          Constantes.MENSAJE_CODIGO_400,
-          valorUid.isBlank() ? valorUid.isEmpty()
-            ? "-" : valorUid : valorUid,
-          Constantes.NOMBRE_MS,
-          "Ocurrió un problema en la validación " + resultado.getMensaje());
+        System.out.println("errorr de validacion");
+        //hipocoristicoUtils.generarExcepcion(Constantes.HTTP_400, resultado.getCodigo(),
+          //resultado.getMensaje(), uid);
       }
     }
-    catch (BadRequestException | UnauthorizedException unauthorized_request) {
-      log.registrarExcepcion(unauthorized_request, null);
-      throw unauthorized_request;
+    catch(BadRequestException | UnauthorizedException excepcion) {
+      System.out.println("errorr de validacion");
+      log.registrarExcepcion(excepcion, null);
+      throw excepcion;
     }
-    catch (Exception e) {
-      log.registrarExcepcion(e, null);
-      throw new InternalServerErrorException(
-        Constantes.HTTP_500,
-        Constantes.GENERAL_ERROR,
-        Constantes.MENSAJE_CODIGO_500,
-        valorUid,
-        nombreClaseMetodo,
-        "Ocurrió un problema en la validación " + e.getMessage());
+    catch(Exception excepcion){
+      log.registrarExcepcion(excepcion, null);
+      System.out.println("exepcion");
+      //hipocoristicoUtils.generarExcepcion(Constantes.HTTP_500, Constantes.CODIGO_ERROR_GENERAL_API,
+        //excepcion.getMessage(), uid);
     }
   }
 }

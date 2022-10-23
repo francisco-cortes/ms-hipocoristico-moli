@@ -8,12 +8,9 @@ import com.baz.hipocoristico.exceptions.ErrorInternoExepcion;
 import com.baz.hipocoristico.utilis.Constantes;
 import com.baz.log.LogServicio;
 
-import javax.ws.rs.ConstrainedTo;
-import javax.ws.rs.RuntimeType;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
-import javax.ws.rs.ext.Provider;
 import javax.ws.rs.ext.ReaderInterceptor;
 import javax.ws.rs.ext.ReaderInterceptorContext;
 import java.io.IOException;
@@ -27,7 +24,7 @@ import java.util.regex.Pattern;
  * @ultimaModificacion: 13/10/2022
  */
 
-public class HipocoristicoInterceptor{
+public class HipocoristicoInterceptor implements ReaderInterceptor{
 
   /*
   regex de validacion de cadenas para nombres en español
@@ -48,11 +45,10 @@ public class HipocoristicoInterceptor{
    * @param: context, contexto de lectura de interceptor
    * @ultimaModificacion: 14/10/22
    */
-  /*@Override
-  public Object aroundReadFrom(ReaderInterceptorContext context)
-    throws IOException, WebApplicationException {
-    HipocoristicoRequestDto request = null;
+  @Override
+  public final Object aroundReadFrom(ReaderInterceptorContext context) throws IOException, WebApplicationException {
     System.out.println("ENTRA AL INTERCEPTOR");
+    HipocoristicoRequestDto request = null;
     LogServicio log = new LogServicio();
     String nombreClaseMetodo = "ConsultaBarriInterceptor-aroundReadFrom";
     log.iniciarTiempoMetodo(nombreClaseMetodo, Constantes.NOMBRE_MS);
@@ -60,9 +56,9 @@ public class HipocoristicoInterceptor{
     System.out.println("URI:" + uri.getPath());
     int contadorNulosNombres = 0;
     int contadorNulosApellidos = 0;
+    System.out.println(context.proceed());
 
     try {
-      System.out.println(context.proceed());
       request = (HipocoristicoRequestDto) context.proceed();
     }
     catch(BadRequestException | NotFoundException | InternalServerErrorException excepcion){
@@ -76,6 +72,7 @@ public class HipocoristicoInterceptor{
       for (String nom : noms) {
         if (!NOMBRE_REGEX.matcher(nom).matches()) {
           contadorNulosNombres++;
+          System.out.println(contadorNulosNombres);
         }
       }
     }
@@ -97,5 +94,5 @@ public class HipocoristicoInterceptor{
     }
 
     return request;
-  }*/
+  }
 }
