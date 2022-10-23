@@ -3,12 +3,14 @@ package com.baz.hipocoristico.controllers;
 import com.baz.excepciones.DtoExcepcion;
 import com.baz.hipocoristico.dtos.HipocoristicoRequestDto;
 import com.baz.hipocoristico.dtos.HipocoristicoResponseDto;
-import com.baz.hipocoristico.exceptions.ErrorInternoExepcion;
 import com.baz.hipocoristico.services.BuscarHipocoristicoService;
 import com.baz.hipocoristico.utilis.Constantes;
 import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.enums.ParameterIn;
+import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
@@ -48,6 +50,16 @@ public class HipocoristicoController {
   /*
   Valores para respuesta controladas
    */
+  @Parameter(name ="token",
+    schema = @Schema(type = SchemaType.STRING),
+    description = "Token para el inciar al solicitud.",
+    example = "022DEE73F8528EA4445B133DDB5B224848B2258B",
+    in = ParameterIn.HEADER, required = true)
+  @Parameter(name ="uid",
+    schema = @Schema(type = SchemaType.STRING),
+    description = "Uid para identificacion del sservice.",
+    example = "UID123412341332",
+    in = ParameterIn.HEADER, required = true)
   @APIResponses(value =
     {
       @APIResponse(
@@ -70,19 +82,11 @@ public class HipocoristicoController {
         description = "Error Interno en la aplicación",
         content = @Content(mediaType = "application/json",
           schema =  @Schema(implementation = DtoExcepcion.class))),
-      @APIResponse(
-        responseCode = Constantes.HTTP_500,
-        description = "Error Interno en la aplicación",
-        content = @Content(mediaType = "application/json",
-          schema =  @Schema(implementation = ErrorInternoExepcion.class))),
-
     })
   @PostMapping(value ="/buscar-hipocoristico",
     produces = MediaType.APPLICATION_JSON_VALUE,
     consumes = MediaType.APPLICATION_JSON_VALUE)
-  public Response buscarHipocoristico(@RequestHeader(name = "uid", required = true) String uidHeader,
-                                      @RequestHeader(name = "token", required = true) String tokenHeader,
-                                      @RequestBody HipocoristicoRequestDto peticion){
+  public Response buscarHipocoristico(@RequestBody HipocoristicoRequestDto peticion){
 
     /*
     invoca metodo del servicio principal y crea el objeto con el model hipocoristicoResponseDto
