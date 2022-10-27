@@ -68,17 +68,17 @@ public class HipocoristicoController {
         content = @Content(mediaType = "application/json",
           schema =  @Schema(implementation = HipocoristicoResponseDto.class))),
       @APIResponse(
-        responseCode = "400",
+        responseCode = Constantes.HTTP_400,
         description = "Solicitud incorrecta",
         content = @Content(mediaType = "application/json",
           schema =  @Schema(implementation = DtoExcepcion.class))),
       @APIResponse(
-        responseCode = "401",
-        description = "Solicitud incorrecta",
+        responseCode = Constantes.HTTP_404,
+        description = "No Encontrado",
         content = @Content(mediaType = "application/json",
           schema =  @Schema(implementation = DtoExcepcion.class))),
       @APIResponse(
-        responseCode = "500",
+        responseCode = Constantes.HTTP_500,
         description = "Error Interno en la aplicación",
         content = @Content(mediaType = "application/json",
           schema =  @Schema(implementation = DtoExcepcion.class))),
@@ -92,7 +92,7 @@ public class HipocoristicoController {
     invoca metodo del servicio principal y crea el objeto con el model hipocoristicoResponseDto
      */
     HipocoristicoResponseDto hipocoristicoResponse =
-      buscarHipocoristicoService.iniciaBuscar(peticion);
+      buscarHipocoristicoService.iniciaBuscar(peticion, "falta implemnetar con microprofile");
     /*
     retorna el objeto como entidad para el parseo como json
      */

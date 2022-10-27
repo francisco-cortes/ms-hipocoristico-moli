@@ -1,7 +1,7 @@
 package com.baz.hipocoristico.daos;
 
+import com.baz.hipocoristico.utilis.GenerarExcepcionUtil;
 import com.baz.log.LogServicio;
-import com.baz.hipocoristico.exceptions.ErrorInternoExepcion;
 import com.baz.hipocoristico.utilis.Constantes;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -26,6 +26,8 @@ import java.sql.Types;
 @NoArgsConstructor
 public class ConsultarHipocorsiticoDao {
 
+  private static final GenerarExcepcionUtil generarExcepcionUtil = new GenerarExcepcionUtil();
+
   private static final String NOMBRE_CLASE = "ConsultarHipocoristicoDao";
   /**
    * Instancia el objeto para conexion a DB a travez de fabricaDao
@@ -44,7 +46,7 @@ public class ConsultarHipocorsiticoDao {
    * @ultimaModificacion: 13/10/22
    */
   @Transactional
-  public String ejecutarSp(String hipocoristico, LogServicio log, String[] nombres, String[] apellidos)
+  public String ejecutarSp(String hipocoristico, LogServicio log, String uid)
     throws SQLException {
     /*
     Constantes para indices de parametros en SP
@@ -97,8 +99,8 @@ public class ConsultarHipocorsiticoDao {
       log.registrarExcepcion(exception,"Error SQL");
       log.registrarMensaje(NOMBRE_CLASE+NOMBRE_METODO,exception.getMessage());
 
-      throw new ErrorInternoExepcion(Constantes.HTTP_500,"Error SQL",
-        exception.getMessage(),nombres,apellidos);
+      generarExcepcionUtil.generarExcepcion(Constantes.HTTP_500,Constantes.CODIGO_ERROR_GENERAL_API,
+        exception.getMessage(),uid);
     }
     finally {
       /*

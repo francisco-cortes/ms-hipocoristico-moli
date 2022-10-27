@@ -2,7 +2,6 @@ package com.baz.hipocoristico.dtos;
 
 import com.baz.anotaciones.Validacion;
 import com.baz.hipocoristico.utilis.Constantes;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.*;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 

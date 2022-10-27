@@ -1,13 +1,12 @@
 package com.baz.hipocoristico.filter;
 
 import com.baz.excepciones.BadRequestException;
-import com.baz.excepciones.InternalServerErrorException;
 import com.baz.excepciones.UnauthorizedException;
 import com.baz.hipocoristico.models.Header;
 import com.baz.hipocoristico.models.Resultado;
 import com.baz.hipocoristico.utilis.Constantes;
+import com.baz.hipocoristico.utilis.GenerarExcepcionUtil;
 import com.baz.log.LogServicio;
-import com.baz.servicios.CifradorAes;
 import com.baz.servicios.ValidarDto;
 
 import javax.ws.rs.container.ContainerRequestContext;
@@ -25,6 +24,8 @@ import java.io.IOException;
 @Provider
 @PreMatching
 public class HipocoristicoFilter implements ContainerRequestFilter {
+
+  private static final GenerarExcepcionUtil generarExcepcionUtil = new GenerarExcepcionUtil();
 
   /**
    * <b>filter</b>
@@ -63,9 +64,9 @@ public class HipocoristicoFilter implements ContainerRequestFilter {
       System.out.println(resultado.getCodigo());
 
       if (!resultado.getCodigo().equals(Constantes.CODIGO_EXITO)) {
-        System.out.println("errorr de validacion");
-        //hipocoristicoUtils.generarExcepcion(Constantes.HTTP_400, resultado.getCodigo(),
-          //resultado.getMensaje(), uid);
+        System.out.println("error de validacion");
+        generarExcepcionUtil.generarExcepcion(Constantes.HTTP_400, resultado.getCodigo(),
+          resultado.getMensaje(), uid);
       }
     }
     catch(BadRequestException | UnauthorizedException excepcion) {
@@ -76,8 +77,8 @@ public class HipocoristicoFilter implements ContainerRequestFilter {
     catch(Exception excepcion){
       log.registrarExcepcion(excepcion, null);
       System.out.println("exepcion");
-      //hipocoristicoUtils.generarExcepcion(Constantes.HTTP_500, Constantes.CODIGO_ERROR_GENERAL_API,
-        //excepcion.getMessage(), uid);
+      generarExcepcionUtil.generarExcepcion(Constantes.HTTP_500, Constantes.CODIGO_ERROR_GENERAL_API,
+        excepcion.getMessage(), uid);
     }
   }
 }

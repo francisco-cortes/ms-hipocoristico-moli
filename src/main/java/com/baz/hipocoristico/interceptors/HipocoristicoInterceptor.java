@@ -4,8 +4,8 @@ import com.baz.excepciones.BadRequestException;
 import com.baz.excepciones.InternalServerErrorException;
 import com.baz.excepciones.NotFoundException;
 import com.baz.hipocoristico.dtos.HipocoristicoRequestDto;
-import com.baz.hipocoristico.exceptions.ErrorInternoExepcion;
 import com.baz.hipocoristico.utilis.Constantes;
+import com.baz.hipocoristico.utilis.GenerarExcepcionUtil;
 import com.baz.log.LogServicio;
 
 import javax.ws.rs.ConstrainedTo;
@@ -17,7 +17,6 @@ import javax.ws.rs.ext.Provider;
 import javax.ws.rs.ext.ReaderInterceptor;
 import javax.ws.rs.ext.ReaderInterceptorContext;
 import java.io.IOException;
-import java.util.regex.Pattern;
 
 /**
  * <b>HipocoristicoiInterceptor</b>
@@ -30,12 +29,7 @@ import java.util.regex.Pattern;
 @Provider
 public class HipocoristicoInterceptor implements ReaderInterceptor{
 
-  /*
-  regex de validacion de cadenas para nombres en español
-   */
-  private static final Pattern NOMBRE_REGEX =
-    Pattern.compile("^(?=.{1,40}$)[a-zA-ZáéíóúüñÁÉÍÓÚÑ]+(?:[\\s][a-zA-ZáéíóúüñÁÉÍÓÚÑ]+)*$");
-
+  private static final GenerarExcepcionUtil generarExcepcionUtil = new GenerarExcepcionUtil();
   /*
   inyeccion de UriInfo
    */
@@ -61,6 +55,7 @@ public class HipocoristicoInterceptor implements ReaderInterceptor{
     System.out.println("URI:" + uri.getPath());
     int contadorNulosNombres = 0;
     int contadorNulosApellidos = 0;
+    StringBuilder nombresErroneos = new StringBuilder();
 
     try {
       request = (HipocoristicoRequestDto) context.proceed();
@@ -74,27 +69,29 @@ public class HipocoristicoInterceptor implements ReaderInterceptor{
 
     if(!(noms == null)){
       for (String nom : noms) {
-        if (!NOMBRE_REGEX.matcher(nom).matches()) {
+        if (nom.contains("{") || nom.contains("}") || nom.contains("*")) {
           contadorNulosNombres++;
-          System.out.println(contadorNulosNombres);
+          nombresErroneos.append(nom);
+          nombresErroneos.append(", ");
         }
       }
     }
 
     if(!(aps == null)){
       for (String ap : aps) {
-        if (!NOMBRE_REGEX.matcher(ap).matches()) {
+        if (ap.contains("{") || ap.contains("}") || ap.contains("*")) {
           contadorNulosApellidos++;
+          nombresErroneos.append(ap);
+          nombresErroneos.append(", ");
         }
       }
     }
 
     if(contadorNulosNombres > 0 || contadorNulosApellidos > 0 ){
-      assert aps != null;
-      assert noms != null;
-      throw new ErrorInternoExepcion(Constantes.HTTP_500,"Hubo Nombres invalidos",
-        "Nombres invalidos: " + contadorNulosNombres + " Apellidos invalidos: " + contadorNulosApellidos
-        ,noms,aps);
+
+      generarExcepcionUtil.generarExcepcion(Constantes.HTTP_400,
+        Constantes.CODIGO_ERROR_GENERAL_API,"Los valores: "+ nombresErroneos + " tienen caracteres invalidos"
+        ,uid);
     }
 
     return request;

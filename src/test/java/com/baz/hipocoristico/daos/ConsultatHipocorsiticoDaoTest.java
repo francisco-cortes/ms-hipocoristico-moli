@@ -22,23 +22,21 @@ public class ConsultatHipocorsiticoDaoTest {
   @Test
   public void testEjecutarSp() throws SQLException {
     LogServicio log = new LogServicio();
-    final String[] NOMBRES = new String[]{"PACO","PEDRO"};
-    final String[] APELLIDO = new String[]{"MARTINEZ","MILLAN"};
+    String uid = "123i12093812093";
     final String HIPOCORISTICO_TEST = "PACO";
     final String RESULTADO_ESPERADO = "FRANCISCO";
-    String resp = consultarHipocorsiticoDao.ejecutarSp(HIPOCORISTICO_TEST,log,NOMBRES,APELLIDO);
+    String resp = consultarHipocorsiticoDao.ejecutarSp(HIPOCORISTICO_TEST,log,uid);
     assertEquals(RESULTADO_ESPERADO,resp);
   }
 
   @DisplayName("SP sql expecion")
   @Test
   public void testEjecutarSpSqlExpcion() throws SQLException {
+    String uid = "123i12093812093";
     LogServicio log = new LogServicio();
-    final String[] NOMBRES = new String[]{"PACO","PEDRO"};
-    final String[] APELLIDO = new String[]{"MARTINEZ","MILLAN"};
     final String HIPOCORISTICO_TEST = "DELETE FROM SC_FONET.TADICCIONARIO";
     Assertions.assertThrows(ErrorInternoExepcion.class, () -> {
-      consultarHipocorsiticoDao.ejecutarSp(HIPOCORISTICO_TEST,log,NOMBRES,APELLIDO);
+      consultarHipocorsiticoDao.ejecutarSp(HIPOCORISTICO_TEST,log,uid);
     });
   }
 

@@ -24,6 +24,8 @@ public class Constantes {
   public static final int LONGITUD_MAX_ENTRADA = 10;
 
   public final static String GENERAL_EXITO = "C00000";
+
+  public final static String CODIGO_ERROR_GENERAL_API = "C70063";
   public static final String ESTADO_OK = "OK";
   public static final String ESTADO_NOT_OK = "NOT OK";
   public static final String CODIGO_EXITO = "E";
