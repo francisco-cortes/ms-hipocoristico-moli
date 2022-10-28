@@ -1,5 +1,6 @@
 package com.baz.hipocoristico.dtos;
 
+import com.baz.hipocoristico.utilis.Constantes;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;
 import lombok.Setter;
@@ -21,7 +22,7 @@ public class EstadoResponseDto {
    */
   @Schema(
     example = "OK",
-    required = false,
+    required = Constantes.NO_REQUERIDO,
     description = "Mensaje que representa el estado del microservicio."
   )
   public String mensaje;
@@ -30,7 +31,7 @@ public class EstadoResponseDto {
    */
   @Schema(
     example = "UID201910011922",
-    required = false,
+    required = Constantes.NO_REQUERIDO,
     description = "Identificador único de la solicitud."
   )
   public String folio;

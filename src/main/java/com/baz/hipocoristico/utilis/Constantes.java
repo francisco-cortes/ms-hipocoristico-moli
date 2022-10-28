@@ -3,9 +3,13 @@ package com.baz.hipocoristico.utilis;
 public class Constantes {
 
   public final static String NOMBRE_MS = "ms-modulo-hipocoristicos";
+
+  public final static String MS_VERSION = "1.0.0";
+
   public final static String NOMBRE_HIPOCORISTICO_SERVICE = "Servicio-modulo-hipocoristico";
 
   public final static String HTTP_200 = "200";
+
   public final static String HTTP_201 = "201";
   public final static String HTTP_400 = "400";
   public final static String HTTP_404 = "404";
@@ -25,16 +29,25 @@ public class Constantes {
 
   public final static String GENERAL_EXITO = "C00000";
 
+  public final static boolean ES_REQUERIDO = true;
+
+  public final static boolean NO_REQUERIDO = false;
+
   public final static String CODIGO_ERROR_GENERAL_API = "C70063";
   public static final String ESTADO_OK = "OK";
+
   public static final String ESTADO_NOT_OK = "NOT OK";
   public static final String CODIGO_EXITO = "E";
   public static final String MENSAJE_EXITO = "Operacion exitosa.";
+
   public final static String GENERAL_APP_INTERNA = "C20000";
+
   public final static String GENERAL_ERROR = "C20001";
+
   public final static String BAD_REQUEST = "C20002";
 
   public final static String MENSAJE_CODIGO_400 = "Datos de entrada incorrectos, por favor valide su información.";
+
   public final static String MENSAJE_CODIGO_401 = "No estas autorizado, favor de validar.";
   public final static String MENSAJE_CODIGO_404 = "Recurso no encontrado";
   public final static String MENSAJE_CODIGO_500 = "Ocurrió un incoveniente al procesar la solicitud.";

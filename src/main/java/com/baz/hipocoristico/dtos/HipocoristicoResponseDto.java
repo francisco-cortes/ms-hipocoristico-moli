@@ -46,20 +46,12 @@ public class HipocoristicoResponseDto {
     description = "Cadena, mensajesobre la cantidad de hipocoristicos encontrados"
   )
   private String mensaje;
-  /*
-  detalles como mensajes de expciones
-   */
-  @Schema(
-    example = " \"SQLExeption: not found\" ",
-    description = "Cadena, mensaje obtenido sobre alguna exepcion"
-  )
-  private String detalles;
 
   /*
   clase constructora
    */
   public HipocoristicoResponseDto(String codigoRespuesta, String[] nombres, String[] apellidos,
-                                  String mensaje, String detalles){
+                                  String mensaje){
     //codigo http
     this.codigoRespuesta = codigoRespuesta;
     //nombres
@@ -68,8 +60,6 @@ public class HipocoristicoResponseDto {
     this.apellidos = apellidos.clone();
     // mensaje de error
     this.mensaje = mensaje;
-    // detalles de error
-    this.detalles = detalles;
   }
 
 }

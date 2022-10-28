@@ -4,9 +4,12 @@ import com.baz.excepciones.BadRequestException;
 import com.baz.excepciones.InternalServerErrorException;
 import com.baz.excepciones.NotFoundException;
 import com.baz.hipocoristico.dtos.HipocoristicoRequestDto;
+import com.baz.hipocoristico.models.Resultado;
 import com.baz.hipocoristico.utilis.Constantes;
 import com.baz.hipocoristico.utilis.GenerarExcepcionUtil;
 import com.baz.log.LogServicio;
+import com.baz.servicios.CifradorAes;
+import com.baz.servicios.ValidacionObjeto;
 
 import javax.ws.rs.ConstrainedTo;
 import javax.ws.rs.RuntimeType;
@@ -16,7 +19,6 @@ import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.ext.Provider;
 import javax.ws.rs.ext.ReaderInterceptor;
 import javax.ws.rs.ext.ReaderInterceptorContext;
-import java.io.IOException;
 
 /**
  * <b>HipocoristicoiInterceptor</b>
@@ -44,56 +46,78 @@ public class HipocoristicoInterceptor implements ReaderInterceptor{
    * @ultimaModificacion: 14/10/22
    */
   @Override
-  public final Object aroundReadFrom(ReaderInterceptorContext context) throws IOException, WebApplicationException {
+  public final Object aroundReadFrom(ReaderInterceptorContext context) throws WebApplicationException {
     System.out.println("ENTRA AL INTERCEPTOR");
-    HipocoristicoRequestDto request = null;
     LogServicio log = new LogServicio();
-    String nombreClaseMetodo = "ConsultaBarriInterceptor-aroundReadFrom";
+    String nombreClaseMetodo = "GeneraTokenInterceptor-aroundReadFrom";
     log.iniciarTiempoMetodo(nombreClaseMetodo, Constantes.NOMBRE_MS);
-    String uid = context.getHeaders().getFirst("uid");
-    System.out.println(uid);
-    System.out.println("URI:" + uri.getPath());
-    int contadorNulosNombres = 0;
-    int contadorNulosApellidos = 0;
-    StringBuilder nombresErroneos = new StringBuilder();
 
-    try {
-      request = (HipocoristicoRequestDto) context.proceed();
+    String uid = context.getHeaders().getFirst("uid");
+    Resultado resultado = new Resultado(uid, Constantes.CODIGO_EXITO, Constantes.MENSAJE_EXITO);
+    HipocoristicoRequestDto request = null;
+
+    try{
+
+      if("/remesas/hipocoristico/buscar-hipocoristico".equals(uri.getPath())){
+        request = (HipocoristicoRequestDto) context.proceed();
+        validarPeticion(request, resultado);
+        System.out.println("RESULTADO INTERCEPTOR" + resultado.getCodigo());
+
+        if (resultado.getCodigo().equals(Constantes.CODIGO_EXITO)) {
+          return request;
+        }
+        else {
+          generarExcepcionUtil.generarExcepcion(Constantes.HTTP_400, Constantes.CODIGO_ERROR_GENERAL_API,
+            resultado.getMensaje(), resultado.getUid());
+        }
+      }
+      else {
+        generarExcepcionUtil.generarExcepcion(Constantes.HTTP_404, Constantes.CODIGO_ERROR_GENERAL_API,
+          "No se encuentra el recurso: " + uri.getPath() + " en el servicio.", resultado.getUid());
+      }
     }
     catch(BadRequestException | NotFoundException | InternalServerErrorException excepcion){
-      excepcion.printStackTrace();
+      log.registrarExcepcion(excepcion, null);
+      throw excepcion;
     }
-
-    String[] noms = request.getNombres();
-    String[] aps = request.getApellidos();
-
-    if(!(noms == null)){
-      for (String nom : noms) {
-        if (nom.contains("{") || nom.contains("}") || nom.contains("*")) {
-          contadorNulosNombres++;
-          nombresErroneos.append(nom);
-          nombresErroneos.append(", ");
-        }
-      }
+    catch (Exception excepcion) {
+      log.registrarExcepcion(excepcion, null);
+      generarExcepcionUtil.generarExcepcion(Constantes.HTTP_500, Constantes.CODIGO_ERROR_GENERAL_API,
+        excepcion.toString(), resultado.getUid());
     }
-
-    if(!(aps == null)){
-      for (String ap : aps) {
-        if (ap.contains("{") || ap.contains("}") || ap.contains("*")) {
-          contadorNulosApellidos++;
-          nombresErroneos.append(ap);
-          nombresErroneos.append(", ");
-        }
-      }
-    }
-
-    if(contadorNulosNombres > 0 || contadorNulosApellidos > 0 ){
-
-      generarExcepcionUtil.generarExcepcion(Constantes.HTTP_400,
-        Constantes.CODIGO_ERROR_GENERAL_API,"Los valores: "+ nombresErroneos + " tienen caracteres invalidos"
-        ,uid);
+    finally{
+      log.terminarTiempoMetodo(nombreClaseMetodo);
     }
 
     return request;
   }
+
+  /**
+   * <b>ValidarPeticion</b>
+   * @descripcion: Metodo para validar el cuerpo de la petici�n.
+   * @autor: Angel Eduardo Hern�ndez Aguilar.
+   * @param request Petici�n enviada.
+   * @param resultado Resultado del proceso de validaci�n.
+   * @ultimaModificacion: 06/12/2021
+   */
+  private void validarPeticion(HipocoristicoRequestDto request, Resultado resultado) throws Exception {
+
+    //ValidacionObjeto validador = new ValidacionObjeto();
+    //validador.validarDto(request, resultado);
+
+    CifradorAes cifrador = new CifradorAes(true);
+    cifrador.desencriptarObjeto(request, resultado);
+    System.out.println("RESULTADO DESENCRIPCION INTERCEPTOR: " + resultado.getCodigo());
+    System.out.println("MENSAJE DESENCRIPCION INTERCEPTOR: " + resultado.getMensaje());
+    //System.out.println("DATO DESENCRIPTADO: " + request.getNombres()[0]);
+    if (resultado.getCodigo().equals(Constantes.CODIGO_EXITO)) {
+      ValidacionObjeto validador = new ValidacionObjeto();
+      validador.validarDto(request, resultado);
+    }
+    else {
+      generarExcepcionUtil.generarExcepcion(Constantes.HTTP_500, Constantes.CODIGO_ERROR_GENERAL_API,
+        resultado.getMensaje(), resultado.getUid());
+    }
+  }
+
 }

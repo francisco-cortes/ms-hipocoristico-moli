@@ -91,8 +91,7 @@ public class ExcepcionesController {
       errorInterno.getCodigo(),
       errorInterno.getNombres(),
       errorInterno.getApellidos(),
-      errorInterno.getMensaje(),
-      errorInterno.getDetalles());
+      errorInterno.getMensaje());
   }
 
 }

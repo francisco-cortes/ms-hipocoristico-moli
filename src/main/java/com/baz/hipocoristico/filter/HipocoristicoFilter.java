@@ -47,7 +47,6 @@ public class HipocoristicoFilter implements ContainerRequestFilter {
     ValidarDto validarDto;
 
     System.out.println("VALOR DE uid "+ uid);
-    System.out.println("VALOR de TOKEN "+ token);
     try {
 
       if (!"/remesas/hipocoristico/buscar-hipocoristico".equals(requestContext.getUriInfo().getPath())) {
@@ -58,25 +57,23 @@ public class HipocoristicoFilter implements ContainerRequestFilter {
       Resultado resultado = new Resultado(uid, Constantes.CODIGO_EXITO, Constantes.MENSAJE_EXITO);
       validarDto = new ValidarDto();
       System.out.println("entra a validar peticion ");
-      validarDto.validarPeticionAes(new Header(uid,token), resultado);
+      validarDto.validarPeticionAes(new Header(uid, token), resultado);
       System.out.println(resultado.getMensaje());
       System.out.println("sale de validar peticion");
       System.out.println(resultado.getCodigo());
 
       if (!resultado.getCodigo().equals(Constantes.CODIGO_EXITO)) {
-        System.out.println("error de validacion");
         generarExcepcionUtil.generarExcepcion(Constantes.HTTP_400, resultado.getCodigo(),
           resultado.getMensaje(), uid);
       }
+      return;
     }
     catch(BadRequestException | UnauthorizedException excepcion) {
-      System.out.println("errorr de validacion");
       log.registrarExcepcion(excepcion, null);
       throw excepcion;
     }
     catch(Exception excepcion){
       log.registrarExcepcion(excepcion, null);
-      System.out.println("exepcion");
       generarExcepcionUtil.generarExcepcion(Constantes.HTTP_500, Constantes.CODIGO_ERROR_GENERAL_API,
         excepcion.getMessage(), uid);
     }

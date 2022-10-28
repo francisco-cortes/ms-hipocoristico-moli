@@ -90,18 +90,19 @@ public class BuscarHipocoristicoService {
       /*
       busca en el arraglo los hipocoristicos
        */
-      resultadoBusqueda = buscarNombres(arregloCompleto, log, nombres, apellidos, uid);
+      resultadoBusqueda = buscarNombres(arregloCompleto, log, uid);
       detalles.setDetalles(Constantes.MENSAJE_EXITO);
     }
-    catch (Exception e) {
+    catch (Exception excepcion) {
+      String mensajeExcepcion = excepcion.getMessage();
       /*
       arroja respuesta cotrolada a traves del controlador de exepciones
        */
       generarExcepcionUtil.generarExcepcion(Constantes.HTTP_500,Constantes.CODIGO_ERROR_GENERAL_API,
-        e.getMessage(), uid);
+        mensajeExcepcion, uid);
 
-      log.registrarExcepcion(e,"Error SQL");
-      log.registrarMensaje(NOMBRE_CLASE+NOMBRE_METODO,e.getMessage());
+      log.registrarExcepcion(excepcion,"Error SQL");
+      log.registrarMensaje(NOMBRE_CLASE+NOMBRE_METODO,mensajeExcepcion);
     }
     /*
     parte el arreglo en 2 para nombres y apellidso
@@ -115,7 +116,7 @@ public class BuscarHipocoristicoService {
     log.obtenerTiempoTotal(NOMBRE_CLASE+NOMBRE_METODO);
     log.terminarTiempoMetodo(NOMBRE_CLASE+NOMBRE_METODO);
     return new HipocoristicoResponseDto(
-      Constantes.HTTP_200,nombreRes,apellidoRes,detalles.getMensaje(),detalles.getDetalles());
+      Constantes.HTTP_200,nombreRes,apellidoRes,detalles.getMensaje());
   }
 
   /**
@@ -125,8 +126,7 @@ public class BuscarHipocoristicoService {
    *
    * @ultimaModificacion: 01/06/22
    */
-  private String[] buscarNombres(String[] arregloCompleto, LogServicio log, String[] nombres,
-                                 String[] apellido, String uid)
+  private String[] buscarNombres(String[] arregloCompleto, LogServicio log, String uid)
     throws SQLException {
 
     final String NOMBRE_METODO = "buscarNombres";
@@ -144,7 +144,7 @@ public class BuscarHipocoristicoService {
         String[] cadenaSeparada = CadenasUtil.subCadenaSeparada(arregloCompleto[posicionArreglo]);
 
         while (auxiliar<cadenaSeparada.length){
-          cadenaSeparada[auxiliar] = buscarEnTabla(cadenaSeparada[auxiliar],log, nombres, apellido, uid);
+          cadenaSeparada[auxiliar] = buscarEnTabla(cadenaSeparada[auxiliar],log,uid);
           auxiliar ++;
         }
 
@@ -153,8 +153,7 @@ public class BuscarHipocoristicoService {
       }
       else {
 
-        arregloCompleto[posicionArreglo] = buscarEnTabla(arregloCompleto[posicionArreglo],log, nombres,
-          apellido, uid);
+        arregloCompleto[posicionArreglo] = buscarEnTabla(arregloCompleto[posicionArreglo],log,uid);
 
       }
 
@@ -175,8 +174,7 @@ public class BuscarHipocoristicoService {
    * @ultimaModificacion: 01/06/22
    */
 
-  private String buscarEnTabla(String nombreBuscado, LogServicio log, String[] nombres,
-                               String[] apellidos, String uid)
+  private String buscarEnTabla(String nombreBuscado, LogServicio log, String uid)
     throws SQLException {
     final String NOMBRE_METODO = "buscarEnTabla";
     log.iniciarTiempoMetodo(NOMBRE_CLASE+NOMBRE_METODO, Constantes.NOMBRE_MS);

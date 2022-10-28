@@ -86,13 +86,15 @@ public class HipocoristicoController {
   @PostMapping(value ="/buscar-hipocoristico",
     produces = MediaType.APPLICATION_JSON_VALUE,
     consumes = MediaType.APPLICATION_JSON_VALUE)
-  public Response buscarHipocoristico(@RequestBody HipocoristicoRequestDto peticion){
+  public Response buscarHipocoristico(@RequestHeader(name = "uid", required = Constantes.ES_REQUERIDO) String uid,
+                                      @RequestHeader(name = "token", required = Constantes.NO_REQUERIDO) String token,
+                                      @RequestBody HipocoristicoRequestDto peticion){
 
     /*
     invoca metodo del servicio principal y crea el objeto con el model hipocoristicoResponseDto
      */
     HipocoristicoResponseDto hipocoristicoResponse =
-      buscarHipocoristicoService.iniciaBuscar(peticion, "falta implemnetar con microprofile");
+      buscarHipocoristicoService.iniciaBuscar(peticion, uid);
     /*
     retorna el objeto como entidad para el parseo como json
      */

@@ -96,11 +96,12 @@ public class ConsultarHipocorsiticoDao {
     }
     catch (Exception exception){
       resp = hipocoristico;
+      String mensajeExcepcion = exception.getMessage();
       log.registrarExcepcion(exception,"Error SQL");
-      log.registrarMensaje(NOMBRE_CLASE+NOMBRE_METODO,exception.getMessage());
+      log.registrarMensaje(NOMBRE_CLASE+NOMBRE_METODO,mensajeExcepcion);
 
       generarExcepcionUtil.generarExcepcion(Constantes.HTTP_500,Constantes.CODIGO_ERROR_GENERAL_API,
-        exception.getMessage(),uid);
+        mensajeExcepcion,uid);
     }
     finally {
       /*

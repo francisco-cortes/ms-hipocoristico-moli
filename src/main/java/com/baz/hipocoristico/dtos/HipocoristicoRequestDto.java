@@ -22,14 +22,14 @@ public class HipocoristicoRequestDto {
    */
   @Validacion(
     tipoDato = Validacion.tiposDato.VARCHAR,
-    requerido = true,
+    requerido = Constantes.ES_REQUERIDO,
     caracteresValidos = Validacion.LETRAS,
     longitudMin = Constantes.LONGITUD_MIN_ENTRADA,
     longitudMax = Constantes.LONGITUD_MAX_ENTRADA
   )
   @Schema(
     example = " [\"PACO\", \"JAVIER\" ]",
-    required = true,
+    required = Constantes.ES_REQUERIDO,
     minLength = Constantes.LONGITUD_MIN_ENTRADA,
     maxLength = Constantes.LONGITUD_MAX_ENTRADA,
     description = "Arreglos de cadenas, idealmente nombres de personas, en maysucula"
@@ -40,13 +40,14 @@ public class HipocoristicoRequestDto {
    */
   @Validacion(
     tipoDato = Validacion.tiposDato.VARCHAR,
-    requerido = true,
+    requerido = Constantes.ES_REQUERIDO,
     caracteresValidos = Validacion.LETRAS,
     longitudMin = Constantes.LONGITUD_MIN_ENTRADA,
     longitudMax = Constantes.LONGITUD_MAX_ENTRADA
   )
   @Schema(
     example = " [\"GARCIA\", \"MTZ\" ]",
+    required = Constantes.ES_REQUERIDO,
     minLength = Constantes.LONGITUD_MIN_ENTRADA,
     maxLength = Constantes.LONGITUD_MAX_ENTRADA,
     description = "Arreglos de cadenas, idealmente apellidos de persona, en maysucula"
