@@ -9,7 +9,7 @@ quarkus:
     #  url: jdbc:postgresql://localhost:5432/REMFONETIC
   container-image:
     group: ""
-    name: ms-hipocoristico-hipocoristico
+    name: ms-hipocoristico-moli
     tag: 1.0-snapshot
     registry: franciscoct
   kubernetes:
@@ -19,16 +19,16 @@ quarkus:
     level: INFO
     file:
       enable: true
-      path: ./log/logms-hipocoristico-hipocoristico.log
+      path: ./log/log-ms-hipocoristico-moli.log
       level: INFO
       format: '{"log_data":{"fecha":"%d{yyyy-MM-dd HH:mm:ss}","Level":"%-5p","Mensaje":"%m","servicios":[%X{servicios}],"TiempoTotal":%X{tiempo}}}%n'
       rotation:
-        max-file-size: 500M
+        max-file-size: 200M
         max-backup-index: 5
         rotate-on-boot: true
         file-suffix: .yyyy-MM-dd
   smallrye-openapi:
-    path: /ms-modulo-hipocoristico
+    path: /ms-hipocoristico-moli
     info-title: Contrato de Interfaz Microservicio Hipocoristico para modulo de concidencia de nombres.
     info-version: 1.0.0
     info-description: Contrato de Interfaz para la consulta de un nombres en base da datos para determinar si existe como hipocoristico y remplazarlo por su nombre real.
