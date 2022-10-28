@@ -26,7 +26,7 @@ import javax.ws.rs.core.Response;
  * @ultimaModificacion: 13/10/22
  */
 @RestController
-@RequestMapping("/remesas/hipocoristico")
+@RequestMapping("/datos/hipocoristico")
 @Tag(name = "Hipocoristico - Consulta")
 public class ControladorHipocoristico {
 

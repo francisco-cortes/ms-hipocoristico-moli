@@ -55,3 +55,6 @@ SonarQubeCommand.txt
 ms-hipocoristico-moli.zip
 
 ms-hipocoristico-moli.yml
+deployment.yml
+ingress.yml
+service.yml

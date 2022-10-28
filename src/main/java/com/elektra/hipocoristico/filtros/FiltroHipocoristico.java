@@ -49,7 +49,7 @@ public class FiltroHipocoristico implements ContainerRequestFilter {
     System.out.println("VALOR DE uid "+ uid);
     try {
 
-      if (!"/remesas/hipocoristico/buscar-hipocoristico".equals(requestContext.getUriInfo().getPath())) {
+      if (!"/datos/hipocoristico/buscar-hipocoristico".equals(requestContext.getUriInfo().getPath())) {
         return;
       }
 

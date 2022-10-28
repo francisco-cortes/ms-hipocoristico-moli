@@ -58,7 +58,7 @@ public class InterceptorHipocoristico implements ReaderInterceptor{
 
     try{
 
-      if("/remesas/hipocoristico/buscar-hipocoristico".equals(uri.getPath())){
+      if("/datos/hipocoristico/buscar-hipocoristico".equals(uri.getPath())){
         request = (DtoHipocoristicoRequest) context.proceed();
         validarPeticion(request, resultado);
         System.out.println("RESULTADO INTERCEPTOR" + resultado.getCodigo());
