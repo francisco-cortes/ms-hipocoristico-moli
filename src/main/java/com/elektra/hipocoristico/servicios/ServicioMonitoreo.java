@@ -7,7 +7,7 @@ import com.baz.servicios.Uid;
 import javax.inject.Singleton;
 /**
  * <b>ServicioMonitoreo</b>
- * @descripcion: Monitoreo service para el modulo
+ * @descripcion: Monitoreo servicio para el modulo
  * @autor: Francisco Javier Cortes Torres, Desarrollador
  * @ultimaModificacion: 04/10/22
  */

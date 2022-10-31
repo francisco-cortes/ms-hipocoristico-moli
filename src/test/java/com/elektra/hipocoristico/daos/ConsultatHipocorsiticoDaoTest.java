@@ -1,5 +1,6 @@
 package com.elektra.hipocoristico.daos;
 
+import com.baz.excepciones.InternalServerErrorException;
 import com.baz.log.LogServicio;
 import com.elektra.hipocoristico.excepcion.ErrorInternoExepcion;
 import io.quarkus.test.junit.QuarkusTest;
@@ -35,7 +36,7 @@ public class ConsultatHipocorsiticoDaoTest {
     String uid = "123i12093812093";
     LogServicio log = new LogServicio();
     final String HIPOCORISTICO_TEST = "DELETE FROM SC_FONET.TADICCIONARIO";
-    Assertions.assertThrows(ErrorInternoExepcion.class, () -> {
+    Assertions.assertThrows(InternalServerErrorException.class, () -> {
       daoConsultarHipocorsitico.ejecutarSp(HIPOCORISTICO_TEST,log,uid);
     });
   }

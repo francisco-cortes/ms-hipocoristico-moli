@@ -1,4 +1,4 @@
-package com.elektra.hipocoristico.service;
+package com.elektra.hipocoristico.servicio;
 
 import com.elektra.hipocoristico.dtos.DtoEstadoResponse;
 import com.elektra.hipocoristico.servicios.ServicioMonitoreo;

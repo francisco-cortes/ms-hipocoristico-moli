@@ -1,4 +1,4 @@
-package com.elektra.hipocoristico.service;
+package com.elektra.hipocoristico.servicio;
 
 import com.elektra.hipocoristico.dtos.DtoHipocoristicoRequest;
 import com.elektra.hipocoristico.dtos.DtoHipocoristicoResponse;
@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @QuarkusTest
 public class ServicioBuscarHipocoristicoTest {
+  public static final String UID = "UID123412341332";
   private static final String[] APELLIDOS = new String[] {"MILLAN","GARCIAS"};
   @Inject
   private ServicioBuscarHipocoristico servicioBuscarHipocoristico;
@@ -22,7 +23,7 @@ public class ServicioBuscarHipocoristicoTest {
   @Test
   public void testIniciarBusquedaIdeal(){
     String nombres[] = {"LEONARDO", "PACO"};
-    DtoHipocoristicoResponse resp = servicioBuscarHipocoristico.iniciaBuscar(peticion(nombres), "token");
+    DtoHipocoristicoResponse resp = servicioBuscarHipocoristico.iniciaBuscar(peticion(nombres), UID);
     Assertions.assertEquals(Constantes.UN_HIPOCORISTICO,resp.getMensaje());
   }
 
@@ -30,7 +31,7 @@ public class ServicioBuscarHipocoristicoTest {
   @Test
   public void testIniciarBusquedaDosHipocoristicos(){
     String nombres[] = {"PETE","PACO"};
-    DtoHipocoristicoResponse resp = servicioBuscarHipocoristico.iniciaBuscar(peticion(nombres),"token");
+    DtoHipocoristicoResponse resp = servicioBuscarHipocoristico.iniciaBuscar(peticion(nombres),UID);
     assertEquals(Constantes.DOS_HIPOCORISTICO,resp.getMensaje());
   }
 
@@ -38,7 +39,7 @@ public class ServicioBuscarHipocoristicoTest {
   @Test
   public void testIniciarBusquedaSinHipocoristicos(){
     String nombres[] = {"LEONARDO","ISRAEL"};
-    DtoHipocoristicoResponse resp = servicioBuscarHipocoristico.iniciaBuscar(peticion(nombres),"token");
+    DtoHipocoristicoResponse resp = servicioBuscarHipocoristico.iniciaBuscar(peticion(nombres),UID);
     assertEquals(Constantes.CERO_HIPOCORISTICOS,resp.getMensaje());
   }
 

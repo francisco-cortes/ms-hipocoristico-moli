@@ -2,7 +2,10 @@ package com.elektra.hipocoristico.dtos;
 
 import com.baz.anotaciones.Validacion;
 import com.elektra.hipocoristico.utilidades.Constantes;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 /**
