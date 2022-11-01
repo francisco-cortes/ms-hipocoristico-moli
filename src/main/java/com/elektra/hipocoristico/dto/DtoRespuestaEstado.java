@@ -1,6 +1,6 @@
 package com.elektra.hipocoristico.dto;
 
-import com.elektra.hipocoristico.utilidades.Constantes;
+import com.elektra.hipocoristico.util.Constantes;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;
 import lombok.Setter;

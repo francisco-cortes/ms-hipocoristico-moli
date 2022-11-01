@@ -25,7 +25,7 @@ public class PruebaControladorHipocoristico {
     DtoPeticionHipocoristico peticion = new DtoPeticionHipocoristico();
     peticion.setNombres(nombres);
     peticion.setApellidos(apellidos);
-    Response response = controladorHipocoristico.buscarHipocoristico("","",peticion);
+    Response response = controladorHipocoristico.buscarHipocoristico("",peticion);
     String res = String.valueOf(response.getEntity());
     assertTrue(res.contains("codigoRespuesta=200"));
   }

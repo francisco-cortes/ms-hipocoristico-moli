@@ -1,7 +1,7 @@
 package com.elektra.hipocoristico.dao;
 
 import com.elektra.hipocoristico.propiedades.Propiedades;
-import com.elektra.hipocoristico.utilidades.Constantes;
+import com.elektra.hipocoristico.util.Constantes;
 import com.baz.servicios.CifradorAes;
 
 import javax.enterprise.context.ApplicationScoped;

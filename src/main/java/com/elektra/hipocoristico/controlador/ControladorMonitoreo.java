@@ -2,7 +2,7 @@ package com.elektra.hipocoristico.controlador;
 
 import com.elektra.hipocoristico.dto.DtoRespuestaEstado;
 import com.elektra.hipocoristico.servicios.ServicioMonitoreo;
-import com.elektra.hipocoristico.utilidades.Constantes;
+import com.elektra.hipocoristico.util.Constantes;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;

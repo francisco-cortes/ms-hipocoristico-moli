@@ -1,7 +1,7 @@
 package com.elektra.hipocoristico.servicios;
 
 import com.elektra.hipocoristico.dto.DtoRespuestaEstado;
-import com.elektra.hipocoristico.utilidades.Constantes;
+import com.elektra.hipocoristico.util.Constantes;
 import com.baz.servicios.Uid;
 
 import javax.inject.Singleton;

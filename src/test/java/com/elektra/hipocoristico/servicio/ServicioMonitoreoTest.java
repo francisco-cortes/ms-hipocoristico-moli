@@ -2,7 +2,7 @@ package com.elektra.hipocoristico.servicio;
 
 import com.elektra.hipocoristico.dto.DtoRespuestaEstado;
 import com.elektra.hipocoristico.servicios.ServicioMonitoreo;
-import com.elektra.hipocoristico.utilidades.Constantes;
+import com.elektra.hipocoristico.util.Constantes;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

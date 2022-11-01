@@ -4,8 +4,8 @@ import com.baz.excepciones.BadRequestException;
 import com.baz.excepciones.UnauthorizedException;
 import com.elektra.hipocoristico.modelos.Encabezado;
 import com.elektra.hipocoristico.modelos.Resultado;
-import com.elektra.hipocoristico.utilidades.Constantes;
-import com.elektra.hipocoristico.utilidades.UtilidadGenerarExcepcion;
+import com.elektra.hipocoristico.util.Constantes;
+import com.elektra.hipocoristico.util.UtilidadGenerarExcepcion;
 import com.baz.log.LogServicio;
 import com.baz.servicios.ValidarDto;
 

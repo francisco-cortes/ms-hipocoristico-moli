@@ -1,8 +1,8 @@
 package com.elektra.hipocoristico.dao;
 
-import com.elektra.hipocoristico.utilidades.UtilidadGenerarExcepcion;
+import com.elektra.hipocoristico.util.UtilidadGenerarExcepcion;
 import com.baz.log.LogServicio;
-import com.elektra.hipocoristico.utilidades.Constantes;
+import com.elektra.hipocoristico.util.Constantes;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -54,7 +54,7 @@ public class DaoConsultaHipocorsitico {
     final int PARAMETRO_PAIS = 2;
     final int PARAMETRO_HIPOCORSITICO = 3;
     //String de respuesta del método
-    String resp;
+    String respuestaSp;
     // objeto de conexión sql
     Connection conexion = null;
     //objeto callable sql
@@ -88,10 +88,10 @@ public class DaoConsultaHipocorsitico {
       /*
       Obtención de salida sp
       */
-      resp = declaracionInvocable.getString(RESPUESTA);
+      respuestaSp = declaracionInvocable.getString(RESPUESTA);
     }
     catch (Exception exception){
-      resp = hipocoristico;
+      respuestaSp = hipocoristico;
       String mensajeExcepcion = exception.getMessage();
       log.registrarExcepcion(exception,"Error SQL");
       log.registrarMensaje(nombreClaseMetodo,mensajeExcepcion);
@@ -109,7 +109,7 @@ public class DaoConsultaHipocorsitico {
     retorna salida de sp
      */
     log.terminarTiempoMetodo(nombreClaseMetodo);
-    return resp;
+    return respuestaSp;
   }
 
 }

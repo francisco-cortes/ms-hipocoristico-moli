@@ -4,7 +4,7 @@ import com.baz.excepciones.DtoExcepcion;
 import com.elektra.hipocoristico.dto.DtoPeticionHipocoristico;
 import com.elektra.hipocoristico.dto.DtoRespuestaHipocoristico;
 import com.elektra.hipocoristico.servicios.ServicioBuscarHipocoristico;
-import com.elektra.hipocoristico.utilidades.Constantes;
+import com.elektra.hipocoristico.util.Constantes;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.enums.ParameterIn;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;

@@ -2,12 +2,12 @@ package com.elektra.hipocoristico.servicios;
 
 import com.elektra.hipocoristico.dto.DtoPeticionHipocoristico;
 import com.elektra.hipocoristico.modelos.ModeloDetallesServicio;
-import com.elektra.hipocoristico.utilidades.UtilidadCadenas;
-import com.elektra.hipocoristico.utilidades.UtilidadGenerarExcepcion;
+import com.elektra.hipocoristico.util.UtilidadCadenas;
+import com.elektra.hipocoristico.util.UtilidadGenerarExcepcion;
 import com.baz.log.LogServicio;
 import com.elektra.hipocoristico.dao.DaoConsultaHipocorsitico;
 import com.elektra.hipocoristico.dto.DtoRespuestaHipocoristico;
-import com.elektra.hipocoristico.utilidades.Constantes;
+import com.elektra.hipocoristico.util.Constantes;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

@@ -1,4 +1,4 @@
-package com.elektra.hipocoristico.utilidades;
+package com.elektra.hipocoristico.util;
 
 import org.springframework.stereotype.Service;
 
