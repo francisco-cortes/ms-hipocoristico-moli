@@ -1,4 +1,4 @@
-package com.elektra.hipocoristico.dtos;
+package com.elektra.hipocoristico.dto;
 
 import com.baz.anotaciones.Validacion;
 import com.elektra.hipocoristico.utilidades.Constantes;
@@ -7,19 +7,17 @@ import lombok.Setter;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
-
 /**
- * <b>DtoHipocoristicoRequest</b>
+ * <b>DtoPeticionHipocoristico</b>
  * @descripcion: Modelo de datos que da forma y contiene los parametros de entrada para el metodo buscarHipocoristico
  * @autor: Francisco Javier Cortes Torres, Desarrollador
  * @ultimaModificacion: 03/10/2022
  */
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class DtoHipocoristicoRequest {
+public class DtoPeticionHipocoristico {
   /*
   Arreglo de strings para guardar los nombres de una persona
    */

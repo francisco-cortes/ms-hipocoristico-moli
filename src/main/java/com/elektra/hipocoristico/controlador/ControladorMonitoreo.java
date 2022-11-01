@@ -1,8 +1,13 @@
-package com.elektra.hipocoristico.controladores;
+package com.elektra.hipocoristico.controlador;
 
-import com.elektra.hipocoristico.dtos.DtoEstadoResponse;
+import com.elektra.hipocoristico.dto.DtoRespuestaEstado;
 import com.elektra.hipocoristico.servicios.ServicioMonitoreo;
+import com.elektra.hipocoristico.utilidades.Constantes;
 import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.media.Content;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,22 +19,22 @@ import javax.ws.rs.core.Response;
 
 /**
  * <b>ControladorMonitoreo</b>
- * @descripcion: Controlador principal para el modulo
+ * @descripcion: Controlador para el endpoint de estado del servicio
  * @autor: Francisco Javier Cortes Torres, Desarrollador
  * @ultimaModificacion: 13/10/22
  */
 @RestController
 @RequestMapping("/datos/hipocoristico")
-@Tag(name = "Monitoreo - hipocoristico")
+@Tag(name = "Monitoreo - hipocorístico")
 public class ControladorMonitoreo {
   /*
-  Inyeccion de instacia del ServicioMonitoreo
+  Inyección de instancia del Servicio Monitoreo
    */
   @Inject
   private ServicioMonitoreo servicioMonitoreo;
 
   /**
-   * <b>status</b>
+   * <b>estado</b>
    * @descripcion: Método para validar el estado del microservicio
    * @autor: Francisco Javier Cortes Torres, Desarrollador
    * @ultimaModificacion: 13/10/22
@@ -37,15 +42,23 @@ public class ControladorMonitoreo {
   @Operation(
     operationId = "2",
     summary = "Se realiza el test de disponibilidad al microservicio.")
+  @APIResponses(value =
+    {
+      @APIResponse(
+        responseCode = Constantes.HTTP_200,
+        description = "Respuesta Controlada",
+        content = @Content(mediaType = "application/json",
+          schema = @Schema(implementation = DtoRespuestaEstado.class))),
+    })
   @GetMapping(value ="/status", produces = MediaType.APPLICATION_JSON_VALUE)
-  public Response status(){
+  public Response estado(){
     /*
-    modelo con con los datos de salida
+    modelo con los datos de salida
      */
-    DtoEstadoResponse dtoEstadoResponse = servicioMonitoreo.generarUid();
+    DtoRespuestaEstado dtoRespuestaEstado = servicioMonitoreo.generarUid();
     /*
-    retorna el objeto como entidad para el parceo como json
+    retorna el objeto como entidad para él parseo como json
      */
-    return Response.ok().entity(dtoEstadoResponse).build();
+    return Response.ok().entity(dtoRespuestaEstado).build();
   }
 }

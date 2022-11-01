@@ -1,12 +1,10 @@
-package com.elektra.hipocoristico.controladores;
+package com.elektra.hipocoristico.controlador;
 
 import com.baz.excepciones.BadRequestException;
 import com.baz.excepciones.DtoExcepcion;
 import com.baz.excepciones.UnauthorizedException;
 import com.baz.excepciones.NotFoundException;
 import com.baz.excepciones.InternalServerErrorException;
-import com.elektra.hipocoristico.dtos.DtoHipocoristicoResponse;
-import com.elektra.hipocoristico.excepcion.ErrorInternoExepcion;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -21,9 +19,9 @@ public class ControladorExcepciones {
 
   /**
    * <b>badRequestException</b>
-   * @descripcion: Método para personzalizar la salida del tipo 400.
+   * @descripcion: Método para personalizar la salida del tipo 400.
    * @autor: Francisco Javier Cortes Torres.
-   * @param: peticionincorrecta Datos de la excepción.
+   * @param: peticionIncorrecta Datos de la excepción.
    * @ultimaModificacion: 17/10/2022
    */
   @ExceptionHandler(value = {BadRequestException.class})
@@ -36,9 +34,9 @@ public class ControladorExcepciones {
 
   /**
    * <b>UnauthorizedException</b>
-   * @descripcion: Método para personzalizar la salida del tipo 400.
+   * @descripcion: Método para personalizar la salida del tipo 401.
    * @autor: Francisco Javier Cortes Torres.
-   * @param: peticionincorrecta Datos de la excepción.
+   * @param: peticionIncorrecta Datos de la excepción.
    * @ultimaModificacion: 17/10/2022
    */
   @ExceptionHandler(value = {UnauthorizedException.class})
@@ -51,9 +49,9 @@ public class ControladorExcepciones {
 
   /**
    * <b>notFoundException</b>
-   * @descripcion: Método para personzalizar la salida del tipo 400.
+   * @descripcion: Método para personalizar la salida del tipo 404.
    * @autor: Francisco Javier Cortes Torres.
-   * @param: peticionincorrecta Datos de la excepción.
+   * @param: peticionIncorrecta Datos de la excepción.
    * @ultimaModificacion: 17/10/2022
    */
   @ExceptionHandler(value = {NotFoundException.class})
@@ -66,9 +64,9 @@ public class ControladorExcepciones {
 
   /**
    * <b>InternalServerErrorException</b>
-   * @descripcion: Método para personzalizar la salida del tipo 400.
+   * @descripcion: Método para personalizar la salida del tipo 500.
    * @autor: Francisco Javier Cortes Torres.
-   * @param: peticionincorrecta Datos de la excepción.
+   * @param: peticionIncorrecta Datos de la excepción.
    * @ultimaModificacion: 17/10/2022
    */
   @ExceptionHandler(value = {InternalServerErrorException.class})
@@ -77,25 +75,6 @@ public class ControladorExcepciones {
       errorInterno.getMensaje(),
       errorInterno.getFolio(),
       errorInterno.getDetalles());
-  }
-
-  /**
-   * <b>ErrorInternoException</b>
-   * @descripcion: Método para personzalizar la salida de una excepción del tipo 500.
-   * @autor: Francisco Javier Cortes Torres, Desarrollador
-   * @param: errorInterno datos de la exepcion
-   * @ultimaModificacion: 13/10/22
-   */
-  @ExceptionHandler(value = {ErrorInternoExepcion.class})
-  public DtoHipocoristicoResponse errorInterno(ErrorInternoExepcion errorInterno) {
-    /*
-    Construccion del metodo de salida
-     */
-    return new DtoHipocoristicoResponse(
-      errorInterno.getCodigo(),
-      errorInterno.getNombres(),
-      errorInterno.getApellidos(),
-      errorInterno.getMensaje());
   }
 
 }

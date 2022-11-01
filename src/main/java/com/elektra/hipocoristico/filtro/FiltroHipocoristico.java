@@ -1,8 +1,8 @@
-package com.elektra.hipocoristico.filtros;
+package com.elektra.hipocoristico.filtro;
 
 import com.baz.excepciones.BadRequestException;
 import com.baz.excepciones.UnauthorizedException;
-import com.elektra.hipocoristico.modelos.Header;
+import com.elektra.hipocoristico.modelos.Encabezado;
 import com.elektra.hipocoristico.modelos.Resultado;
 import com.elektra.hipocoristico.utilidades.Constantes;
 import com.elektra.hipocoristico.utilidades.UtilidadGenerarExcepcion;
@@ -28,7 +28,7 @@ public class FiltroHipocoristico implements ContainerRequestFilter {
   private static final UtilidadGenerarExcepcion UTILIDAD_GENERAR_EXCEPCION = new UtilidadGenerarExcepcion();
 
   /**
-   * <b>filtros</b>
+   * <b>filtro</b>
    * @descripcion: breve descripcion del metodo
    * @autor: Francisco Javier Cortes Torres, Desarrollador
    * @param: requestContex, Contexto de peticion
@@ -39,7 +39,7 @@ public class FiltroHipocoristico implements ContainerRequestFilter {
   public void filter(ContainerRequestContext requestContext) throws IOException {
     System.out.println("ENTRA AL FILTER");
     LogServicio log = new LogServicio();
-    String nombreClaseMetodo  = "FiltroHipocoristico-filtros";
+    String nombreClaseMetodo  = "FiltroHipocoristico-filtro";
     log.iniciarTiempoMetodo(nombreClaseMetodo, Constantes.NOMBRE_MS);
 
     String uid = requestContext.getHeaderString("uid");
@@ -57,7 +57,7 @@ public class FiltroHipocoristico implements ContainerRequestFilter {
       Resultado resultado = new Resultado(uid, Constantes.CODIGO_EXITO, Constantes.MENSAJE_EXITO);
       validarDto = new ValidarDto();
       System.out.println("entra a validar peticion ");
-      validarDto.validarPeticionAes(new Header(uid, token), resultado);
+      validarDto.validarPeticionAes(new Encabezado(uid, token), resultado);
       System.out.println(resultado.getMensaje());
       System.out.println("sale de validar peticion");
       System.out.println(resultado.getCodigo());

@@ -1,4 +1,4 @@
-package com.elektra.hipocoristico.dtos;
+package com.elektra.hipocoristico.dto;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;
@@ -11,13 +11,12 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
  * @autor: Francisco Javier Cortes Torres, Desarrollador
  * @ultimaModificacion: 31/05/22
  */
-
 @Data
 @Getter
 @JsonPropertyOrder({"nombres","apellidos","mensaje"})
-public class DtoHipocoristicoResponse {
+public class DtoRespuestaHipocoristico {
   /*
-  codigo de respuesta http
+  código de respuesta http
    */
   @Schema(
     example = "200",
@@ -39,7 +38,7 @@ public class DtoHipocoristicoResponse {
   )
   private String[] apellidos;
   /*
-  mensaje de opeacion
+  mensaje de opeación
    */
   @Schema(
     example = " \"1 hipocoristico encontrado\" ",
@@ -50,8 +49,8 @@ public class DtoHipocoristicoResponse {
   /*
   clase constructora
    */
-  public DtoHipocoristicoResponse(String codigoRespuesta, String[] nombres, String[] apellidos,
-                                  String mensaje){
+  public DtoRespuestaHipocoristico(String codigoRespuesta, String[] nombres, String[] apellidos,
+                                   String mensaje){
     //codigo http
     this.codigoRespuesta = codigoRespuesta;
     //nombres

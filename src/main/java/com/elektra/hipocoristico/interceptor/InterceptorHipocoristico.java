@@ -1,9 +1,9 @@
-package com.elektra.hipocoristico.interceptores;
+package com.elektra.hipocoristico.interceptor;
 
 import com.baz.excepciones.BadRequestException;
 import com.baz.excepciones.InternalServerErrorException;
 import com.baz.excepciones.NotFoundException;
-import com.elektra.hipocoristico.dtos.DtoHipocoristicoRequest;
+import com.elektra.hipocoristico.dto.DtoPeticionHipocoristico;
 import com.elektra.hipocoristico.modelos.Resultado;
 import com.elektra.hipocoristico.utilidades.Constantes;
 import com.elektra.hipocoristico.utilidades.UtilidadGenerarExcepcion;
@@ -54,12 +54,12 @@ public class InterceptorHipocoristico implements ReaderInterceptor{
 
     String uid = context.getHeaders().getFirst("uid");
     Resultado resultado = new Resultado(uid, Constantes.CODIGO_EXITO, Constantes.MENSAJE_EXITO);
-    DtoHipocoristicoRequest request = null;
+    DtoPeticionHipocoristico request = null;
 
     try{
 
       if("/datos/hipocoristico/buscar-hipocoristico".equals(uri.getPath())){
-        request = (DtoHipocoristicoRequest) context.proceed();
+        request = (DtoPeticionHipocoristico) context.proceed();
         validarPeticion(request, resultado);
         System.out.println("RESULTADO INTERCEPTOR" + resultado.getCodigo());
 
@@ -100,7 +100,7 @@ public class InterceptorHipocoristico implements ReaderInterceptor{
    * @param resultado Resultado del proceso de validaci�n.
    * @ultimaModificacion: 06/12/2021
    */
-  private void validarPeticion(DtoHipocoristicoRequest request, Resultado resultado) throws Exception {
+  private void validarPeticion(DtoPeticionHipocoristico request, Resultado resultado) throws Exception {
 
     //ValidacionObjeto validador = new ValidacionObjeto();
     //validador.validarDto(request, resultado);

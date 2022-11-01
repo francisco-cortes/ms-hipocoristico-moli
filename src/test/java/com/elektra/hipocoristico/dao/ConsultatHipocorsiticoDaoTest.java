@@ -1,8 +1,7 @@
-package com.elektra.hipocoristico.daos;
+package com.elektra.hipocoristico.dao;
 
 import com.baz.excepciones.InternalServerErrorException;
 import com.baz.log.LogServicio;
-import com.elektra.hipocoristico.excepcion.ErrorInternoExepcion;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -17,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ConsultatHipocorsiticoDaoTest {
 
   @Inject
-  private DaoConsultarHipocorsitico daoConsultarHipocorsitico;
+  private DaoConsultaHipocorsitico daoConsultaHipocorsitico;
 
   @DisplayName("SP")
   @Test
@@ -26,7 +25,7 @@ public class ConsultatHipocorsiticoDaoTest {
     String uid = "123i12093812093";
     final String HIPOCORISTICO_TEST = "PACO";
     final String RESULTADO_ESPERADO = "FRANCISCO";
-    String resp = daoConsultarHipocorsitico.ejecutarSp(HIPOCORISTICO_TEST,log,uid);
+    String resp = daoConsultaHipocorsitico.buscarDiccionario(HIPOCORISTICO_TEST,log,uid);
     assertEquals(RESULTADO_ESPERADO,resp);
   }
 
@@ -37,7 +36,7 @@ public class ConsultatHipocorsiticoDaoTest {
     LogServicio log = new LogServicio();
     final String HIPOCORISTICO_TEST = "DELETE FROM SC_FONET.TADICCIONARIO";
     Assertions.assertThrows(InternalServerErrorException.class, () -> {
-      daoConsultarHipocorsitico.ejecutarSp(HIPOCORISTICO_TEST,log,uid);
+      daoConsultaHipocorsitico.buscarDiccionario(HIPOCORISTICO_TEST,log,uid);
     });
   }
 

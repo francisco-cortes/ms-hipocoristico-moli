@@ -1,6 +1,6 @@
-package com.elektra.hipocoristico.controladores;
+package com.elektra.hipocoristico.controlador;
 
-import com.elektra.hipocoristico.dtos.DtoHipocoristicoRequest;
+import com.elektra.hipocoristico.dto.DtoPeticionHipocoristico;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,7 +22,7 @@ public class PruebaControladorHipocoristico {
   public void pruebaConsumoHipocoristico(){
     String nombres[] = {"LEONARDO", "ISRAEL"};
     String apellidos[] = {"MILLAN", "GARCIA"};
-    DtoHipocoristicoRequest peticion = new DtoHipocoristicoRequest();
+    DtoPeticionHipocoristico peticion = new DtoPeticionHipocoristico();
     peticion.setNombres(nombres);
     peticion.setApellidos(apellidos);
     Response response = controladorHipocoristico.buscarHipocoristico("","",peticion);

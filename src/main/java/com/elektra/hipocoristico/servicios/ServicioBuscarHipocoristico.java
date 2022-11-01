@@ -1,12 +1,12 @@
 package com.elektra.hipocoristico.servicios;
 
-import com.elektra.hipocoristico.dtos.DtoHipocoristicoRequest;
+import com.elektra.hipocoristico.dto.DtoPeticionHipocoristico;
 import com.elektra.hipocoristico.modelos.ModeloDetallesServicio;
 import com.elektra.hipocoristico.utilidades.UtilidadCadenas;
 import com.elektra.hipocoristico.utilidades.UtilidadGenerarExcepcion;
 import com.baz.log.LogServicio;
-import com.elektra.hipocoristico.daos.DaoConsultarHipocorsitico;
-import com.elektra.hipocoristico.dtos.DtoHipocoristicoResponse;
+import com.elektra.hipocoristico.dao.DaoConsultaHipocorsitico;
+import com.elektra.hipocoristico.dto.DtoRespuestaHipocoristico;
 import com.elektra.hipocoristico.utilidades.Constantes;
 
 import javax.inject.Inject;
@@ -31,7 +31,7 @@ public class ServicioBuscarHipocoristico {
   inyeccion del dao para consultar sp
    */
   @Inject
-  private DaoConsultarHipocorsitico daoConsultarHipocorsitico;
+  private DaoConsultaHipocorsitico daoConsultaHipocorsitico;
 
   /**
    * <b>iniciaBuscar</b>
@@ -43,7 +43,7 @@ public class ServicioBuscarHipocoristico {
    * @ultimaModificacion: 13/10/22
    */
 
-  public DtoHipocoristicoResponse iniciaBuscar(DtoHipocoristicoRequest peticion, String uid){
+  public DtoRespuestaHipocoristico iniciaBuscar(DtoPeticionHipocoristico peticion, String uid){
     LogServicio log = new LogServicio();
     StringBuilder cadenaNombres = new StringBuilder();
     StringBuilder cadenaApellidos = new StringBuilder();
@@ -115,7 +115,7 @@ public class ServicioBuscarHipocoristico {
      */
     log.obtenerTiempoTotal(NOMBRE_CLASE+NOMBRE_METODO);
     log.terminarTiempoMetodo(NOMBRE_CLASE+NOMBRE_METODO);
-    return new DtoHipocoristicoResponse(
+    return new DtoRespuestaHipocoristico(
       Constantes.HTTP_200,nombreRes,apellidoRes,detalles.getMensaje());
   }
 
@@ -179,7 +179,7 @@ public class ServicioBuscarHipocoristico {
     final String NOMBRE_METODO = "buscarEnTabla";
     log.iniciarTiempoMetodo(NOMBRE_CLASE+NOMBRE_METODO, Constantes.NOMBRE_MS);
     String respuestaSp;
-    String busquedaTabla = daoConsultarHipocorsitico.ejecutarSp(nombreBuscado.toUpperCase(),log,uid);
+    String busquedaTabla = daoConsultaHipocorsitico.buscarDiccionario(nombreBuscado.toUpperCase(),log,uid);
 
     if(busquedaTabla.isBlank() || busquedaTabla.isEmpty() || Constantes.SP_RESPUESTA_VACIA.equals(busquedaTabla)){
       respuestaSp = nombreBuscado;

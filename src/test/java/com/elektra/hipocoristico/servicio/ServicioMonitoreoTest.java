@@ -1,6 +1,6 @@
 package com.elektra.hipocoristico.servicio;
 
-import com.elektra.hipocoristico.dtos.DtoEstadoResponse;
+import com.elektra.hipocoristico.dto.DtoRespuestaEstado;
 import com.elektra.hipocoristico.servicios.ServicioMonitoreo;
 import com.elektra.hipocoristico.utilidades.Constantes;
 import io.quarkus.test.junit.QuarkusTest;
@@ -19,8 +19,8 @@ public class ServicioMonitoreoTest {
   @DisplayName("Prueba Unitaria sobre Monitoreo")
   @Test
   public void testUid(){
-    DtoEstadoResponse dtoEstadoResponse = servicioMonitoreo.generarUid();
-    assertEquals(Constantes.ESTADO_OK, dtoEstadoResponse.getMensaje());
+    DtoRespuestaEstado dtoRespuestaEstado = servicioMonitoreo.generarUid();
+    assertEquals(Constantes.ESTADO_OK, dtoRespuestaEstado.getMensaje());
   }
 
 }

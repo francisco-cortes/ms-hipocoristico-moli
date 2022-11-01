@@ -5,13 +5,13 @@ import lombok.Getter;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 /**
- * <b>Header</b>
+ * <b>Encabezado</b>
  * @descripcion: Entidad que contiene las propiedades de la cabecera de la solicitud.
  * @autor: Fredi Daniel Cifuentes Robledo
  * @ultimaModificacion: 09/03/2022
  */
 @Getter
-public class Header {
+public class Encabezado {
 
   @Validacion(tipoDato = Validacion.tiposDato.VARCHAR, requerido = true,
     caracteresValidos = Validacion.LETRAS_Y_NUMEROS, longitudMin = 40, longitudMax = 40 )
@@ -25,7 +25,7 @@ public class Header {
     description = "Identificador único de trama.", name = "x-request-id")
   private String uid;
 
-  public Header(String uid,String token){
+  public Encabezado(String uid, String token){
     this.uid = uid;
     this.token = token;
 

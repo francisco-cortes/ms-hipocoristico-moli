@@ -1,4 +1,4 @@
-package com.elektra.hipocoristico.dtos;
+package com.elektra.hipocoristico.dto;
 
 import com.elektra.hipocoristico.utilidades.Constantes;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -16,7 +16,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 @Data
 @Setter
 @JsonPropertyOrder({"mensaje","folio"})
-public class DtoEstadoResponse {
+public class DtoRespuestaEstado {
   /*
   mensaje
    */

@@ -12,6 +12,6 @@ import io.quarkus.runtime.annotations.ConfigGroup;
 public interface Credenciales {
   //usuario para base de datos
   String usuario();
-  //constrasena para base de datos
+  //contraseña para base de datos
   String contrasena();
 }

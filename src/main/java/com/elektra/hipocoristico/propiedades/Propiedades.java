@@ -6,14 +6,14 @@ import io.smallrye.config.ConfigMapping;
 
 import java.util.Map;
 /**
- * <b>Properties</b>
- * @descripcion: interface para obtener datos del propiedades.yml
+ * <b>Propiedades</b>
+ * @descripcion: interfaz para obtener datos del propiedades.yml
  * @autor: Francisco Javier Cortes Torres, Desarrollador
  * @ultimaModificacion: 04/10/22
  */
 @StaticInitSafe
 @ConfigMapping(prefix = "conexion")
-public interface Properties {
+public interface Propiedades {
   /**
    * <b>conexionesdb</b>
    * @descripcion: apunta a configuracionesdb

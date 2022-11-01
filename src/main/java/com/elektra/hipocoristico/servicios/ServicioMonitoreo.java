@@ -1,6 +1,6 @@
 package com.elektra.hipocoristico.servicios;
 
-import com.elektra.hipocoristico.dtos.DtoEstadoResponse;
+import com.elektra.hipocoristico.dto.DtoRespuestaEstado;
 import com.elektra.hipocoristico.utilidades.Constantes;
 import com.baz.servicios.Uid;
 
@@ -21,8 +21,8 @@ public class ServicioMonitoreo {
    * @ultimaModificacion: 04/10/22
    */
 
-  public DtoEstadoResponse generarUid(){
-    DtoEstadoResponse uidAlive = new DtoEstadoResponse();
+  public DtoRespuestaEstado generarUid(){
+    DtoRespuestaEstado uidAlive = new DtoRespuestaEstado();
     uidAlive.setMensaje(Constantes.ESTADO_OK);
     /*
     genera folio a traves de RemesasUtils.jar

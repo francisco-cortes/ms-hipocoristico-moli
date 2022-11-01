@@ -1,7 +1,7 @@
 package com.elektra.hipocoristico.servicio;
 
-import com.elektra.hipocoristico.dtos.DtoHipocoristicoRequest;
-import com.elektra.hipocoristico.dtos.DtoHipocoristicoResponse;
+import com.elektra.hipocoristico.dto.DtoPeticionHipocoristico;
+import com.elektra.hipocoristico.dto.DtoRespuestaHipocoristico;
 import com.elektra.hipocoristico.servicios.ServicioBuscarHipocoristico;
 import com.elektra.hipocoristico.utilidades.Constantes;
 import io.quarkus.test.junit.QuarkusTest;
@@ -23,7 +23,7 @@ public class ServicioBuscarHipocoristicoTest {
   @Test
   public void testIniciarBusquedaIdeal(){
     String nombres[] = {"LEONARDO", "PACO"};
-    DtoHipocoristicoResponse resp = servicioBuscarHipocoristico.iniciaBuscar(peticion(nombres), UID);
+    DtoRespuestaHipocoristico resp = servicioBuscarHipocoristico.iniciaBuscar(peticion(nombres), UID);
     Assertions.assertEquals(Constantes.UN_HIPOCORISTICO,resp.getMensaje());
   }
 
@@ -31,7 +31,7 @@ public class ServicioBuscarHipocoristicoTest {
   @Test
   public void testIniciarBusquedaDosHipocoristicos(){
     String nombres[] = {"PETE","PACO"};
-    DtoHipocoristicoResponse resp = servicioBuscarHipocoristico.iniciaBuscar(peticion(nombres),UID);
+    DtoRespuestaHipocoristico resp = servicioBuscarHipocoristico.iniciaBuscar(peticion(nombres),UID);
     assertEquals(Constantes.DOS_HIPOCORISTICO,resp.getMensaje());
   }
 
@@ -39,12 +39,12 @@ public class ServicioBuscarHipocoristicoTest {
   @Test
   public void testIniciarBusquedaSinHipocoristicos(){
     String nombres[] = {"LEONARDO","ISRAEL"};
-    DtoHipocoristicoResponse resp = servicioBuscarHipocoristico.iniciaBuscar(peticion(nombres),UID);
+    DtoRespuestaHipocoristico resp = servicioBuscarHipocoristico.iniciaBuscar(peticion(nombres),UID);
     assertEquals(Constantes.CERO_HIPOCORISTICOS,resp.getMensaje());
   }
 
-  private DtoHipocoristicoRequest peticion(String[] nombres){
-    DtoHipocoristicoRequest req = new DtoHipocoristicoRequest();
+  private DtoPeticionHipocoristico peticion(String[] nombres){
+    DtoPeticionHipocoristico req = new DtoPeticionHipocoristico();
     req.setNombres(nombres);
     req.setApellidos(APELLIDOS);
     return req;
