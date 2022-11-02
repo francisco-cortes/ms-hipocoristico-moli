@@ -1,5 +1,6 @@
 package com.elektra.hipocoristico.dao;
 
+import com.elektra.hipocoristico.modelos.Resultado;
 import com.elektra.hipocoristico.util.UtilidadGenerarExcepcion;
 import com.baz.log.LogServicio;
 import com.elektra.hipocoristico.util.Constantes;
@@ -25,7 +26,6 @@ import java.sql.Types;
 @Service("ConsultarHipocoristicoDao")
 @NoArgsConstructor
 public class DaoConsultaHipocorsitico {
-  private static final UtilidadGenerarExcepcion UTILIDAD_GENERAR_EXCEPCION = new UtilidadGenerarExcepcion();
   /**
    * Instancia el objeto para conexión a DB a través de DaofabricaConexion
    */
@@ -43,10 +43,13 @@ public class DaoConsultaHipocorsitico {
    * @ultimaModificacion: 13/10/22
    */
   @Transactional
-  public String buscarDiccionario(String hipocoristico, LogServicio log, String uid)
-    throws SQLException {
-    String nombreClaseMetodo = "DaoConsultaHipocorsitico-buscarDiccionario";
+  public String buscarDiccionario(String hipocoristico, Resultado resultado, LogServicio log)
+    throws Exception {
+    String nombreClaseMetodo  = "DaoConsultarHipocorsitico-ejecutarSp";
     log.iniciarTiempoMetodo(nombreClaseMetodo, Constantes.NOMBRE_MS);
+
+    resultado.setCodigo("CX00000");
+    resultado.setMensaje("Ocurrió un error al invocar la consulta hacia diccionario de base de datos.");
     /*
     Constantes para índices de parametros en SP
      */
@@ -62,11 +65,11 @@ public class DaoConsultaHipocorsitico {
 
     try {
       /*
-      Obtiene conexion a base de datos postgres
+      Obtiene conexión a base de datos postgres
       */
       conexion = daoFabricaConexion.obtenerConexion();
       /*
-      Se declara la query para la ejecucion del sp, ((buscar forma de guardarla en propiedades))
+      Se declara la query para la ejecución del sp, ((buscar forma de guardarla en propiedades))
       */
       declaracionInvocable = conexion.prepareCall("{? = call SC_FONET.FNDICCIONARIO(?, ?)}");
       /*
@@ -89,15 +92,6 @@ public class DaoConsultaHipocorsitico {
       Obtención de salida sp
       */
       respuestaSp = declaracionInvocable.getString(RESPUESTA);
-    }
-    catch (Exception exception){
-      respuestaSp = hipocoristico;
-      String mensajeExcepcion = exception.getMessage();
-      log.registrarExcepcion(exception,"Error SQL");
-      log.registrarMensaje(nombreClaseMetodo,mensajeExcepcion);
-
-      UTILIDAD_GENERAR_EXCEPCION.generarExcepcion(Constantes.HTTP_500,Constantes.CODIGO_ERROR_GENERAL_API,
-        mensajeExcepcion,uid);
     }
     finally {
       /*

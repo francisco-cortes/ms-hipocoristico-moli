@@ -23,7 +23,7 @@ public class ServicioBuscarHipocoristicoTest {
   @Test
   public void testIniciarBusquedaIdeal(){
     String nombres[] = {"LEONARDO", "PACO"};
-    DtoRespuestaHipocoristico resp = servicioBuscarHipocoristico.iniciaBuscar(peticion(nombres), UID);
+    DtoRespuestaHipocoristico resp = servicioBuscarHipocoristico.iniciarBuscar(peticion(nombres), UID);
     Assertions.assertEquals(Constantes.UN_HIPOCORISTICO,resp.getMensaje());
   }
 
@@ -31,7 +31,7 @@ public class ServicioBuscarHipocoristicoTest {
   @Test
   public void testIniciarBusquedaDosHipocoristicos(){
     String nombres[] = {"PETE","PACO"};
-    DtoRespuestaHipocoristico resp = servicioBuscarHipocoristico.iniciaBuscar(peticion(nombres),UID);
+    DtoRespuestaHipocoristico resp = servicioBuscarHipocoristico.iniciarBuscar(peticion(nombres),UID);
     assertEquals(Constantes.DOS_HIPOCORISTICO,resp.getMensaje());
   }
 
@@ -39,7 +39,7 @@ public class ServicioBuscarHipocoristicoTest {
   @Test
   public void testIniciarBusquedaSinHipocoristicos(){
     String nombres[] = {"LEONARDO","ISRAEL"};
-    DtoRespuestaHipocoristico resp = servicioBuscarHipocoristico.iniciaBuscar(peticion(nombres),UID);
+    DtoRespuestaHipocoristico resp = servicioBuscarHipocoristico.iniciarBuscar(peticion(nombres),UID);
     assertEquals(Constantes.CERO_HIPOCORISTICOS,resp.getMensaje());
   }
 

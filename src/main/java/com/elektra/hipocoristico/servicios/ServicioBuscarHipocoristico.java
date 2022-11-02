@@ -1,7 +1,8 @@
 package com.elektra.hipocoristico.servicios;
 
+import com.baz.excepciones.InternalServerErrorException;
 import com.elektra.hipocoristico.dto.DtoPeticionHipocoristico;
-import com.elektra.hipocoristico.modelos.ModeloDetallesServicio;
+import com.elektra.hipocoristico.modelos.Resultado;
 import com.elektra.hipocoristico.util.UtilidadCadenas;
 import com.elektra.hipocoristico.util.UtilidadGenerarExcepcion;
 import com.baz.log.LogServicio;
@@ -11,7 +12,6 @@ import com.elektra.hipocoristico.util.Constantes;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import java.sql.SQLException;
 import java.util.stream.Stream;
 
 /**
@@ -24,189 +24,163 @@ import java.util.stream.Stream;
 @Singleton
 public class ServicioBuscarHipocoristico {
 
-  private static final UtilidadGenerarExcepcion UTILIDAD_GENERAR_EXCEPCION = new UtilidadGenerarExcepcion();
-  private static final ModeloDetallesServicio detalles = new ModeloDetallesServicio();
-  private static final String NOMBRE_CLASE = "ServicioBuscarHipocoristico";
+  private int contadorHipocoristico;
   /*
-  inyeccion del dao para consultar sp
+  inyección del dao para consultar sp
    */
   @Inject
   private DaoConsultaHipocorsitico daoConsultaHipocorsitico;
+
+  @Inject
+  private UtilidadGenerarExcepcion utilidadGenerarExcepcion;
 
   /**
    * <b>iniciaBuscar</b>
    * @descripcion: Inicio de la estructura que busca hipocoristicos
    * @autor: Francisco Javier Cortes Torres, Desarrollador
-   * @param: nombres, arreglo de nombres de una persona
-   * @param: apellido, arreglo de apellido de una persona
    * @param: arregloCompleto, conjunto de nombres y apellidos
    * @ultimaModificacion: 13/10/22
    */
 
-  public DtoRespuestaHipocoristico iniciaBuscar(DtoPeticionHipocoristico peticion, String uid){
+  public DtoRespuestaHipocoristico iniciarBuscar(DtoPeticionHipocoristico peticion, String uid){
+    contadorHipocoristico = 0;
+    String nombreClaseMetodo = "ServicioBuscarHipocoristico-iniciarBuscar";
     LogServicio log = new LogServicio();
+    log.iniciarTiempoMetodo(nombreClaseMetodo,Constantes.NOMBRE_MS);
+
+    Resultado resultado = new Resultado(uid, "CX00000",
+      "Ocurrió un problema en el proceso de hipocoristico.");
+
     StringBuilder cadenaNombres = new StringBuilder();
     StringBuilder cadenaApellidos = new StringBuilder();
-    final String NOMBRE_METODO = "iniciaBuscar";
-    log.iniciarTiempoMetodo(NOMBRE_CLASE+NOMBRE_METODO,Constantes.NOMBRE_MS);
-    /*
-    obtiene la cantidad de strings del arreglo nombre
-     */
-    String[] nombres = peticion.getNombres();
-    /*
-    obtiene la cantida de string del arreglo apellido
-     */
-    String[] apellidos = peticion.getApellidos();
-    /*
-    une los arreglos para iterar despues
-     */
-    String[] arregloCompleto= Stream.of(peticion.getNombres(), peticion.getApellidos())
-      .flatMap(Stream::of).toArray(String[]::new);
+    DtoRespuestaHipocoristico respuesta = null;
 
-    log.registrarMensaje(NOMBRE_CLASE+NOMBRE_METODO,"Recibido: " + arregloCompleto.length +
-      " de nombres");
-
-    for(int i = 0; i < nombres.length; i++){
-      cadenaNombres.append(nombres[i]);
-      cadenaNombres.append(" ");
-    }
-    for(int j = 0; j < apellidos.length; j++){
-      cadenaApellidos.append(apellidos[j]);
-      cadenaApellidos.append(" ");
-    }
-    log.registrarMensaje(NOMBRE_CLASE+NOMBRE_METODO, nombres.length + " Nombres: " +
-      cadenaNombres + " " + apellidos.length + " Apellidos: " + cadenaApellidos);
-    /*
-    se incia en 0 para cada consulta
-     */
-    detalles.setHipos(0);
-    /*
-    Variables iniciadas para la respuesta
-     */
-    String[] nombreRes = new String[nombres.length];
-    String[] apellidoRes = new String[apellidos.length];
-    String[] resultadoBusqueda = new String[0];
     try {
       /*
-      busca en el arraglo los hipocoristicos
-       */
-      resultadoBusqueda = buscarNombres(arregloCompleto, log, uid);
-      detalles.setDetalles(Constantes.MENSAJE_EXITO);
-    }
-    catch (Exception excepcion) {
-      String mensajeExcepcion = excepcion.getMessage();
+      obtiene la cantidad de strings del arreglo nombre
+      */
+      String[] nombres = peticion.getNombres();
       /*
-      arroja respuesta cotrolada a traves del controlador de exepciones
+      obtiene la cantidad de string del arreglo apellido
+      */
+      String[] apellidos = peticion.getApellidos();
+      /*
+      une los arreglos para iterar después
+      */
+      String[] arregloCompleto= Stream.of(peticion.getNombres(), peticion.getApellidos())
+        .flatMap(Stream::of).toArray(String[]::new);
+
+      log.registrarMensaje(nombreClaseMetodo  ,"Recibido: " + arregloCompleto.length +
+        " de nombres");
+
+      for (String nombre : nombres) {
+        cadenaNombres.append(nombre);
+        cadenaNombres.append(" ");
+      }
+      for (String apellido : apellidos) {
+        cadenaApellidos.append(apellido);
+        cadenaApellidos.append(" ");
+      }
+      log.registrarMensaje(nombreClaseMetodo, nombres.length + " Nombres: " +
+        cadenaNombres + " " + apellidos.length + " Apellidos: " + cadenaApellidos);
+      /*
+      Variables iniciadas para la respuesta
+      */
+      String[] nombreRes = new String[nombres.length];
+      String[] apellidoRes = new String[apellidos.length];
+      String[] resultadoBusqueda = new String[0];
+      /*
+      busca en el arreglo los hipocorísticos
        */
-      UTILIDAD_GENERAR_EXCEPCION.generarExcepcion(Constantes.HTTP_500,Constantes.CODIGO_ERROR_GENERAL_API,
-        mensajeExcepcion, uid);
+      resultadoBusqueda = buscarNombres(arregloCompleto, resultado, log);
+      /*
+      parte el arreglo en 2 para nombres y apellidos
+      */
+      System.arraycopy(resultadoBusqueda, 0, nombreRes, 0, nombres.length);
+      System.arraycopy(resultadoBusqueda,nombres.length,apellidoRes,0,apellidos.length);
 
-      log.registrarExcepcion(excepcion,"Error SQL");
-      log.registrarMensaje(NOMBRE_CLASE+NOMBRE_METODO,mensajeExcepcion);
+      if(contadorHipocoristico > 1) {
+        resultado.setCodigo("CX0000");
+        resultado.setMensaje("No se puede tener mas de un hipocoristico por evaluación.");
+
+        utilidadGenerarExcepcion.generarExcepcion(Constantes.HTTP_500, resultado.getCodigo(),
+          resultado.getMensaje() , uid);
+      }
+      else {
+        respuesta = new DtoRespuestaHipocoristico(
+          Constantes.HTTP_200, nombreRes, apellidoRes, "Operación exitosa.");
+      }
     }
-    /*
-    parte el arreglo en 2 para nombres y apellidso
-     */
-    System.arraycopy(resultadoBusqueda, 0, nombreRes, 0, nombres.length);
-    System.arraycopy(resultadoBusqueda,nombres.length,apellidoRes,0,apellidos.length);
-
-    /*
-    retorna la respuesta exitosa
-     */
-    log.obtenerTiempoTotal(NOMBRE_CLASE+NOMBRE_METODO);
-    log.terminarTiempoMetodo(NOMBRE_CLASE+NOMBRE_METODO);
-    return new DtoRespuestaHipocoristico(
-      Constantes.HTTP_200,nombreRes,apellidoRes,detalles.getMensaje());
+    catch (InternalServerErrorException excepcion){
+      log.registrarExcepcion(excepcion, null);
+      throw excepcion;
+    }
+    catch (Exception excepcion){
+      log.registrarExcepcion(excepcion, "Error SQL");
+      /*
+      arroja respuesta controlada a través del controlador de exepciones
+       */
+      utilidadGenerarExcepcion.generarExcepcion(Constantes.HTTP_500, resultado.getCodigo(),
+        resultado.getMensaje() + " " + excepcion.getMessage(), uid);
+    }
+    finally {
+      /*
+      retorna la respuesta exitosa
+      */
+      log.terminarTiempoMetodo(nombreClaseMetodo);
+    }
+    return respuesta;
   }
 
   /**
    * <b>buscarNombres</b>
    * @descripcion: recorre el arreglo dado invocando el metodo buscar en tabla y reassigna valores dentro del arreglo
    * @autor: Francisco Javier Cortes Torres, Desarrollador
-   *
    * @ultimaModificacion: 01/06/22
    */
-  private String[] buscarNombres(String[] arregloCompleto, LogServicio log, String uid)
-    throws SQLException {
-
-    final String NOMBRE_METODO = "buscarNombres";
+  private String[] buscarNombres(String[] arregloCompleto, Resultado resultado,LogServicio log)
+    throws Exception {
     /*
-    variables de iteracion de arreglo
+    variables de iteración de arreglo
      */
     int posicionArreglo = 0;
     int auxiliar = 0;
-    log.iniciarTiempoMetodo(NOMBRE_CLASE+NOMBRE_METODO,Constantes.NOMBRE_MS);
-
     while (posicionArreglo<arregloCompleto.length){
-
       if (UtilidadCadenas.buscarEspaciosCadena(arregloCompleto[posicionArreglo])) {
-
         String[] cadenaSeparada = UtilidadCadenas.subCadenaSeparada(arregloCompleto[posicionArreglo]);
-
         while (auxiliar<cadenaSeparada.length){
-          cadenaSeparada[auxiliar] = buscarEnTabla(cadenaSeparada[auxiliar],log,uid);
+          cadenaSeparada[auxiliar] = buscarEnTabla(cadenaSeparada[auxiliar], resultado, log);
           auxiliar ++;
         }
-
         arregloCompleto[posicionArreglo] = UtilidadCadenas.unirSubCadena(cadenaSeparada);
-
       }
       else {
-
-        arregloCompleto[posicionArreglo] = buscarEnTabla(arregloCompleto[posicionArreglo],log,uid);
-
+        arregloCompleto[posicionArreglo] = buscarEnTabla(arregloCompleto[posicionArreglo], resultado, log);
       }
-
       posicionArreglo ++;
-
     }
-    log.terminarTiempoMetodo(NOMBRE_CLASE+NOMBRE_METODO);
     return arregloCompleto;
-
   }
 
   /**
    * <b>buscarEnTabla</b>
    * @descripcion: ejecuta consulta a sp con un String como parametro actualiza
-   * mensaje dependiendo de parametros mesajeActual y HipocoristicosEncotrados
+   * mensaje dependiendo de parametros mensajeActual y HipocorísticosEncontrados
    * @autor: Francisco Javier Cortes Torres, Desarrollador
-   *
    * @ultimaModificacion: 01/06/22
    */
 
-  private String buscarEnTabla(String nombreBuscado, LogServicio log, String uid)
-    throws SQLException {
-    final String NOMBRE_METODO = "buscarEnTabla";
-    log.iniciarTiempoMetodo(NOMBRE_CLASE+NOMBRE_METODO, Constantes.NOMBRE_MS);
-    String respuestaSp;
-    String busquedaTabla = daoConsultaHipocorsitico.buscarDiccionario(nombreBuscado.toUpperCase(),log,uid);
-
-    if(busquedaTabla.isBlank() || busquedaTabla.isEmpty() || Constantes.SP_RESPUESTA_VACIA.equals(busquedaTabla)){
-      respuestaSp = nombreBuscado;
-      if(detalles.getHipos() == 0){
-        detalles.setMensaje(Constantes.CERO_HIPOCORISTICOS);
-      }
-      else if (detalles.getHipos() == 1) {
-        detalles.setMensaje(Constantes.UN_HIPOCORISTICO);
-      }
-      else {
-        detalles.setMensaje(Constantes.DOS_HIPOCORISTICO);
-      }
+  private String buscarEnTabla(String nombreBuscado, Resultado resultado,LogServicio log)
+    throws Exception {
+    String respuestaDiccionario = daoConsultaHipocorsitico.buscarDiccionario(nombreBuscado.toUpperCase(),
+      resultado, log);
+    if(Constantes.SP_RESPUESTA_VACIA.equals(respuestaDiccionario)){
+      return nombreBuscado;
     }
     else {
-      detalles.sumHipos(1);
-      if (detalles.getHipos() == 1) {
-        respuestaSp = busquedaTabla;
-        detalles.setMensaje(Constantes.UN_HIPOCORISTICO);
-      }
-      else {
-        respuestaSp = nombreBuscado;
-        detalles.setMensaje(Constantes.DOS_HIPOCORISTICO);
-      }
+      contadorHipocoristico++;
+      return respuestaDiccionario;
     }
-
-    log.terminarTiempoMetodo(NOMBRE_CLASE+NOMBRE_METODO);
-    return respuestaSp;
   }
 
 }

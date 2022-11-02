@@ -89,7 +89,7 @@ public class ControladorHipocoristico {
     /*
     invoca metodo del servicio principal y crea el objeto con el model hipocoristicoResponseDto
      */
-    DtoRespuestaHipocoristico hipocoristicoResponse = servicioBuscarHipocoristico.iniciaBuscar(peticion, uid);
+    DtoRespuestaHipocoristico hipocoristicoResponse = servicioBuscarHipocoristico.iniciarBuscar(peticion, uid);
     /*
     retorna el objeto como entidad para él parseo como json
      */
