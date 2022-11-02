@@ -13,7 +13,7 @@ import com.baz.excepciones.NotFoundException;
  * @autor: Angel Eduardo Hern�ndez Aguilar.
  * @ultimaModificacion: 26/10/2022
  * */
-@Service("HipocoristicoUtils")
+@Service("UtilidadGenerarExcepcion")
 public class UtilidadGenerarExcepcion {
   /**
    * <b>generarExcepcion</b>

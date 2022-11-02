@@ -21,5 +21,7 @@ public interface Configuraciones {
   //nombre de la base de datos
   String name();
   //primer procedimiento almacenado
-  String fsp();
+  String esquema();
+  String paquete();
+  String sp();
 }

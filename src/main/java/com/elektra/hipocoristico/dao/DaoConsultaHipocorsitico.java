@@ -1,8 +1,9 @@
 package com.elektra.hipocoristico.dao;
 
+import com.baz.servicios.DaoUtils;
 import com.elektra.hipocoristico.modelos.Resultado;
-import com.elektra.hipocoristico.util.UtilidadGenerarExcepcion;
 import com.baz.log.LogServicio;
+import com.elektra.hipocoristico.propiedades.Propiedades;
 import com.elektra.hipocoristico.util.Constantes;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,6 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.sql.Types;
 
 /**
@@ -31,6 +31,9 @@ public class DaoConsultaHipocorsitico {
    */
   @Inject
   private DaoFabricaConexion daoFabricaConexion;
+  @Inject
+  private Propiedades propiedades;
+
 
   /**
    * <b>ejecutarSp</b>
@@ -45,6 +48,7 @@ public class DaoConsultaHipocorsitico {
   @Transactional
   public String buscarDiccionario(String hipocoristico, Resultado resultado, LogServicio log)
     throws Exception {
+    DaoUtils daoUtils = new DaoUtils();
     String nombreClaseMetodo  = "DaoConsultarHipocorsitico-ejecutarSp";
     log.iniciarTiempoMetodo(nombreClaseMetodo, Constantes.NOMBRE_MS);
 
@@ -56,6 +60,13 @@ public class DaoConsultaHipocorsitico {
     final int RESPUESTA = 1;
     final int PARAMETRO_PAIS = 2;
     final int PARAMETRO_HIPOCORSITICO = 3;
+
+    String spConsultaHipocoristico = daoUtils.obtenerCallableStatementFuncion(
+      propiedades.conexionesdb().get(Constantes.C3REMESASC).esquema(),
+      null,
+      propiedades.conexionesdb().get(Constantes.C3REMESASC).sp(),
+      2);
+
     //String de respuesta del método
     String respuestaSp;
     // objeto de conexión sql
@@ -71,7 +82,7 @@ public class DaoConsultaHipocorsitico {
       /*
       Se declara la query para la ejecución del sp, ((buscar forma de guardarla en propiedades))
       */
-      declaracionInvocable = conexion.prepareCall("{? = call SC_FONET.FNDICCIONARIO(?, ?)}");
+      declaracionInvocable = conexion.prepareCall(spConsultaHipocoristico);
       /*
       Salida String nombre solicitado
       */

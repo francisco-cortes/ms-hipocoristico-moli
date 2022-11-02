@@ -42,4 +42,6 @@ conexion:
       ip: uYx3RV2-TQEHDr7-0gim9x4uZYdVw-suErVPWljmhWheenvOqDOHOy8UMbu135Y-cdzSPlp-Uy13DTM5wxlHmnV47cq_iJTHY331MDuW10A
       port: Y90BNCyOb8r61WBZigIEfA
       name: KiIPuiEfM53_RfP77oDDwg
-      fsp: hola
+      esquema: SC_FONET
+      paquete: null
+      sp: FNDICCIONARIO

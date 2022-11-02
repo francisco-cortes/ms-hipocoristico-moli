@@ -53,7 +53,7 @@ public class DaoFabricaConexion {
 
   /**
    * cerrarConexion
-   * Descripción: Cierra y termina los procesos resultantes de la consulta a base de datos sin result set ya que hay
+   * Descripción: Cierra y termina los procesos resultantes de la consulta a base de datos sin result set, ya que hay
    * consulta que no generan y asi se evita un fallo por excepción
    * Autor: Francisco Javier Cortes Torres, Desarrollador
    * params: Connection, Statement

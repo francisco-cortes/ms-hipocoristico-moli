@@ -3,7 +3,7 @@ package com.elektra.hipocoristico.controlador;
 import com.baz.excepciones.DtoExcepcion;
 import com.elektra.hipocoristico.dto.DtoPeticionHipocoristico;
 import com.elektra.hipocoristico.dto.DtoRespuestaHipocoristico;
-import com.elektra.hipocoristico.servicios.ServicioBuscarHipocoristico;
+import com.elektra.hipocoristico.servicios.ServicioBuscaHipocoristico;
 import com.elektra.hipocoristico.util.Constantes;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.enums.ParameterIn;
@@ -37,7 +37,7 @@ public class ControladorHipocoristico {
   Inyección instancia del BuscarHipocorístico
    */
   @Inject
-  private ServicioBuscarHipocoristico servicioBuscarHipocoristico;
+  private ServicioBuscaHipocoristico servicioBuscaHipocoristico;
   /**
    * <b>buscarHipocorístico</b>
    * @descripcion: Endpoint POST principal
@@ -89,7 +89,7 @@ public class ControladorHipocoristico {
     /*
     invoca metodo del servicio principal y crea el objeto con el model hipocoristicoResponseDto
      */
-    DtoRespuestaHipocoristico hipocoristicoResponse = servicioBuscarHipocoristico.iniciarBuscar(peticion, uid);
+    DtoRespuestaHipocoristico hipocoristicoResponse = servicioBuscaHipocoristico.iniciarBuscar(peticion, uid);
     /*
     retorna el objeto como entidad para él parseo como json
      */

@@ -1,5 +1,6 @@
 package com.elektra.hipocoristico.dto;
 
+import com.baz.anotaciones.CifrarValorAes;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;
 import lombok.Getter;
@@ -28,6 +29,7 @@ public class DtoRespuestaHipocoristico {
   @Schema(
     example = "[ \"PACO\", \"JAVIER\" ]",
     description = "Arreglos de cadenas, idealmente nombres de personas, en maysucula")
+  @CifrarValorAes
   private String[] nombres;
   /*
   apellidos de una persona
@@ -36,6 +38,7 @@ public class DtoRespuestaHipocoristico {
     example = "[ \"GARCIA\", \"MARTINEZ\" ]",
     description = "Arreglos de cadenas, idealmente apellidos de personas, en maysucula"
   )
+  @CifrarValorAes
   private String[] apellidos;
   /*
   mensaje de opeación

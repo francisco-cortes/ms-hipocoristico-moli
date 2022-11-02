@@ -22,7 +22,7 @@ import java.util.stream.Stream;
  */
 
 @Singleton
-public class ServicioBuscarHipocoristico {
+public class ServicioBuscaHipocoristico {
 
   private int contadorHipocoristico;
   /*
@@ -44,7 +44,7 @@ public class ServicioBuscarHipocoristico {
 
   public DtoRespuestaHipocoristico iniciarBuscar(DtoPeticionHipocoristico peticion, String uid){
     contadorHipocoristico = 0;
-    String nombreClaseMetodo = "ServicioBuscarHipocoristico-iniciarBuscar";
+    String nombreClaseMetodo = "ServicioBuscaHipocoristico-iniciarBuscar";
     LogServicio log = new LogServicio();
     log.iniciarTiempoMetodo(nombreClaseMetodo,Constantes.NOMBRE_MS);
 
