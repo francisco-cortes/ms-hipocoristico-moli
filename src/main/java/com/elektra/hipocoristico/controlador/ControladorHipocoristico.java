@@ -48,16 +48,6 @@ public class ControladorHipocoristico {
   //operación principal
   @Operation(operationId = "1",
     summary = "Buscar y reemplazar hipocorísticos por nombre real")
-  @Parameter(name ="token",
-    schema = @Schema(type = SchemaType.STRING),
-    description = "Token para el iniciar al solicitud.",
-    example = "022DEE73F8528EA4445B133DDB5B224848B2258B",
-    in = ParameterIn.HEADER, required = false)
-  @Parameter(name ="uid",
-    schema = @Schema(type = SchemaType.STRING),
-    description = "Uid para identification del service.",
-    example = "UID123412341332",
-    in = ParameterIn.HEADER, required = true)
   @APIResponses(value =
     {
       @APIResponse(
@@ -84,12 +74,12 @@ public class ControladorHipocoristico {
   @PostMapping(value ="/buscar-hipocoristico",
     produces = MediaType.APPLICATION_JSON_VALUE,
     consumes = MediaType.APPLICATION_JSON_VALUE)
-  public Response buscarHipocoristico(@RequestHeader(name = "uid", required = Constantes.ES_REQUERIDO) String uid,
-                                      @RequestBody DtoPeticionHipocoristico peticion){
+  public Response buscarHipocoristico(@RequestBody DtoPeticionHipocoristico peticion){
     /*
     invoca método del servicio principal y crea el objeto con el model hipocoristicoResponseDto
      */
-    DtoRespuestaHipocoristico hipocoristicoResponse = servicioBuscaHipocoristico.iniciarBuscar(peticion, uid);
+    DtoRespuestaHipocoristico hipocoristicoResponse = servicioBuscaHipocoristico.iniciarBuscar(peticion,
+      "UIDHARDCODE");
     /*
     retorna el objeto como entidad para él parseo como json
      */

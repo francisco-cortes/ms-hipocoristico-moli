@@ -29,7 +29,6 @@ public class DtoRespuestaHipocoristico {
   @Schema(
     example = "[ \"PACO\", \"JAVIER\" ]",
     description = "Arreglos de cadenas, idealmente nombres de personas, en mayúscula")
-  @CifrarValorAes
   private String[] nombres;
   /*
   apellidos de una persona
@@ -38,7 +37,6 @@ public class DtoRespuestaHipocoristico {
     example = "[ \"GARCIA\", \"MARTINEZ\" ]",
     description = "Arreglos de cadenas, idealmente apellidos de personas, en mayúscula"
   )
-  @CifrarValorAes
   private String[] apellidos;
   /*
   mensaje de opeación

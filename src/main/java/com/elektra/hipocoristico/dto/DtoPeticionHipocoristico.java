@@ -29,7 +29,6 @@ public class DtoPeticionHipocoristico {
     longitudMin = Constantes.LONGITUD_MIN_ENTRADA,
     longitudMax = Constantes.LONGITUD_MAX_ENTRADA
   )
-  @DesCifrarValorAes
   @Schema(
     example = " [\"PACO\", \"JAVIER\" ]",
     required = Constantes.ES_REQUERIDO,
@@ -48,7 +47,6 @@ public class DtoPeticionHipocoristico {
     longitudMin = Constantes.LONGITUD_MIN_ENTRADA,
     longitudMax = Constantes.LONGITUD_MAX_ENTRADA
   )
-  @DesCifrarValorAes
   @Schema(
     example = " [\"GARCIA\", \"MTZ\" ]",
     required = Constantes.ES_REQUERIDO,

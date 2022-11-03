@@ -1,6 +1,7 @@
 package com.elektra.hipocoristico.servicios;
 
 import com.baz.excepciones.InternalServerErrorException;
+import com.elektra.hipocoristico.dao.DaoConsultaCsv;
 import com.elektra.hipocoristico.dto.DtoPeticionHipocoristico;
 import com.elektra.hipocoristico.modelos.Resultado;
 import com.elektra.hipocoristico.util.UtilidadCadenas;
@@ -29,7 +30,8 @@ public class ServicioBuscaHipocoristico {
   inyección del dao para consultar sp
    */
   @Inject
-  private DaoConsultaHipocorsitico daoConsultaHipocorsitico;
+  private DaoConsultaCsv daoConsultaCsv;
+  //private DaoConsultaHipocorsitico daoConsultaHipocorsitico;
 
   @Inject
   private UtilidadGenerarExcepcion utilidadGenerarExcepcion;
@@ -180,8 +182,7 @@ public class ServicioBuscaHipocoristico {
 
   private String buscarEnTabla(String nombreBuscado, Resultado resultado,LogServicio log)
     throws Exception {
-    String respuestaDiccionario = daoConsultaHipocorsitico.buscarDiccionario(nombreBuscado.toUpperCase(),
-      resultado, log);
+    String respuestaDiccionario = daoConsultaCsv.buscarDick(nombreBuscado.toUpperCase());
     if(Constantes.SP_RESPUESTA_VACIA_SP.equals(respuestaDiccionario)){
       return nombreBuscado;
     }

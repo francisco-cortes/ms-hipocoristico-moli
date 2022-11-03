@@ -3,7 +3,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.baz.moli</groupId>
-  <artifactId>ms-hipocristico-moli</artifactId>
+  <artifactId>ms-hipocristico-hard</artifactId>
   <version>latest</version>
   <properties>
     <compiler-plugin.version>3.8.1</compiler-plugin.version>
@@ -48,6 +48,11 @@
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-spring-web</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.opencsv</groupId>
+      <artifactId>opencsv</artifactId>
+      <version>5.3</version>
     </dependency>
     <!-- JDBC driver dependencies -->
     <dependency>
