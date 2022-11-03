@@ -29,10 +29,9 @@ public class DaoFabricaConexion {
   private CifradorAes cifradorAes;
 
   /**
-   * obtenerConexion
-   * Descrpcion: creoa le objeto SQL Connection
-   * Autor: Francisco Javier Cortes Torres, Desarrollador
-   * returns: String
+   * <b>obtenerConexion</b>
+   * @descrpcion: crea le objeto SQL Connection
+   * @autor: Francisco Javier Cortes Torres, Desarrollador
    **/
   public Connection obtenerConexion() throws Exception {
     cifradorAes = new CifradorAes(false);
@@ -52,12 +51,11 @@ public class DaoFabricaConexion {
   }
 
   /**
-   * cerrarConexion
-   * Descripción: Cierra y termina los procesos resultantes de la consulta a base de datos sin result set, ya que hay
+   * <b>cerrarConexion</b>
+   * @descripción: Cierra y termina los procesos resultantes de la consulta a base de datos sin result set, ya que hay
    * consulta que no generan y asi se evita un fallo por excepción
-   * Autor: Francisco Javier Cortes Torres, Desarrollador
-   * params: Connection, Statement
-   * returns: Void
+   * @autor: Francisco Javier Cortes Torres, Desarrollador
+   * @params: Connection, Statement
    **/
   public void cerrarConexion(Connection conexion, Statement declaracionInvocable)
     throws SQLException {

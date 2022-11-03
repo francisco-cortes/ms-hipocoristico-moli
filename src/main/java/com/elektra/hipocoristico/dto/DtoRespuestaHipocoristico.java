@@ -28,7 +28,7 @@ public class DtoRespuestaHipocoristico {
    */
   @Schema(
     example = "[ \"PACO\", \"JAVIER\" ]",
-    description = "Arreglos de cadenas, idealmente nombres de personas, en maysucula")
+    description = "Arreglos de cadenas, idealmente nombres de personas, en mayúscula")
   @CifrarValorAes
   private String[] nombres;
   /*
@@ -36,7 +36,7 @@ public class DtoRespuestaHipocoristico {
    */
   @Schema(
     example = "[ \"GARCIA\", \"MARTINEZ\" ]",
-    description = "Arreglos de cadenas, idealmente apellidos de personas, en maysucula"
+    description = "Arreglos de cadenas, idealmente apellidos de personas, en mayúscula"
   )
   @CifrarValorAes
   private String[] apellidos;
@@ -45,7 +45,7 @@ public class DtoRespuestaHipocoristico {
    */
   @Schema(
     example = " \"1 hipocoristico encontrado\" ",
-    description = "Cadena, mensajesobre la cantidad de hipocoristicos encontrados"
+    description = "Cadena, mensajes sobre la cantidad de hipocorísticos encontrados"
   )
   private String mensaje;
 
@@ -54,7 +54,7 @@ public class DtoRespuestaHipocoristico {
    */
   public DtoRespuestaHipocoristico(String codigoRespuesta, String[] nombres, String[] apellidos,
                                    String mensaje){
-    //codigo http
+    //código http
     this.codigoRespuesta = codigoRespuesta;
     //nombres
     this.nombres = nombres.clone();

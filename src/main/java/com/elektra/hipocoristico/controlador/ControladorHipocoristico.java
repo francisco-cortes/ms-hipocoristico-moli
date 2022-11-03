@@ -25,7 +25,7 @@ import org.springframework.http.MediaType;
 import javax.ws.rs.core.Response;
 /**
  * <b>ControladorHipocorístico</b>
- * @descripcion: Controlador principal para el modulo hipocorístico
+ * @descripcion: Controlador principal para el módulo hipocorístico
  * @autor: Francisco Javier Cortes Torres, Desarrollador
  * @ultimaModificacion: 13/10/22
  */
@@ -50,33 +50,33 @@ public class ControladorHipocoristico {
     summary = "Buscar y reemplazar hipocorísticos por nombre real")
   @Parameter(name ="token",
     schema = @Schema(type = SchemaType.STRING),
-    description = "Token para el inciar al solicitud.",
+    description = "Token para el iniciar al solicitud.",
     example = "022DEE73F8528EA4445B133DDB5B224848B2258B",
     in = ParameterIn.HEADER, required = false)
   @Parameter(name ="uid",
     schema = @Schema(type = SchemaType.STRING),
-    description = "Uid para identificacion del service.",
+    description = "Uid para identification del service.",
     example = "UID123412341332",
     in = ParameterIn.HEADER, required = true)
   @APIResponses(value =
     {
       @APIResponse(
-        responseCode = Constantes.HTTP_200,
+        responseCode = Constantes.CODIGO_HTTP_200,
         description = "Respuesta Controlada",
         content = @Content(mediaType = "application/json",
           schema =  @Schema(implementation = DtoRespuestaHipocoristico.class))),
       @APIResponse(
-        responseCode = Constantes.HTTP_400,
+        responseCode = Constantes.CODIGO_HTTP_400,
         description = "Solicitud incorrecta",
         content = @Content(mediaType = "application/json",
           schema =  @Schema(implementation = DtoExcepcion.class))),
       @APIResponse(
-        responseCode = Constantes.HTTP_404,
+        responseCode = Constantes.CODIGO_HTTP_404,
         description = "No Encontrado",
         content = @Content(mediaType = "application/json",
           schema =  @Schema(implementation = DtoExcepcion.class))),
       @APIResponse(
-        responseCode = Constantes.HTTP_500,
+        responseCode = Constantes.CODIGO_HTTP_500,
         description = "Error Interno en la aplicación",
         content = @Content(mediaType = "application/json",
           schema =  @Schema(implementation = DtoExcepcion.class))),
@@ -87,7 +87,7 @@ public class ControladorHipocoristico {
   public Response buscarHipocoristico(@RequestHeader(name = "uid", required = Constantes.ES_REQUERIDO) String uid,
                                       @RequestBody DtoPeticionHipocoristico peticion){
     /*
-    invoca metodo del servicio principal y crea el objeto con el model hipocoristicoResponseDto
+    invoca método del servicio principal y crea el objeto con el model hipocoristicoResponseDto
      */
     DtoRespuestaHipocoristico hipocoristicoResponse = servicioBuscaHipocoristico.iniciarBuscar(peticion, uid);
     /*

@@ -12,7 +12,6 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
  * @autor: Francisco Javier Cortes Torres, Desarrollador
  * @ultimaModificacion: 12/07/22
  */
-
 @Data
 @Setter
 @JsonPropertyOrder({"mensaje","folio"})

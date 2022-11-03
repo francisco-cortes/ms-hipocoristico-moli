@@ -67,12 +67,12 @@ public class InterceptorHipocoristico implements ReaderInterceptor{
           return request;
         }
         else {
-          UTILIDAD_GENERAR_EXCEPCION.generarExcepcion(Constantes.HTTP_400, Constantes.CODIGO_ERROR_GENERAL_API,
+          UTILIDAD_GENERAR_EXCEPCION.generarExcepcion(Constantes.CODIGO_HTTP_400, Constantes.CODIGO_SOLICITUD_INCORRECTA,
             resultado.getMensaje(), resultado.getUid());
         }
       }
       else {
-        UTILIDAD_GENERAR_EXCEPCION.generarExcepcion(Constantes.HTTP_404, Constantes.CODIGO_ERROR_GENERAL_API,
+        UTILIDAD_GENERAR_EXCEPCION.generarExcepcion(Constantes.CODIGO_HTTP_404, Constantes.CODIGO_NO_ENCONTRADO,
           "No se encuentra el recurso: " + uri.getPath() + " en el servicio.", resultado.getUid());
       }
     }
@@ -82,7 +82,7 @@ public class InterceptorHipocoristico implements ReaderInterceptor{
     }
     catch (Exception excepcion) {
       log.registrarExcepcion(excepcion, null);
-      UTILIDAD_GENERAR_EXCEPCION.generarExcepcion(Constantes.HTTP_500, Constantes.CODIGO_ERROR_GENERAL_API,
+      UTILIDAD_GENERAR_EXCEPCION.generarExcepcion(Constantes.CODIGO_HTTP_500, Constantes.CODIGO_ERROR_GENERAL,
         excepcion.toString(), resultado.getUid());
     }
     finally{
@@ -115,7 +115,7 @@ public class InterceptorHipocoristico implements ReaderInterceptor{
       validador.validarDto(request, resultado);
     }
     else {
-      UTILIDAD_GENERAR_EXCEPCION.generarExcepcion(Constantes.HTTP_500, Constantes.CODIGO_ERROR_GENERAL_API,
+      UTILIDAD_GENERAR_EXCEPCION.generarExcepcion(Constantes.CODIGO_HTTP_500, Constantes.CODIGO_ERROR_GENERAL,
         resultado.getMensaje(), resultado.getUid());
     }
   }

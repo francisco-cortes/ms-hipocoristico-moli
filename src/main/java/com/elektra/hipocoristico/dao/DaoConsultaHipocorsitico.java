@@ -52,8 +52,8 @@ public class DaoConsultaHipocorsitico {
     String nombreClaseMetodo  = "DaoConsultarHipocorsitico-ejecutarSp";
     log.iniciarTiempoMetodo(nombreClaseMetodo, Constantes.NOMBRE_MS);
 
-    resultado.setCodigo("CX00000");
-    resultado.setMensaje("Ocurrió un error al invocar la consulta hacia diccionario de base de datos.");
+    resultado.setCodigo(Constantes.CODIGO_ERROR_SQL);
+    resultado.setMensaje(Constantes.MENSAJE_ERROR_SQL);
     /*
     Constantes para índices de parametros en SP
      */
@@ -65,7 +65,7 @@ public class DaoConsultaHipocorsitico {
       propiedades.conexionesdb().get(Constantes.C3REMESASC).esquema(),
       null,
       propiedades.conexionesdb().get(Constantes.C3REMESASC).sp(),
-      2);
+      Constantes.DOS);
 
     //String de respuesta del método
     String respuestaSp;

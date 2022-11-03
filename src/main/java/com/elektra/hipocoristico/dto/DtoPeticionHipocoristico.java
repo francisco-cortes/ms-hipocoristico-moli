@@ -25,7 +25,7 @@ public class DtoPeticionHipocoristico {
   @Validacion(
     tipoDato = Validacion.tiposDato.VARCHAR,
     requerido = Constantes.ES_REQUERIDO,
-    caracteresValidos = Validacion.LETRAS,
+    caracteresValidos = Validacion.LETRAS + " ",
     longitudMin = Constantes.LONGITUD_MIN_ENTRADA,
     longitudMax = Constantes.LONGITUD_MAX_ENTRADA
   )
@@ -35,7 +35,7 @@ public class DtoPeticionHipocoristico {
     required = Constantes.ES_REQUERIDO,
     minLength = Constantes.LONGITUD_MIN_ENTRADA,
     maxLength = Constantes.LONGITUD_MAX_ENTRADA,
-    description = "Arreglos de cadenas, idealmente nombres de personas, en maysucula"
+    description = "Arreglos de cadenas, idealmente nombres de personas, en mayúscula"
   )
   private String[] nombres;
   /*
@@ -44,7 +44,7 @@ public class DtoPeticionHipocoristico {
   @Validacion(
     tipoDato = Validacion.tiposDato.VARCHAR,
     requerido = Constantes.ES_REQUERIDO,
-    caracteresValidos = Validacion.LETRAS,
+    caracteresValidos = Validacion.LETRAS + " ",
     longitudMin = Constantes.LONGITUD_MIN_ENTRADA,
     longitudMax = Constantes.LONGITUD_MAX_ENTRADA
   )
@@ -54,7 +54,7 @@ public class DtoPeticionHipocoristico {
     required = Constantes.ES_REQUERIDO,
     minLength = Constantes.LONGITUD_MIN_ENTRADA,
     maxLength = Constantes.LONGITUD_MAX_ENTRADA,
-    description = "Arreglos de cadenas, idealmente apellidos de persona, en maysucula"
+    description = "Arreglos de cadenas, idealmente apellidos de persona, en mayúscula"
   )
   private String[] apellidos;
 }

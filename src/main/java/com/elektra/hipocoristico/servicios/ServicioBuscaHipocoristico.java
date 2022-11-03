@@ -48,8 +48,8 @@ public class ServicioBuscaHipocoristico {
     LogServicio log = new LogServicio();
     log.iniciarTiempoMetodo(nombreClaseMetodo,Constantes.NOMBRE_MS);
 
-    Resultado resultado = new Resultado(uid, "CX00000",
-      "Ocurrió un problema en el proceso de hipocoristico.");
+    Resultado resultado = new Resultado(uid, Constantes.CODIGO_ERROR_GENERAL,
+      Constantes.MENSAJE_CODIGO_500);
 
     StringBuilder cadenaNombres = new StringBuilder();
     StringBuilder cadenaApellidos = new StringBuilder();
@@ -100,15 +100,23 @@ public class ServicioBuscaHipocoristico {
       System.arraycopy(resultadoBusqueda,nombres.length,apellidoRes,0,apellidos.length);
 
       if(contadorHipocoristico > 1) {
-        resultado.setCodigo("CX0000");
-        resultado.setMensaje("No se puede tener mas de un hipocoristico por evaluación.");
+        resultado.setCodigo(Constantes.CODIGO_DOS_HIPOCORISTICO);
+        resultado.setMensaje(Constantes.DOS_HIPOCORISTICO);
 
-        utilidadGenerarExcepcion.generarExcepcion(Constantes.HTTP_500, resultado.getCodigo(),
+        utilidadGenerarExcepcion.generarExcepcion(Constantes.CODIGO_HTTP_500, resultado.getCodigo(),
           resultado.getMensaje() , uid);
       }
       else {
-        respuesta = new DtoRespuestaHipocoristico(
-          Constantes.HTTP_200, nombreRes, apellidoRes, "Operación exitosa.");
+        if(contadorHipocoristico == 1){
+          respuesta = new DtoRespuestaHipocoristico(
+            Constantes.CODIGO_HTTP_200, nombreRes, apellidoRes, Constantes.CODIGO_UN_HIPOCORISTICO
+            + Constantes.UN_HIPOCORISTICO);
+        }
+        else{
+          respuesta = new DtoRespuestaHipocoristico(
+            Constantes.CODIGO_HTTP_200, nombreRes, apellidoRes, Constantes.CODIGO_SIN_HIPOCORISTICO
+            + Constantes.CERO_HIPOCORISTICOS);
+        }
       }
     }
     catch (InternalServerErrorException excepcion){
@@ -116,11 +124,11 @@ public class ServicioBuscaHipocoristico {
       throw excepcion;
     }
     catch (Exception excepcion){
-      log.registrarExcepcion(excepcion, "Error SQL");
+      log.registrarExcepcion(excepcion, Constantes.CODIGO_ERROR_SQL);
       /*
-      arroja respuesta controlada a través del controlador de exepciones
+      arroja respuesta controlada a través del controlador de excepciones
        */
-      utilidadGenerarExcepcion.generarExcepcion(Constantes.HTTP_500, resultado.getCodigo(),
+      utilidadGenerarExcepcion.generarExcepcion(Constantes.CODIGO_HTTP_500, resultado.getCodigo(),
         resultado.getMensaje() + " " + excepcion.getMessage(), uid);
     }
     finally {
@@ -174,7 +182,7 @@ public class ServicioBuscaHipocoristico {
     throws Exception {
     String respuestaDiccionario = daoConsultaHipocorsitico.buscarDiccionario(nombreBuscado.toUpperCase(),
       resultado, log);
-    if(Constantes.SP_RESPUESTA_VACIA.equals(respuestaDiccionario)){
+    if(Constantes.SP_RESPUESTA_VACIA_SP.equals(respuestaDiccionario)){
       return nombreBuscado;
     }
     else {

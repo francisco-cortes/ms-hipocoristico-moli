@@ -45,7 +45,7 @@ public class ControladorMonitoreo {
   @APIResponses(value =
     {
       @APIResponse(
-        responseCode = Constantes.HTTP_200,
+        responseCode = Constantes.CODIGO_HTTP_200,
         description = "Respuesta Controlada",
         content = @Content(mediaType = "application/json",
           schema = @Schema(implementation = DtoRespuestaEstado.class))),
