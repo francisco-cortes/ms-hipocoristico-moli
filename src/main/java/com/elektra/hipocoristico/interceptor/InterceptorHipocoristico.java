@@ -23,7 +23,7 @@ import javax.ws.rs.ext.ReaderInterceptorContext;
 /**
  * <b>HipocoristicoiInterceptor</b>
  * @descripcion: Intercepta la petición http antes de que llegue al controlador
- * para las inspección de la misma.
+ * para la inspección de la misma.
  * @autor: Francisco Javier Cortes Torres, Desarrollador
  * @ultimaModificacion: 13/10/2022
  */
@@ -46,20 +46,20 @@ public class InterceptorHipocoristico implements ReaderInterceptor{
    * @ultimaModificacion: 14/10/22
    */
   @Override
-  public final Object aroundReadFrom(ReaderInterceptorContext context) throws WebApplicationException {
+  public final Object aroundReadFrom(ReaderInterceptorContext contexto) throws WebApplicationException {
     System.out.println("ENTRA AL INTERCEPTOR");
     LogServicio log = new LogServicio();
     String nombreClaseMetodo = "GeneraTokenInterceptor-aroundReadFrom";
     log.iniciarTiempoMetodo(nombreClaseMetodo, Constantes.NOMBRE_MS);
 
-    String uid = context.getHeaders().getFirst("uid");
+    String uid = contexto.getHeaders().getFirst("uid");
     Resultado resultado = new Resultado(uid, Constantes.CODIGO_EXITO, Constantes.MENSAJE_EXITO);
     DtoPeticionHipocoristico request = null;
 
     try{
 
       if("/datos/hipocoristico/buscar-hipocoristico".equals(uri.getPath())){
-        request = (DtoPeticionHipocoristico) context.proceed();
+        request = (DtoPeticionHipocoristico) contexto.proceed();
         validarPeticion(request, resultado);
         System.out.println("RESULTADO INTERCEPTOR" + resultado.getCodigo());
 
@@ -67,7 +67,8 @@ public class InterceptorHipocoristico implements ReaderInterceptor{
           return request;
         }
         else {
-          UTILIDAD_GENERAR_EXCEPCION.generarExcepcion(Constantes.CODIGO_HTTP_400, Constantes.CODIGO_SOLICITUD_INCORRECTA,
+          UTILIDAD_GENERAR_EXCEPCION.generarExcepcion(Constantes.CODIGO_HTTP_400,
+            Constantes.CODIGO_SOLICITUD_INCORRECTA,
             resultado.getMensaje(), resultado.getUid());
         }
       }
@@ -96,23 +97,23 @@ public class InterceptorHipocoristico implements ReaderInterceptor{
    * <b>ValidarPeticion</b>
    * @descripcion: Metodo para validar el cuerpo de la petici�n.
    * @autor: Angel Eduardo Hern�ndez Aguilar.
-   * @param request Petici�n enviada.
+   * @param peticion Petici�n enviada.
    * @param resultado Resultado del proceso de validaci�n.
    * @ultimaModificacion: 06/12/2021
    */
-  private void validarPeticion(DtoPeticionHipocoristico request, Resultado resultado) throws Exception {
+  private void validarPeticion(DtoPeticionHipocoristico peticion, Resultado resultado) throws Exception {
 
     //ValidacionObjeto validador = new ValidacionObjeto();
     //validador.validarDto(request, resultado);
 
     CifradorAes cifrador = new CifradorAes(true);
-    cifrador.desencriptarObjeto(request, resultado);
+    cifrador.desencriptarObjeto(peticion, resultado);
     System.out.println("RESULTADO DESENCRIPCION INTERCEPTOR: " + resultado.getCodigo());
     System.out.println("MENSAJE DESENCRIPCION INTERCEPTOR: " + resultado.getMensaje());
     //System.out.println("DATO DESENCRIPTADO: " + request.getNombres()[0]);
     if (resultado.getCodigo().equals(Constantes.CODIGO_EXITO)) {
       ValidacionObjeto validador = new ValidacionObjeto();
-      validador.validarDto(request, resultado);
+      validador.validarDto(peticion, resultado);
     }
     else {
       UTILIDAD_GENERAR_EXCEPCION.generarExcepcion(Constantes.CODIGO_HTTP_500, Constantes.CODIGO_ERROR_GENERAL,
