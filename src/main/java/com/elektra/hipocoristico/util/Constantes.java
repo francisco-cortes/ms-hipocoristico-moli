@@ -12,7 +12,7 @@ public class Constantes {
    */
   public final static String CODIGO_HTTP_200 = "200";
   public final static String CODIGO_HTTP_400 = "400";
- public final static String CODIGO_HTTP_401 = "401";
+  public final static String CODIGO_HTTP_401 = "401";
   public final static String CODIGO_HTTP_404 = "404";
   public final static String CODIGO_HTTP_500 = "500";
   public static final String CERO_HIPOCORISTICOS = "Sin Hipocorístico.";
@@ -24,8 +24,8 @@ public class Constantes {
   public final static String MENSAJE_CODIGO_404 = "Recurso no encontrado";
   public final static String MENSAJE_CODIGO_500 = "Ocurrió un inconveniente al procesar la solicitud.";
 
- public final static String MENSAJE_ERROR_SQL = "Ocurrió un error al invocar la consulta " +
-   "hacia diccionario de base de datos.";
+  public final static String MENSAJE_ERROR_SQL = "Ocurrió un error al invocar la consulta " +
+    "hacia diccionario de base de datos.";
 
   public final static String CODIGO_SIN_HIPOCORISTICO = "IDCMH00000";
   public final static String CODIGO_UN_HIPOCORISTICO = "IDCMH00001";
@@ -54,10 +54,10 @@ public class Constantes {
   /*
   Números
    */
- public static final int UNO = 1;
- public static final int DOS = 2;
- public static final int TRES = 3;
- public static final int CUATRO = 4;
- public static final int CINCO = 5;
+  public static final int UNO = 1;
+  public static final int DOS = 2;
+  public static final int TRES = 3;
+  public static final int CUATRO = 4;
+  public static final int CINCO = 5;
 
 }

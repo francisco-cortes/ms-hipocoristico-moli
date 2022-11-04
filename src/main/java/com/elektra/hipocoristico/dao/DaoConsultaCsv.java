@@ -6,6 +6,7 @@ import javax.inject.Singleton;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class DaoConsultaCsv {
 
     String aux = Constantes.SP_RESPUESTA_VACIA_SP;
     System.out.println(hipocorsitico);
-    for(int i = 0; i < lista.size()-1; i++){
+    for(int i = 0; i < lista.size(); i++){
       if(lista.get(i).getFcPrefijo().equals(hipocorsitico)){
         System.out.println("hipo");
         aux = lista.get(i).getFcNombre();
@@ -29,10 +30,10 @@ public class DaoConsultaCsv {
 
   private List<DickModel> leerDick(){
     List<DickModel> lista = new ArrayList<DickModel>();
-    String file = "Datos_Hipocoristico.csv";
+    String file = "/deployments/Datos_Hipocoristico.csv";
     System.out.println("Entra el try de leer diccionario");
     try {
-      BufferedReader br = new BufferedReader(new FileReader(file));
+      BufferedReader br = new BufferedReader(new FileReader(file, StandardCharsets.UTF_8));
       String line;
 
       while ((line = br.readLine()) != null) {

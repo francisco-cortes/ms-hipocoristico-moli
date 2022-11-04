@@ -1,6 +1,6 @@
 quarkus:
   http:
-    port: 8080
+    port: 80
     #datasource:
     #db-kind: postgresql
     #username: posgres
@@ -9,7 +9,7 @@ quarkus:
     #  url: jdbc:postgresql://localhost:5432/REMFONETIC
   container-image:
     group: ""
-    name: ms-hipocoristico-hard
+    name: ms-hipocoristico
     tag: latest
     registry: franciscoct
   kubernetes:
