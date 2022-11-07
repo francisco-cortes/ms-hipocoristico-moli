@@ -120,7 +120,7 @@ public class ServicioBuscaHipocoristico {
       }
     }
     catch (InternalServerErrorException excepcion){
-      log.registrarExcepcion(excepcion, null);
+      log.registrarExcepcion(excepcion, excepcion.getMensaje());
       throw excepcion;
     }
     catch (Exception excepcion){

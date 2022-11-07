@@ -34,7 +34,7 @@ public class Constantes {
   public final static String CODIGO_SOLICITUD_INCORRECTA = "IDCMH00004";
   public final static String CODIGO_NO_AUTORIZADO = "IDCMH00005";
   public final static String CODIGO_NO_ENCONTRADO = "IDCMH00006";
- public final static String CODIGO_ERROR_GENERAL = "IDCMH00007";
+  public final static String CODIGO_ERROR_GENERAL = "IDCMH00007";
   /*
   Constates de datos
    */

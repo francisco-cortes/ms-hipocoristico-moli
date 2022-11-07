@@ -52,12 +52,12 @@ public class ControladorHipocoristico {
     schema = @Schema(type = SchemaType.STRING),
     description = "Token para el iniciar al solicitud.",
     example = "022DEE73F8528EA4445B133DDB5B224848B2258B",
-    in = ParameterIn.HEADER, required = false)
+    in = ParameterIn.HEADER, required = Constantes.NO_REQUERIDO)
   @Parameter(name ="uid",
     schema = @Schema(type = SchemaType.STRING),
     description = "Uid para identification del service.",
     example = "UID123412341332",
-    in = ParameterIn.HEADER, required = true)
+    in = ParameterIn.HEADER, required = Constantes.ES_REQUERIDO)
   @APIResponses(value =
     {
       @APIResponse(
