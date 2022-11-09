@@ -9,7 +9,7 @@ public class UtilidadCadenas {
 
   /**
    * <b>unirSubCadena</b>
-   * @descripcion: une un arreglo de cadenas en una varialbe String eliminado caracteres basura
+   * @descripcion: une un arreglo de cadenas en una variable String eliminados caracteres basura
    * @autor: Francisco Javier Cortes Torres, Desarrollador
    *
    * @ultimaModificacion: 01/06/22
