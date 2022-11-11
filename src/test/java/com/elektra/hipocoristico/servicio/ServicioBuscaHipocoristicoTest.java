@@ -1,5 +1,6 @@
 package com.elektra.hipocoristico.servicio;
 
+import com.baz.excepciones.InternalServerErrorException;
 import com.elektra.hipocoristico.dto.DtoPeticionHipocoristico;
 import com.elektra.hipocoristico.dto.DtoRespuestaHipocoristico;
 import com.elektra.hipocoristico.servicios.ServicioBuscaHipocoristico;
@@ -12,6 +13,8 @@ import org.junit.jupiter.api.Test;
 import javax.inject.Inject;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.wildfly.common.Assert.assertTrue;
 
 @QuarkusTest
 public class ServicioBuscaHipocoristicoTest {
@@ -24,15 +27,21 @@ public class ServicioBuscaHipocoristicoTest {
   public void testIniciarBusquedaIdeal(){
     String nombres[] = {"LEONARDO", "PACO"};
     DtoRespuestaHipocoristico resp = servicioBuscaHipocoristico.iniciarBuscar(peticion(nombres), UID);
-    Assertions.assertEquals(Constantes.UN_HIPOCORISTICO,resp.getMensaje());
+    Assertions.assertEquals(Constantes.CODIGO_UN_HIPOCORISTICO+Constantes.UN_HIPOCORISTICO,
+      resp.getMensaje());
   }
 
   @DisplayName("Prueba Unitaria buqueda 2 o mas hipocoristicos")
   @Test
   public void testIniciarBusquedaDosHipocoristicos(){
     String nombres[] = {"PETE","PACO"};
-    DtoRespuestaHipocoristico resp = servicioBuscaHipocoristico.iniciarBuscar(peticion(nombres),UID);
-    assertEquals(Constantes.DOS_HIPOCORISTICO,resp.getMensaje());
+
+    InternalServerErrorException thrown = assertThrows(
+      InternalServerErrorException.class,
+      () -> servicioBuscaHipocoristico.iniciarBuscar(peticion(nombres),UID),
+      "2 hipocoristicos"
+                                                      );
+    assertTrue(thrown.getDetalles().contains(Constantes.DOS_HIPOCORISTICO));
   }
 
   @DisplayName("Prueba sin hipocorisiticos")
@@ -40,7 +49,8 @@ public class ServicioBuscaHipocoristicoTest {
   public void testIniciarBusquedaSinHipocoristicos(){
     String nombres[] = {"LEONARDO","ISRAEL"};
     DtoRespuestaHipocoristico resp = servicioBuscaHipocoristico.iniciarBuscar(peticion(nombres),UID);
-    assertEquals(Constantes.CERO_HIPOCORISTICOS,resp.getMensaje());
+    assertEquals(Constantes.CODIGO_SIN_HIPOCORISTICO + Constantes.CERO_HIPOCORISTICOS,
+      resp.getMensaje());
   }
 
   private DtoPeticionHipocoristico peticion(String[] nombres){
