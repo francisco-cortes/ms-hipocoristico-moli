@@ -8,7 +8,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 /**
  * <b>StatusResponse</b>
- * @descripcion: Entidad que obtiene el mensaje que representa el estado del microservicio.
+ * @descripcion: Entidad que obtiene el mensaje que representa el estado del microservice.
  * @autor: Francisco Javier Cortes Torres, Desarrollador
  * @ultimaModificacion: 12/07/22
  */

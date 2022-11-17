@@ -25,7 +25,7 @@ public class ServicioMonitoreo {
     DtoRespuestaEstado uidAlive = new DtoRespuestaEstado();
     uidAlive.setMensaje(Constantes.ESTADO_OK);
     /*
-    genera folio a traves de RemesasUtils.jar
+    genera folio a través de RemesasUtils.jar
      */
     uidAlive.setFolio("UID" + Uid.generarUid(Constantes.TAMANO_UDI,Constantes.CICLOS_UDI));
     return uidAlive;

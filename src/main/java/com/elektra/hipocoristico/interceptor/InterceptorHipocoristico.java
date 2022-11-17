@@ -40,14 +40,13 @@ public class InterceptorHipocoristico implements ReaderInterceptor{
 
   /**
    * <b>aroundReadFrom</b>
-   * @descripcion: breve descripción del contenido
+   * @descripcion: Lógica para la validación de la entrada
    * @autor: Francisco Javier Cortes Torres, Desarrollador
    * @param: context, contexto de lectura de interceptor
    * @ultimaModificacion: 14/10/22
    */
   @Override
   public final Object aroundReadFrom(ReaderInterceptorContext contexto) throws WebApplicationException {
-    System.out.println("ENTRA AL INTERCEPTOR");
     LogServicio log = new LogServicio();
     String nombreClaseMetodo = "GeneraTokenInterceptor-aroundReadFrom";
     log.iniciarTiempoMetodo(nombreClaseMetodo, Constantes.NOMBRE_MS);
@@ -61,7 +60,6 @@ public class InterceptorHipocoristico implements ReaderInterceptor{
       if("/datos/hipocoristico/buscar-hipocoristico".equals(uri.getPath())){
         request = (DtoPeticionHipocoristico) contexto.proceed();
         validarPeticion(request, resultado);
-        System.out.println("RESULTADO INTERCEPTOR" + resultado.getCodigo());
 
         if (resultado.getCodigo().equals(Constantes.CODIGO_EXITO)) {
           return request;
@@ -77,7 +75,7 @@ public class InterceptorHipocoristico implements ReaderInterceptor{
           "No se encuentra el recurso: " + uri.getPath() + " en el servicio.", resultado.getUid());
       }
     }
-    catch(BadRequestException | NotFoundException | InternalServerErrorException excepcion){
+    catch(BadRequestException | NotFoundException excepcion){
       log.registrarExcepcion(excepcion, null);
       throw excepcion;
     }
@@ -95,22 +93,15 @@ public class InterceptorHipocoristico implements ReaderInterceptor{
 
   /**
    * <b>ValidarPeticion</b>
-   * @descripcion: Metodo para validar el cuerpo de la petici�n.
-   * @autor: Angel Eduardo Hern�ndez Aguilar.
-   * @param peticion Petici�n enviada.
-   * @param resultado Resultado del proceso de validaci�n.
+   * @descripcion: Método para validar el cuerpo de la petición.
+   * @autor: Angel Eduardo Hernández Aguilar.
+   * @param peticion Petición enviada.
+   * @param resultado Resultado del proceso de validación.
    * @ultimaModificacion: 06/12/2021
    */
   private void validarPeticion(DtoPeticionHipocoristico peticion, Resultado resultado) throws Exception {
-
-    //ValidacionObjeto validador = new ValidacionObjeto();
-    //validador.validarDto(request, resultado);
-
     CifradorAes cifrador = new CifradorAes(true);
     cifrador.desencriptarObjeto(peticion, resultado);
-    System.out.println("RESULTADO DESENCRIPCION INTERCEPTOR: " + resultado.getCodigo());
-    System.out.println("MENSAJE DESENCRIPCION INTERCEPTOR: " + resultado.getMensaje());
-    //System.out.println("DATO DESENCRIPTADO: " + request.getNombres()[0]);
     if (resultado.getCodigo().equals(Constantes.CODIGO_EXITO)) {
       ValidacionObjeto validador = new ValidacionObjeto();
       validador.validarDto(peticion, resultado);

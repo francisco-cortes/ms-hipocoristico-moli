@@ -8,7 +8,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 /**
  * <b>NombreResultadoResponse</b>
- * @descripcion: Modelo de datos que obtiene los datos de la peticion buscar hipocoristico
+ * @descripcion: Modelo de datos que obtiene los datos de la petición buscar hipocorístico
  * @autor: Francisco Javier Cortes Torres, Desarrollador
  * @ultimaModificacion: 31/05/22
  */
@@ -21,7 +21,7 @@ public class DtoRespuestaHipocoristico {
    */
   @Schema(
     example = "200",
-    description = "Entero numerico, codigo de respuesta del servidor interno")
+    description = "Entero numérico, código de respuesta del servidor interno")
   private String codigoRespuesta;
   /*
   nombres de una persona
@@ -41,10 +41,10 @@ public class DtoRespuestaHipocoristico {
   @CifrarValorAes
   private String[] apellidos;
   /*
-  mensaje de opeación
+  mensaje de operación
    */
   @Schema(
-    example = " \"1 hipocoristico encontrado\" ",
+    example = " \"1 hipocorístico encontrado\" ",
     description = "Cadena, mensajes sobre la cantidad de hipocorísticos encontrados"
   )
   private String mensaje;

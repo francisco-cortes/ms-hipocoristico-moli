@@ -49,7 +49,7 @@ public class Constantes {
   public final static boolean ES_REQUERIDO = true;
   public final static boolean NO_REQUERIDO = false;
   public static final String ESTADO_OK = "OK";
-  public static final String CODIGO_EXITO = "E";
+  public static final String CODIGO_EXITO = "C00000";
   public static final String MENSAJE_EXITO = "Operacion exitosa.";
   /*
   Números

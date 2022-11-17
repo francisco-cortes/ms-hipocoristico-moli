@@ -13,7 +13,7 @@ public class PruebaUtilidadCadenas {
 
   @DisplayName("Prueba Unitaria sobre las utilidad de manejo de cadenas y arreglos")
   @Test
-  public void pruebaUnirSubCadena(){
+  public void probarUnirSubCadena(){
     String entrada [] = {"LEONARDO", "ISRAEL"};
     String esperado = "LEONARDO ISRAEL";
     String resultado = utilidadCadenas.unirSubCadena(entrada);
@@ -22,14 +22,14 @@ public class PruebaUtilidadCadenas {
 
   @DisplayName("Prueba Unitaria para saber si hay espacios en una cadena")
   @Test
-  public void pruebaBuscarEspaciosCadena(){
+  public void probarBuscarEspaciosCadena(){
     String entrada = "LEONARDO MILLAN";
     boolean resultado = utilidadCadenas.buscarEspaciosCadena(entrada);
     assertTrue(resultado);
   }
   @DisplayName("Prueba Unitaria separar cadenas")
   @Test
-  public void pruebaSubCadenaSeparada(){
+  public void probarSubCadenaSeparada(){
     String entrada = "LEONARDO ISRAEL";
     String esperado[] = {"LEONARDO", "ISRAEL"};
     String[] resultado = utilidadCadenas.subCadenaSeparada(entrada);

@@ -42,7 +42,7 @@ public class ControladorHipocoristico {
    * <b>buscarHipocorístico</b>
    * @descripcion: Endpoint POST principal
    * @autor: Francisco Javier Cortes Torres, Desarrollador
-   * @param; peticiòn contiene los nombres y apellidos de una persona en arreglos de cadenas
+   * @param; petición contiene los nombres y apellidos de una persona en arreglos de cadenas
    * @ultimaModificacion: 13/10/22
    */
   //operación principal

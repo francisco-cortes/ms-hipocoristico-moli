@@ -8,21 +8,21 @@ import com.baz.excepciones.NotFoundException;
 
 /**
  * <b>HipocoristicoUtils</b>
- * @descripcion: Clase principal qure contiene m�todos gen�ricos a
- * utilizar en toda la aplicaci�n.
- * @autor: Angel Eduardo Hern�ndez Aguilar.
+ * @descripcion: Clase principal que contiene métodos genéricos a
+ * utilizar en toda la aplicación.
+ * @autor: Angel Eduardo Hernández Aguilar.
  * @ultimaModificacion: 26/10/2022
  * */
 @Service("UtilidadGenerarExcepcion")
 public class UtilidadGenerarExcepcion {
   /**
    * <b>generarExcepcion</b>
-   * @descripcion: M�todo para generar una excepci�n de un tipo en espec�fico.
-   * @autor: Angel Eduardo Hern�ndez Aguilar
-   * @param codigoHttp Tipo de estado http al que pertenecer� la excepci�n.
-   * @param codigo C�digo de error que identifica el proceso que ocasiona la excepci�n.
-   * @param mensaje Mensaje breve y claro que describe el porque de la excepci�n.
-   * @param uid Identificador �nico del proceso.
+   * @descripcion: Método para generar una excepción de un tipo en específico.
+   * @autor: Angel Eduardo Hernández Aguilar
+   * @param codigoHttp Tipo de estado http al que pertenecerá la excepción.
+   * @param codigo Código de error que identifica el proceso que ocasiona la excepción.
+   * @param mensaje Mensaje breve y claro que describe el porque de la excepción.
+   * @param uid Identificador único del proceso.
    * @ultimaModificacion: 31/08/2022
    */
   public void generarExcepcion(String codigoHttp, String codigo, String mensaje, String uid) {

@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 
 /**
  * <b>BusccarCadenasDiccionario</b>
- * @descripcion: Clase que contiene los métodos a implementar para el consumo del modulo.
+ * @descripcion: Clase que contiene los métodos a implementar para el consumo del módulo.
  * @autor: Francisco Javier Cortes Torres, Desarrollador
  * @ultimaModificacion: 31/05/22
  */
@@ -36,7 +36,7 @@ public class ServicioBuscaHipocoristico {
 
   /**
    * <b>iniciaBuscar</b>
-   * @descripcion: Inicio de la estructura que busca hipocoristicos
+   * @descripcion: Inicio de la estructura que busca hipocorísticos
    * @autor: Francisco Javier Cortes Torres, Desarrollador
    * @param: arregloCompleto, conjunto de nombres y apellidos
    * @ultimaModificacion: 13/10/22
@@ -142,7 +142,7 @@ public class ServicioBuscaHipocoristico {
 
   /**
    * <b>buscarNombres</b>
-   * @descripcion: recorre el arreglo dado invocando el metodo buscar en tabla y reassigna valores dentro del arreglo
+   * @descripcion: recorre el arreglo dado invocando el método buscar en tabla y reasigna valores dentro del arreglo
    * @autor: Francisco Javier Cortes Torres, Desarrollador
    * @ultimaModificacion: 01/06/22
    */
@@ -172,8 +172,8 @@ public class ServicioBuscaHipocoristico {
 
   /**
    * <b>buscarEnTabla</b>
-   * @descripcion: ejecuta consulta a sp con un String como parametro actualiza
-   * mensaje dependiendo de parametros mensajeActual y HipocorísticosEncontrados
+   * @descripcion: ejecuta consulta a sp con un String como parámetro actualiza
+   * mensaje dependiendo de parámetros mensajeActual y HipocorísticosEncontrados
    * @autor: Francisco Javier Cortes Torres, Desarrollador
    * @ultimaModificacion: 01/06/22
    */

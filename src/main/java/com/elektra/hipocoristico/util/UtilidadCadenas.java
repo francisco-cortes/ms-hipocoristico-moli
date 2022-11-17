@@ -34,7 +34,7 @@ public class UtilidadCadenas {
   }
   /**
    * <b>subCadenaSeparada</b>
-   * @descripcion: separa una cadena en un arreglo de cadenas apartir de cada espacio
+   * @descripcion: separa una cadena en un arreglo de cadenas a partir de cada espacio
    * @autor: Francisco Javier Cortes Torres, Desarrollador
    * @ultimaModificacion: 01/06/22
    */

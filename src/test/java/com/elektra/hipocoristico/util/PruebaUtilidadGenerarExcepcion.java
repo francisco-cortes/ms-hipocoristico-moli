@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.wildfly.common.Assert.assertTrue;
 
 @QuarkusTest
 public class PruebaUtilidadGenerarExcepcion {
@@ -20,7 +19,7 @@ public class PruebaUtilidadGenerarExcepcion {
 
   @DisplayName("Prueba Unitaria excepción 400")
   @Test
-  public void pruebaGeneraExcepcion(){
+  public void probarGeneraExcepcion(){
     BadRequestException thrown = assertThrows(
       BadRequestException.class,
       () -> generaExcepcion.generarExcepcion(Constantes.CODIGO_HTTP_400,Constantes.MENSAJE_CODIGO_400,
@@ -32,7 +31,7 @@ public class PruebaUtilidadGenerarExcepcion {
 
   @DisplayName("Prueba Unitaria excepción 404")
   @Test
-  public void pruebaGeneraExcepcionNoEncontrado(){
+  public void probarGeneraExcepcionNoEncontrado(){
     NotFoundException thrown = assertThrows(
       NotFoundException.class,
       () -> generaExcepcion.generarExcepcion(Constantes.CODIGO_HTTP_404,Constantes.MENSAJE_CODIGO_404,
@@ -44,7 +43,7 @@ public class PruebaUtilidadGenerarExcepcion {
 
   @DisplayName("Prueba Unitaria excepción 500")
   @Test
-  public void pruebaGeneraExcepcionInterna(){
+  public void probarGeneraExcepcionInterna(){
     InternalServerErrorException thrown = assertThrows(
       InternalServerErrorException.class,
       () -> generaExcepcion.generarExcepcion(Constantes.CODIGO_HTTP_500,Constantes.MENSAJE_CODIGO_500,
